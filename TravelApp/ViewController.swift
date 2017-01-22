@@ -20,7 +20,7 @@ class ViewController: UITableViewController {
         if sharedData.getToken() == "" {
             perform(#selector(handleLogout), with: nil, afterDelay: 0)
         } else {
-            print("Token exists")
+            print("Trips Page")
         }
     }
     
