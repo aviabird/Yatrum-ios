@@ -12,6 +12,7 @@ class SharedData: NSObject {
     
     var API_URL: String = "http://localhost:3000"
     var token: String = ""
+    var currentUser: User = User()
     
     func getToken() -> String {
         if token == "" {
