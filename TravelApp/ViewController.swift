@@ -9,20 +9,28 @@
 import UIKit
 
 class ViewController: UITableViewController {
+    
+    var sharedData = SharedData()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         
-        if true {
+        if sharedData.getToken() == "" {
             perform(#selector(handleLogout), with: nil, afterDelay: 0)
+        } else {
+            print("Token exists")
         }
     }
     
     func handleLogout() {
+        
+        sharedData.clearAll()
+        
         let loginController = LoginController()
         present(loginController, animated: true, completion: nil)
+        
     }
 
 
