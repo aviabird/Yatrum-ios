@@ -10,6 +10,15 @@ import UIKit
 
 class LoginController: UIViewController {
     
+    override var shouldAutorotate: Bool { return false }
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return UIInterfaceOrientationMask.portrait }
+    
+    // This variable will store the authToken of the signIn user for creating session
+    var token = ""
+    
+    // it is used for permanent storage and passing authToken and username to next screens
+    var session = [String]()
+    
     let inputContainerView:  UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -29,16 +38,107 @@ class LoginController: UIViewController {
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         
-        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleLoginRegister), for: .touchUpInside)
         return button
     }()
     
-    func handleRegister() {
-        guard let email = emailTextField.text, let password = passwordTextField.text, let name = nameTextField.text else {
-            print("form is not valid")
+    func handleLoginRegister() {
+        if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
+            handleLogin()
+        } else {
+            handleRegister()
+        }
+    }
+    
+    // For creating alerts
+    func createAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Got It", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func handleLogin() {
+        print("User Login")
+        
+        guard let email = emailTextField.text, isValidEmail(testStr: email) else {
+            print("Invalid Email")
             return
         }
-        print("hello")
+        
+        guard let password = passwordTextField.text, password.characters.count > 4 && password.characters.count <= 32 else {
+            print("Invalid Password")
+            return
+        }
+        
+        let url = URL(string: "http://localhost:3000/authenticate")!
+        let params = ["email": "\(emailTextField.text!)", "password": "\(passwordTextField.text!)"]
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "POST"
+        let jsonData = try? JSONSerialization.data(withJSONObject: params)
+        urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        urlRequest.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: urlRequest, completionHandler: { (data, response, error) in
+            if error != nil {
+                print(error!)
+            } else {
+                if let data = data {
+                    do {
+                        let jsonResult = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
+                        if let error = ((jsonResult["error"] as? NSDictionary)?["user_authentication"] as? NSArray)?[0]{
+                            DispatchQueue.main.sync(execute: {
+                                self.createAlert(title: "Error", message: "\(error)")
+                            })
+                        }else {
+                            if let authToken = jsonResult["auth_token"] as? String {
+                                self.token = "\(authToken)"
+                                self.session.append(self.token)
+                                UserDefaults.standard.set(self.session, forKey: "Session")
+                                DispatchQueue.main.sync(execute: {
+                                    self.dismiss(animated: true, completion: nil)
+                                })
+                            }
+                        }
+                    } catch {
+                        DispatchQueue.main.sync(execute: {
+                            self.createAlert(title: "Data Incorrect", message: "Please Check The data")
+                        })
+                    }
+                }
+            }
+        })
+        task.resume()
+        print("User Login Success")
+    }
+    
+    func handleRegister() {
+        
+        print("User Register")
+        
+        guard let name = nameTextField.text, name.characters.count > 3 && name.characters.count <= 16 else {
+            print("Invalid Name")
+            return
+        }
+        
+        guard let email = emailTextField.text, isValidEmail(testStr: email) else {
+            print("Invalid Email")
+            return
+        }
+        
+        guard let password = passwordTextField.text, password.characters.count > 7 && password.characters.count <= 32 else {
+            print("Invalid Password")
+            return
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func isValidEmail(testStr:String) -> Bool {
+        // print("validate calendar: \(testStr)")
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: testStr)
     }
     
     
