@@ -16,7 +16,7 @@
 		78CAB96C1E33B39B0087F530 /* TravelAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAB96B1E33B39B0087F530 /* TravelAppUITests.swift */; };
 		78CAB97B1E33B62A0087F530 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAB97A1E33B62A0087F530 /* LoginController.swift */; };
 		78CAB97E1E33B6E20087F530 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAB97D1E33B6E20087F530 /* Extensions.swift */; };
-		78CCEA3B1E34D71400CEA82C /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 78CCEA3A1E34D59700CEA82C /* Config.xcconfig */; };
+		78CCEA3D1E34DC8300CEA82C /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CCEA3C1E34DC8300CEA82C /* SharedData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +52,7 @@
 		78CAB96D1E33B39B0087F530 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78CAB97A1E33B62A0087F530 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		78CAB97D1E33B6E20087F530 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		78CCEA3A1E34D59700CEA82C /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = ../Config.xcconfig; sourceTree = "<group>"; };
+		78CCEA3C1E34DC8300CEA82C /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +110,6 @@
 				78CAB94F1E33B39A0087F530 /* Main.storyboard */,
 				78CAB9521E33B39A0087F530 /* Assets.xcassets */,
 				78CAB9541E33B39A0087F530 /* LaunchScreen.storyboard */,
-				78CCEA3A1E34D59700CEA82C /* Config.xcconfig */,
 				78CAB9571E33B39A0087F530 /* Info.plist */,
 			);
 			path = TravelApp;
@@ -154,6 +153,7 @@
 		78CCEA341E34D35B00CEA82C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				78CCEA3C1E34DC8300CEA82C /* SharedData.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -266,7 +266,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				78CCEA3B1E34D71400CEA82C /* Config.xcconfig in Resources */,
 				78CAB9561E33B39A0087F530 /* LaunchScreen.storyboard in Resources */,
 				78CAB9531E33B39A0087F530 /* Assets.xcassets in Resources */,
 				78CAB9511E33B39A0087F530 /* Main.storyboard in Resources */,
@@ -295,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				78CAB94E1E33B39A0087F530 /* ViewController.swift in Sources */,
+				78CCEA3D1E34DC8300CEA82C /* SharedData.swift in Sources */,
 				78CAB97B1E33B62A0087F530 /* LoginController.swift in Sources */,
 				78CAB94C1E33B39A0087F530 /* AppDelegate.swift in Sources */,
 				78CAB97E1E33B6E20087F530 /* Extensions.swift in Sources */,

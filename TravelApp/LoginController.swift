@@ -13,11 +13,7 @@ class LoginController: UIViewController {
     override var shouldAutorotate: Bool { return false }
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return UIInterfaceOrientationMask.portrait }
     
-    // This variable will store the authToken of the signIn user for creating session
-    var token = ""
-    
-    // it is used for permanent storage and passing authToken and username to next screens
-    var session = [String]()
+    var sharedData = SharedData()
     
     let inputContainerView:  UIView = {
         let view = UIView()
@@ -91,9 +87,8 @@ class LoginController: UIViewController {
                             })
                         }else {
                             if let authToken = jsonResult["auth_token"] as? String {
-                                self.token = "\(authToken)"
-                                self.session.append(self.token)
-                                UserDefaults.standard.set(self.session, forKey: "Session")
+                                self.sharedData.token = authToken
+                                self.sharedData.setToken()
                                 DispatchQueue.main.sync(execute: {
                                     self.dismiss(animated: true, completion: nil)
                                 })
