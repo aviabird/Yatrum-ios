@@ -1,0 +1,9 @@
+//
+//  Config.xcconfig
+//  TravelApp
+//
+//  Created by rawat on 22/01/17.
+//  Copyright © 2017 Pankaj Rawat. All rights reserved.
+//
+
+BACKEND_URL = http:\/\/localhost:3000

@@ -14,6 +14,10 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
+        
+        if true {
+            perform(#selector(handleLogout), with: nil, afterDelay: 0)
+        }
     }
     
     func handleLogout() {
