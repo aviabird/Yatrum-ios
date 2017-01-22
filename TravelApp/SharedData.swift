@@ -10,6 +10,7 @@ import UIKit
 
 class SharedData: NSObject {
     
+    var API_URL: String = "http://localhost:3000"
     var token: String = ""
     
     func getToken() -> String {
