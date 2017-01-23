@@ -14,6 +14,7 @@ class LoginController: UIViewController {
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return UIInterfaceOrientationMask.portrait }
     
     var sharedData = SharedData()
+    var homeController: HomeController?
     
     let inputContainerView:  UIView = {
         let view = UIView()
@@ -90,7 +91,9 @@ class LoginController: UIViewController {
                                 self.sharedData.token = authToken
                                 self.sharedData.setToken()
                                 DispatchQueue.main.sync(execute: {
-                                    self.dismiss(animated: true, completion: nil)
+                                    self.dismiss(animated: true, completion: { 
+                                        self.homeController?.fetchTrips()
+                                    })
                                 })
                             }
                         }

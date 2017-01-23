@@ -18,26 +18,22 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         // Do any additional setup after loading the view, typically from a nib.
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         
-        if sharedData.getToken() == "" {
-            perform(#selector(handleLogout), with: nil, afterDelay: 0)
-        }
-        
-        fetchTrips()
-        
         collectionView?.backgroundColor = UIColor.white
-        
         collectionView?.register(TripCell.self, forCellWithReuseIdentifier: "cellId")
         
-        //            collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
-        //            collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
         setUpNavBarButtons()
+        
+        if sharedData.getToken() == "" {
+            perform(#selector(handleLogout), with: nil, afterDelay: 0)
+        } else {
+            fetchTrips()
+        }
     }
     
     func handleLogout() {
-        
         sharedData.clearAll()
-        
         let loginController = LoginController()
+        loginController.homeController = self
         present(loginController, animated: true, completion: nil)
         
     }
@@ -58,6 +54,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     let settingsLauncher = SettingsLauncher()
     func handleMore() {
+        settingsLauncher.homeController = self
         settingsLauncher.showSettings()
     }
     
