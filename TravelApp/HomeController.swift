@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var sharedData = SharedData()
     var trips: [Trip]?
@@ -20,27 +20,17 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         if sharedData.getToken() == "" {
             perform(#selector(handleLogout), with: nil, afterDelay: 0)
-        } else {
-            fetchTrips()
-            navigationItem.title = "Home"
-            navigationController?.navigationBar.isTranslucent =  false
-            
-            let titleLabel = UILabel(frame: CGRect(x:0, y:0, width:view.frame.width - 32, height: view.frame.height))
-            titleLabel.text = "Home"
-            titleLabel.textColor = UIColor.white
-            titleLabel.font = UIFont.systemFont(ofSize: 20)
-            navigationItem.titleView = titleLabel
-            
-            
-            collectionView?.backgroundColor = UIColor.white
-            
-            collectionView?.register(TripCell.self, forCellWithReuseIdentifier: "cellId")
-            
-//            collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
-//            collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
-            
-            
         }
+        
+        fetchTrips()
+        
+        collectionView?.backgroundColor = UIColor.white
+        
+        collectionView?.register(TripCell.self, forCellWithReuseIdentifier: "cellId")
+        
+        //            collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
+        //            collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
+        setUpNavBarButtons()
     }
     
     func handleLogout() {
@@ -50,6 +40,25 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let loginController = LoginController()
         present(loginController, animated: true, completion: nil)
         
+    }
+    
+    func setUpNavBarButtons() {
+        let searchIcon = UIImage(named: "search_icon")?.withRenderingMode(.automatic)
+        let searchBarButtonItem = UIBarButtonItem(image: searchIcon, landscapeImagePhone: searchIcon, style: .plain, target: self, action: #selector(handleSearch))
+        
+        let navMoreIcon = UIImage(named: "nav_more_icon")?.withRenderingMode(.automatic)
+        let moreBarButtonItem = UIBarButtonItem(image: navMoreIcon, landscapeImagePhone: navMoreIcon, style: .plain, target: self, action: #selector(handleMore))
+        
+        navigationItem.rightBarButtonItems = [moreBarButtonItem, searchBarButtonItem]
+    }
+    
+    func handleSearch() {
+        print(123)
+    }
+    
+    let settingsLauncher = SettingsLauncher()
+    func handleMore() {
+        settingsLauncher.showSettings()
     }
     
     func fetchTrips() {
