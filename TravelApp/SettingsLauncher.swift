@@ -25,11 +25,11 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
     
     let settings: [Setting] = {
         return [
-            Setting(name: "Settings", imageName: "settings"),
-            Setting(name: "Terms & privacy policy", imageName: "privacy"),
-            Setting(name: "Send Feedback", imageName: "feedback"),
-            Setting(name: "Logout", imageName: "logout"),
-            Setting(name: "Cancel", imageName: "cancel")
+            Setting(name: .Settings, imageName: "settings"),
+            Setting(name: .Privacy, imageName: "privacy"),
+            Setting(name: .Feedback, imageName: "feedback"),
+            Setting(name: .Logout, imageName: "logout"),
+            Setting(name: .Cancel, imageName: "cancel")
         ]
     }()
     
@@ -61,11 +61,15 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
         
     }
     
-    func handleDismiss() {
-        UIView.animate(withDuration: 0.5) {
+    func handleDismiss(setting: Setting) {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: { 
             self.blackView.alpha = 0
             if let window = UIApplication.shared.keyWindow {
                 self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
+            }
+        }) { (true) in
+            if setting.name == .Logout {
+                self.homeController?.handleLogout()
             }
         }
     }
@@ -90,16 +94,8 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let setting = settings[indexPath.item]
-        
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: { 
-            self.blackView.alpha = 0
-            if let window = UIApplication.shared.keyWindow {
-                self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
-            }
-        }) { (true) in
-            self.homeController?.handleLogout()
-        }
+        let setting = settings[indexPath.item]
+        handleDismiss(setting: setting)
     }
     
     override init() {
