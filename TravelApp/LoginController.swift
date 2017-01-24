@@ -67,7 +67,7 @@ class LoginController: UIViewController {
             return
         }
         
-        let url = URL(string: "http://localhost:3000/authenticate")!
+        let url = URL(string: "\(sharedData.API_URL)/authenticate")!
         let params = ["email": "\(emailTextField.text!)", "password": "\(passwordTextField.text!)"]
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"
