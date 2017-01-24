@@ -10,8 +10,8 @@ import UIKit
 
 class SharedData: NSObject {
     
-    var API_URL: String = "http://localhost:3000"
-//    var API_URL: String = "https://travel-api-aviabird.herokuapp.com"
+//    var API_URL: String = "http://localhost:3000"
+    var API_URL: String = "https://travel-api-aviabird.herokuapp.com"
     var token: String = ""
     var currentUser: User = User()
     
