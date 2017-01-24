@@ -16,7 +16,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(TripCell.self, forCellWithReuseIdentifier: "cellId")
@@ -41,13 +40,24 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func setUpNavBarButtons() {
+        
+        // Left Navigation Bar Button
         let searchIcon = UIImage(named: "search_icon")?.withRenderingMode(.automatic)
         let searchBarButtonItem = UIBarButtonItem(image: searchIcon, landscapeImagePhone: searchIcon, style: .plain, target: self, action: #selector(handleSearch))
         
-        let navMoreIcon = UIImage(named: "nav_more_icon")?.withRenderingMode(.automatic)
+        let navMoreIcon = UIImage(named: "settings")?.withRenderingMode(.automatic)
         let moreBarButtonItem = UIBarButtonItem(image: navMoreIcon, landscapeImagePhone: navMoreIcon, style: .plain, target: self, action: #selector(handleMore))
         
-        navigationItem.rightBarButtonItems = [moreBarButtonItem, searchBarButtonItem]
+        navigationItem.leftBarButtonItems = [moreBarButtonItem, searchBarButtonItem]
+        
+        // Left Navigation Bar Button
+        let addIcon = UIImage(named: "plus")?.withRenderingMode(.automatic)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: addIcon, style: .plain, target: self, action: #selector(publishTrip))
+    }
+    
+    func publishTrip() {
+        let createTripController = CreateTripController()
+        navigationController?.pushViewController(createTripController, animated: true)
     }
     
     func handleSearch() {

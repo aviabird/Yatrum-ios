@@ -60,13 +60,13 @@ class TripCell:  BaseCell  {
         let imageView = CustomImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "taylor_swift_blank_space")
+        imageView.image = UIImage(named: "")
         return imageView
     }()
     
     let userProfileImageView: CustomImageView = {
         let imageView = CustomImageView()
-        imageView.image = UIImage(named: "taylor_swift_profile")
+        imageView.image = UIImage(named: "")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 22
@@ -83,7 +83,7 @@ class TripCell:  BaseCell  {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Taylor Swift Blank Space"
+        label.text = ""
         label.numberOfLines = 2
         return label
     }()
@@ -91,7 +91,7 @@ class TripCell:  BaseCell  {
     let subTitleTextView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.text = "245M Views"
+        textView.text = ""
         textView.textContainerInset = UIEdgeInsetsMake(0, -4, 0, 0)
         textView.textColor = UIColor.gray
         return textView
