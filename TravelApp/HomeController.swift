@@ -20,8 +20,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(TripCell.self, forCellWithReuseIdentifier: "cellId")
         
-        navigationController?.hidesBarsOnSwipe = true
-        
         setUpNavBarButtons()
         
         if sharedData.getToken() == "" {

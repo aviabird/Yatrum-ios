@@ -85,6 +85,7 @@ class TripCell:  BaseCell  {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = ""
         label.numberOfLines = 2
+//        label.font = label.font.withSize(14)
         return label
     }()
     
@@ -100,21 +101,21 @@ class TripCell:  BaseCell  {
     var titleLabelHeightConstraint: NSLayoutConstraint?
     
     override func setupViews() {
-        addSubview(thumbnailImageView)
-        addSubview(separatorView)
         addSubview(userProfileImageView)
         addSubview(titleLabel)
         addSubview(subTitleTextView)
+        addSubview(thumbnailImageView)
+        addSubview(separatorView)
         
-        addConstraintsWithFormat(format: "H:|-16-[v0]-16-|", views: thumbnailImageView)
         addConstraintsWithFormat(format: "H:|-16-[v0(44)]", views: userProfileImageView)
+        addConstraintsWithFormat(format: "H:|[v0]|", views: thumbnailImageView)
         
         //vertical constrain
-        addConstraintsWithFormat(format: "V:|-16-[v0]-8-[v1(44)]-36-[v2(1)]|", views: thumbnailImageView, userProfileImageView, separatorView)
+        addConstraintsWithFormat(format: "V:|-16-[v0(44)]-38-[v1]-16-[v2(1)]|", views: userProfileImageView, thumbnailImageView, separatorView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: separatorView)
         
         //top constraint
-        addConstraint(NSLayoutConstraint(item: titleLabel, attribute:  .top, relatedBy: .equal, toItem: thumbnailImageView , attribute: .bottom, multiplier: 1, constant: 8 ))
+        addConstraint(NSLayoutConstraint(item: titleLabel, attribute:  .top, relatedBy: .equal, toItem: userProfileImageView , attribute: .top, multiplier: 1, constant: 0 ))
         // left constraint
         addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .left, relatedBy: .equal, toItem: userProfileImageView, attribute: .right, multiplier: 1, constant: 8))
         //right constraint
