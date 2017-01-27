@@ -78,9 +78,7 @@ class CustomImageView: UIImageView {
             if (error != nil) {
                 print(error!)
                 return
-            }
-                
-            else {
+            } else {
                 DispatchQueue.main.async {
                     let imageToCache = UIImage(data: data!)
                     
@@ -88,10 +86,12 @@ class CustomImageView: UIImageView {
                         self.image = imageToCache
                     }
                     
-                    imageCache.setObject(imageToCache!, forKey: urlString as AnyObject)
+                    if imageToCache != nil {
+                        imageCache.setObject(imageToCache!, forKey: urlString as AnyObject)
+                    }
                 }
                 return
             }
-            }.resume()
+        }.resume()
     }
 }
