@@ -59,7 +59,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         // Left Navigation Bar Button
         let addIcon = UIImage(named: "plus-filled")?.withRenderingMode(.alwaysTemplate)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: addIcon, style: .plain, target: self, action: #selector(publishTrip))
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.orange
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.appSecondaryColor()
     }
     
     func publishTrip() {
@@ -120,6 +120,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                         trip.title = dictionary["name"] as! String?
                         trip.numberOfLikes = dictionary["trip_likes_count"] as! NSNumber?
                         trip.thumbnailImageURL = dictionary["thumbnail_image_url"] as! String?
+                        trip.isLikedByCurrentUser = true
                         
                         
                         // User Data

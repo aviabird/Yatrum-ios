@@ -254,6 +254,7 @@ class LoginController: UIViewController {
         super.viewDidLoad()
 
         view.addBackground(imageName: "LoginBG")
+        view.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(dismissKeyboard)))
         
         view.addSubview(inputContainerView)
         view.addSubview(loginRegisterButton)
@@ -264,6 +265,12 @@ class LoginController: UIViewController {
         setupLoginRegisterButton()
         setupProfileImageView()
         setupLoginRegisterSegmentedControl()
+    }
+    
+    func dismissKeyboard() {
+        emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+        confirmPasswordTextField.resignFirstResponder()
     }
     
     func setupLoginRegisterSegmentedControl() {
