@@ -20,6 +20,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(TripCell.self, forCellWithReuseIdentifier: "cellId")
         
+        collectionView?.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
+        collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 50, 0)
+        
         setUpNavBarButtons()
         
         if sharedData.getToken() == "" {
@@ -27,6 +30,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         } else {
             fetchTrips()
         }
+        
+        setUpMenuBar()
     }
     
     func handleLogout() {
@@ -40,17 +45,21 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     func setUpNavBarButtons() {
         
         // Left Navigation Bar Button
-        let searchIcon = UIImage(named: "search_icon")?.withRenderingMode(.automatic)
+        let searchIcon = UIImage(named: "search_icon")?.withRenderingMode(.alwaysTemplate)
         let searchBarButtonItem = UIBarButtonItem(image: searchIcon, landscapeImagePhone: searchIcon, style: .plain, target: self, action: #selector(handleSearch))
+        searchBarButtonItem.tintColor = UIColor.darkGray
         
-        let navMoreIcon = UIImage(named: "settings")?.withRenderingMode(.automatic)
+        let navMoreIcon = UIImage(named: "settings")?.withRenderingMode(.alwaysTemplate)
         let moreBarButtonItem = UIBarButtonItem(image: navMoreIcon, landscapeImagePhone: navMoreIcon, style: .plain, target: self, action: #selector(handleMore))
+        moreBarButtonItem.tintColor = UIColor.darkGray
+        
         
         navigationItem.leftBarButtonItems = [moreBarButtonItem, searchBarButtonItem]
         
         // Left Navigation Bar Button
-        let addIcon = UIImage(named: "plus")?.withRenderingMode(.automatic)
+        let addIcon = UIImage(named: "plus-filled")?.withRenderingMode(.alwaysTemplate)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: addIcon, style: .plain, target: self, action: #selector(publishTrip))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.orange
     }
     
     func publishTrip() {
@@ -66,6 +75,20 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     func handleMore() {
         settingsLauncher.homeController = self
         settingsLauncher.showSettings()
+    }
+    
+    let menuBar: MenuBar = {
+        let mb = MenuBar()
+        return mb
+    }()
+    
+    private func setUpMenuBar() {
+        view.addSubview(menuBar)
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: menuBar)
+        menuBar.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        view.addConstraintsWithFormat(format: "V:[v0(50)]", views: menuBar)
+        
+        menuBar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
     }
     
     func fetchTrips() {
