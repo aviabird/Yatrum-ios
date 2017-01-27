@@ -12,6 +12,10 @@ extension UIColor {
     static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) -> UIColor {
         return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: alpha)
     }
+    
+    static func appBaseColor() -> UIColor {
+        return rgb(red: 0, green: 163, blue: 136, alpha: 0.95)
+    }
 }
 
 extension UIView {

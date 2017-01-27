@@ -11,6 +11,7 @@
 		7803CFE91E351979006C4373 /* TripCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7803CFE81E351979006C4373 /* TripCell.swift */; };
 		782124B21E375C7A00DF0161 /* CreateTripController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782124B11E375C7A00DF0161 /* CreateTripController.swift */; };
 		786C18761E365A9700087D9C /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786C18751E365A9700087D9C /* SettingsLauncher.swift */; };
+		7891F56A1E3B16B700F895CE /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7891F5691E3B16B700F895CE /* MenuBar.swift */; };
 		78CAB94C1E33B39A0087F530 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAB94B1E33B39A0087F530 /* AppDelegate.swift */; };
 		78CAB94E1E33B39A0087F530 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAB94D1E33B39A0087F530 /* HomeController.swift */; };
 		78CAB9511E33B39A0087F530 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78CAB94F1E33B39A0087F530 /* Main.storyboard */; };
@@ -21,7 +22,6 @@
 		78CAB97B1E33B62A0087F530 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAB97A1E33B62A0087F530 /* LoginController.swift */; };
 		78CAB97E1E33B6E20087F530 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAB97D1E33B6E20087F530 /* Extensions.swift */; };
 		78CCEA3D1E34DC8300CEA82C /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CCEA3C1E34DC8300CEA82C /* SharedData.swift */; };
-		78E9CFD71E37B3FD00371D2A /* BottomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E9CFD61E37B3FD00371D2A /* BottomTabBarController.swift */; };
 		78F079581E366AEC00BA8C4D /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F079571E366AEC00BA8C4D /* SettingCell.swift */; };
 		78F0795A1E366B4100BA8C4D /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F079591E366B4100BA8C4D /* BaseCell.swift */; };
 		78F0795C1E36742400BA8C4D /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F0795B1E36742400BA8C4D /* Setting.swift */; };
@@ -49,6 +49,7 @@
 		7803CFE81E351979006C4373 /* TripCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripCell.swift; sourceTree = "<group>"; };
 		782124B11E375C7A00DF0161 /* CreateTripController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTripController.swift; sourceTree = "<group>"; };
 		786C18751E365A9700087D9C /* SettingsLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
+		7891F5691E3B16B700F895CE /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		78CAB9481E33B39A0087F530 /* TravelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78CAB94B1E33B39A0087F530 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78CAB94D1E33B39A0087F530 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -65,7 +66,6 @@
 		78CAB97A1E33B62A0087F530 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		78CAB97D1E33B6E20087F530 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		78CCEA3C1E34DC8300CEA82C /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
-		78E9CFD61E37B3FD00371D2A /* BottomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomTabBarController.swift; sourceTree = "<group>"; };
 		78F079571E366AEC00BA8C4D /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		78F079591E366B4100BA8C4D /* BaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		78F0795B1E36742400BA8C4D /* Setting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
@@ -103,6 +103,7 @@
 				7803CFE81E351979006C4373 /* TripCell.swift */,
 				78F079571E366AEC00BA8C4D /* SettingCell.swift */,
 				78F079591E366B4100BA8C4D /* BaseCell.swift */,
+				7891F5691E3B16B700F895CE /* MenuBar.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -167,7 +168,6 @@
 				78CAB97A1E33B62A0087F530 /* LoginController.swift */,
 				78CAB94D1E33B39A0087F530 /* HomeController.swift */,
 				782124B11E375C7A00DF0161 /* CreateTripController.swift */,
-				78E9CFD61E37B3FD00371D2A /* BottomTabBarController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -334,9 +334,9 @@
 				782124B21E375C7A00DF0161 /* CreateTripController.swift in Sources */,
 				78F0795C1E36742400BA8C4D /* Setting.swift in Sources */,
 				78CAB97E1E33B6E20087F530 /* Extensions.swift in Sources */,
-				78E9CFD71E37B3FD00371D2A /* BottomTabBarController.swift in Sources */,
 				7803CFE91E351979006C4373 /* TripCell.swift in Sources */,
 				78F0795A1E366B4100BA8C4D /* BaseCell.swift in Sources */,
+				7891F56A1E3B16B700F895CE /* MenuBar.swift in Sources */,
 				78F079581E366AEC00BA8C4D /* SettingCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
