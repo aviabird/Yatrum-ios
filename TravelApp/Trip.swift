@@ -13,6 +13,7 @@ class Trip: NSObject {
     var title: String?
     var numberOfLikes: NSNumber?
     var updatedAt: NSDate?
+    var isLikedByCurrentUser: Bool = false
     
     var user: User?
 }

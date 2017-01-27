@@ -39,6 +39,10 @@ class TripCell:  BaseCell  {
                 }
             }
             
+            if (trip?.isLikedByCurrentUser)! {
+                likeImageView.tintColor = UIColor.appSecondaryColor()
+            }
+            
         }
         
     }
@@ -98,6 +102,14 @@ class TripCell:  BaseCell  {
         return textView
     }()
     
+    let likeImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.image = UIImage(named: "like")?.withRenderingMode(.alwaysTemplate)
+        iv.tintColor = UIColor.white
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        return iv
+    }()
+    
     var titleLabelHeightConstraint: NSLayoutConstraint?
     
     override func setupViews() {
@@ -106,13 +118,15 @@ class TripCell:  BaseCell  {
         addSubview(subTitleTextView)
         addSubview(thumbnailImageView)
         addSubview(separatorView)
+        addSubview(likeImageView)
+        
+        setupThumbnailImageViews()
         
         addConstraintsWithFormat(format: "H:|-16-[v0(44)]", views: userProfileImageView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: thumbnailImageView)
         
         //vertical constrain
-        addConstraintsWithFormat(format: "V:|-16-[v0(44)]-38-[v1]-16-[v2(1)]|", views: userProfileImageView, thumbnailImageView, separatorView)
-        addConstraintsWithFormat(format: "H:|[v0]|", views: separatorView)
+        addConstraintsWithFormat(format: "V:|-16-[v0(44)]-38-[v1]-40-|", views: userProfileImageView, thumbnailImageView)
         
         //top constraint
         addConstraint(NSLayoutConstraint(item: titleLabel, attribute:  .top, relatedBy: .equal, toItem: userProfileImageView , attribute: .top, multiplier: 1, constant: 0 ))
@@ -132,5 +146,13 @@ class TripCell:  BaseCell  {
         addConstraint(NSLayoutConstraint(item: subTitleTextView, attribute: .right , relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
         // hight Constraint
         addConstraint(NSLayoutConstraint(item: subTitleTextView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 30))
+        
+        likeImageView.topAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor, constant: 5).isActive = true
+        likeImageView.leftAnchor.constraint(equalTo: thumbnailImageView.leftAnchor, constant: 5).isActive = true
+        likeImageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        likeImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    }
+    
+    func setupThumbnailImageViews() {
     }
 }

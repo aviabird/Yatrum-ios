@@ -16,6 +16,10 @@ extension UIColor {
     static func appBaseColor() -> UIColor {
         return rgb(red: 0, green: 163, blue: 136, alpha: 0.95)
     }
+    
+    static func appSecondaryColor() -> UIColor {
+        return rgb(red: 247, green: 84, blue: 56, alpha: 1)
+    }
 }
 
 extension UIView {

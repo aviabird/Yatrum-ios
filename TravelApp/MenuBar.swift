@@ -122,8 +122,8 @@ class MenuCell: BaseCell {
         UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             if status {
                 self.imageView.image = UIImage(named: "\(self.imageName)-filled")?.withRenderingMode(.alwaysTemplate)
-                self.imageView.tintColor = UIColor.appBaseColor()
-                self.labelView.textColor = UIColor.appBaseColor()
+                self.imageView.tintColor = UIColor.appSecondaryColor()
+                self.labelView.textColor = UIColor.appSecondaryColor()
             } else {
                 self.imageView.image = UIImage(named: "\(self.imageName)")?.withRenderingMode(.alwaysTemplate)
                 self.imageView.tintColor = UIColor.darkGray
