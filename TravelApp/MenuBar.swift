@@ -35,12 +35,30 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         setupHorizontalBar()
     }
     
+    var horizontalBarLeftAnchor: NSLayoutConstraint?
+    
     func setupHorizontalBar() {
-        let horizontalBar = UIView()
-        horizontalBar.backgroundColor = UIColor.green
+        let horizontalBarView = UIView()
+        horizontalBarView.backgroundColor = UIColor.orange
+        horizontalBarView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(horizontalBarView)
         
+        horizontalBarLeftAnchor = horizontalBarView.leftAnchor.constraint(equalTo: self.leftAnchor)
+        horizontalBarLeftAnchor?.isActive = true
+        horizontalBarView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/4).isActive = true
+        horizontalBarView.heightAnchor.constraint(equalToConstant: 2).isActive = true
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let x = CGFloat(indexPath.item) * frame.width / 4
+        horizontalBarLeftAnchor?.constant = x
+        
+        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: { 
+            self.layoutIfNeeded()
+        }, completion: nil)
+        
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
@@ -101,15 +119,17 @@ class MenuCell: BaseCell {
     }
     
     func updateViewOnSelectedAndHighlight(status: Bool) {
-        if status {
-            imageView.image = UIImage(named: "\(self.imageName)-filled")?.withRenderingMode(.alwaysTemplate)
-            imageView.tintColor = UIColor.appBaseColor()
-            labelView.textColor = UIColor.appBaseColor()
-        } else {
-            imageView.image = UIImage(named: "\(self.imageName)")?.withRenderingMode(.alwaysTemplate)
-            imageView.tintColor = UIColor.darkGray
-            labelView.textColor = UIColor.darkGray
-        }
+        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            if status {
+                self.imageView.image = UIImage(named: "\(self.imageName)-filled")?.withRenderingMode(.alwaysTemplate)
+                self.imageView.tintColor = UIColor.appBaseColor()
+                self.labelView.textColor = UIColor.appBaseColor()
+            } else {
+                self.imageView.image = UIImage(named: "\(self.imageName)")?.withRenderingMode(.alwaysTemplate)
+                self.imageView.tintColor = UIColor.darkGray
+                self.labelView.textColor = UIColor.darkGray
+            }
+        }, completion: nil)
     }
     
     override func setupViews() {
