@@ -15,6 +15,7 @@ class LoginController: UIViewController {
     
     var sharedData = SharedData()
     var homeController: HomeController?
+    var authService = AuthService.sharedInstance
     
     let inputContainerView:  UIView = {
         let view = UIView()
@@ -67,45 +68,8 @@ class LoginController: UIViewController {
             return
         }
         
-        let url = URL(string: "\(sharedData.API_URL)/authenticate")!
-        let params = ["email": "\(emailTextField.text!)", "password": "\(passwordTextField.text!)"]
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "POST"
-        let jsonData = try? JSONSerialization.data(withJSONObject: params)
-        urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-        urlRequest.httpBody = jsonData
+        authService.login(email: emailTextField.text!, password: passwordTextField.text!, loginController: self)
         
-        let task = URLSession.shared.dataTask(with: urlRequest, completionHandler: { (data, response, error) in
-            if error != nil {
-                print(error!)
-            } else {
-                if let data = data {
-                    do {
-                        let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as AnyObject
-                        if let error = ((jsonResult["error"] as? NSDictionary)?["user_authentication"] as? NSArray)?[0]{
-                            DispatchQueue.main.sync(execute: {
-                                self.createAlert(title: "Error", message: "\(error)")
-                            })
-                        }else {
-                            if let authToken = jsonResult["auth_token"] as? String {
-                                self.sharedData.token = authToken
-                                self.sharedData.setToken()
-                                DispatchQueue.main.sync(execute: {
-                                    self.dismiss(animated: true, completion: { 
-                                        self.homeController?.fetchTrips()
-                                    })
-                                })
-                            }
-                        }
-                    } catch {
-                        DispatchQueue.main.sync(execute: {
-                            self.createAlert(title: "Data Incorrect", message: "Please Check The data")
-                        })
-                    }
-                }
-            }
-        })
-        task.resume()
         print("User Login Success")
     }
     
@@ -114,54 +78,21 @@ class LoginController: UIViewController {
         print("User Register")
         
         guard let email = emailTextField.text, isValidEmail(testStr: email) else {
-            print("Invalid Email")
+            self.createAlert(title: "Error", message: "Enter valid email")
             return
         }
         
-        guard let password = passwordTextField.text, password.characters.count > 7 && password.characters.count <= 32 else {
-            print("Invalid Password")
+        guard let password = passwordTextField.text, password.characters.count > 3 && password.characters.count <= 32 else {
+            self.createAlert(title: "Error", message: "Enter valid password(4 to 32 characters)")
             return
         }
         
-        let url = URL(string: "\(sharedData.API_URL)/users/create")!
-        let params = ["user": ["email": "\(emailTextField.text!)", "password": "\(passwordTextField.text!)", "password_confirmation": "\(confirmPasswordTextField.text!)"]]
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "POST"
-        let jsonData = try? JSONSerialization.data(withJSONObject: params)
-        urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-        urlRequest.httpBody = jsonData
-        let task = URLSession.shared.dataTask(with: urlRequest, completionHandler: { (data, response, error) in
-            if error != nil {
-                print(error!)
-            } else {
-                if let data = data {
-                    do {
-                        let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as AnyObject
-                        //                                print(jsonResult["password_confirmation"])
-                        if let error = (jsonResult["password_confirmation"] as? NSArray)?[0] {
-                            DispatchQueue.main.sync(execute: {
-                                self.createAlert(title: "Error", message: "\(error)")
-                            })
-                        }else {
-                            DispatchQueue.main.sync(execute: {
-                                let alert = UIAlertController(title: "Successfull Sign Up", message: "Welcome To Trip Diary", preferredStyle: UIAlertControllerStyle.alert)
-                                
-                                alert.addAction(UIAlertAction(title: "Let's Start", style: .default, handler: { (action) in
-                                    self.handleLogin()
-                                }))
-                                
-                                self.present(alert, animated: true, completion: nil)
-                            })
-                        }
-                    } catch {
-                        DispatchQueue.main.sync(execute: {
-                            self.createAlert(title: "Data Incorrect", message: "Please Check The data")
-                        })
-                    }
-                }
-            }
-        })
-        task.resume()
+        guard confirmPasswordTextField.text == passwordTextField.text else {
+            self.createAlert(title: "Error", message: "Password does not match")
+            return
+        }
+        
+        authService.register(email: emailTextField.text!, password: passwordTextField.text!, confirmPassword: confirmPasswordTextField.text!, loginController: self)
         
         print("User Registration Success")
     }
