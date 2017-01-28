@@ -17,8 +17,3 @@ class Trip: NSObject {
     
     var user: User?
 }
-
-class User: NSObject {
-    var name: String?
-    var profileImageURL: String?
-}
