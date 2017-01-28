@@ -10,10 +10,9 @@ import UIKit
 
 class SharedData: NSObject {
     
-    var API_URL: String = "http://localhost:3000"
-//    var API_URL: String = "https://travel-api-aviabird.herokuapp.com"
+//    var API_URL: String = "http://localhost:3000"
+    var API_URL: String = "https://travel-api-aviabird.herokuapp.com"
     var token: String = ""
-    var currentUser: User
     
     func getToken() -> String {
         if token == "" {
@@ -33,6 +32,16 @@ class SharedData: NSObject {
     func clearAll() {
         self.token = ""
         UserDefaults.standard.removeObject(forKey: "Token")
+    }
+    
+    func currentUser() -> User? {
+        let user = UserDefaults.standard.object(forKey: "User") as? User
+        
+        if (user != nil) {
+            return user!
+        }
+        
+        return nil
     }
     
 }

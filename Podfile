@@ -6,10 +6,14 @@ target 'TravelApp' do
   use_frameworks!
 
   # Pods for TravelApp
+  pod 'RxSwift',    '~> 3.0'
+  pod 'RxCocoa',    '~> 3.0'
 
   target 'TravelAppTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'RxBlocking', '~> 3.0'
+    pod 'RxTest',     '~> 3.0'
   end
 
   target 'TravelAppUITests' do
