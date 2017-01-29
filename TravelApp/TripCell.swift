@@ -39,12 +39,10 @@ class TripCell:  BaseCell  {
                 }
             }
             
-            if (trip?.isLikedByCurrentUser)! {
-                likeImageView.tintColor = UIColor.appSecondaryColor()
-            }
-            
             followButton.addTarget(self, action: #selector(handleFollow), for: .touchUpInside)
-            handleFollow()
+            
+            let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleLike))
+            likeImageView.addGestureRecognizer(tapRecognizer)
             
         }
         
@@ -108,7 +106,7 @@ class TripCell:  BaseCell  {
     let likeImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "like")?.withRenderingMode(.alwaysTemplate)
-        iv.tintColor = UIColor.white
+        iv.tintColor = UIColor.gray
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
@@ -116,13 +114,13 @@ class TripCell:  BaseCell  {
     let followButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = UIColor.white
-        button.layer.borderColor = UIColor.appBaseColor().cgColor
+        button.layer.borderColor = UIColor.appSecondaryColor().cgColor
         button.layer.borderWidth = 1
         button.setTitle("Follow", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 5
         button.layer.masksToBounds = true
-        button.setTitleColor(UIColor.appBaseColor(), for: .normal)
+        button.setTitleColor(UIColor.appSecondaryColor(), for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 10)
         return button
     }()
@@ -131,15 +129,29 @@ class TripCell:  BaseCell  {
         UIView.animate(withDuration: 0.5) {
             if (self.trip?.user?.isFollowedByCurrentUser)! {
                 self.followButton.backgroundColor = UIColor.appSecondaryColor()
-                self.followButton.layer.borderColor = UIColor.appSecondaryColor().cgColor
                 self.followButton.setTitle("Following", for: .normal)
                 self.followButton.setTitleColor(UIColor.white, for: .normal)
             } else {
                 self.followButton.backgroundColor = UIColor.white
-                self.followButton.layer.borderColor = UIColor.appBaseColor().cgColor
                 self.followButton.setTitle("Follow", for: .normal)
-                self.followButton.setTitleColor(UIColor.appBaseColor(), for: .normal)
+                self.followButton.setTitleColor(UIColor.appSecondaryColor(), for: .normal)
             }
+        }
+    }
+    
+    func handleLike() {
+        print("here")
+        UIView.animate(withDuration: 0.5, animations: {
+            self.likeImageView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+            if (self.trip?.isLikedByCurrentUser)! {
+                self.likeImageView.image = UIImage(named: "like-filled")
+                self.likeImageView.tintColor = UIColor.appSecondaryColor()
+            } else {
+                self.likeImageView.image = UIImage(named: "like")
+                self.likeImageView.tintColor = UIColor.appSecondaryColor()
+            }
+        }) { (true) in
+            self.likeImageView.transform = CGAffineTransform.identity
         }
     }
     
