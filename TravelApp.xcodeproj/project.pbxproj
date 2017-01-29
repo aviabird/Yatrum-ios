@@ -17,6 +17,7 @@
 		782221141E3CCDDF0051D4D5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782221131E3CCDDF0051D4D5 /* User.swift */; };
 		7848075B1E3BA2A500C01FC5 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7848075A1E3BA2A500C01FC5 /* AuthService.swift */; };
 		786C18761E365A9700087D9C /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786C18751E365A9700087D9C /* SettingsLauncher.swift */; };
+		78702C241E3E08BD00A1FF9E /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78702C231E3E08BD00A1FF9E /* FeedCell.swift */; };
 		7891F56A1E3B16B700F895CE /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7891F5691E3B16B700F895CE /* MenuBar.swift */; };
 		78CAB94C1E33B39A0087F530 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAB94B1E33B39A0087F530 /* AppDelegate.swift */; };
 		78CAB94E1E33B39A0087F530 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAB94D1E33B39A0087F530 /* HomeController.swift */; };
@@ -65,6 +66,7 @@
 		782221131E3CCDDF0051D4D5 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7848075A1E3BA2A500C01FC5 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		786C18751E365A9700087D9C /* SettingsLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
+		78702C231E3E08BD00A1FF9E /* FeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		7891F5691E3B16B700F895CE /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		78CAB9481E33B39A0087F530 /* TravelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78CAB94B1E33B39A0087F530 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				78F079571E366AEC00BA8C4D /* SettingCell.swift */,
 				78F079591E366B4100BA8C4D /* BaseCell.swift */,
 				7891F5691E3B16B700F895CE /* MenuBar.swift */,
+				78702C231E3E08BD00A1FF9E /* FeedCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -539,6 +542,7 @@
 			files = (
 				7803CFE61E351384006C4373 /* Trip.swift in Sources */,
 				78CAB94E1E33B39A0087F530 /* HomeController.swift in Sources */,
+				78702C241E3E08BD00A1FF9E /* FeedCell.swift in Sources */,
 				78CCEA3D1E34DC8300CEA82C /* SharedData.swift in Sources */,
 				78CAB97B1E33B62A0087F530 /* LoginController.swift in Sources */,
 				782221141E3CCDDF0051D4D5 /* User.swift in Sources */,
