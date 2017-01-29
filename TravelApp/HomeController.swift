@@ -13,6 +13,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     var sharedData = SharedData()
     var trips: [Trip]?
     let cellId = "cellId"
+    let trendingCellId = "trendingCellId"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +40,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.backgroundColor = UIColor.white
         
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(TrendingCell.self, forCellWithReuseIdentifier: trendingCellId)
         
         collectionView?.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 50, 0)
@@ -124,7 +126,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) 
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        
+        if indexPath.item == 1 {
+            return collectionView.dequeueReusableCell(withReuseIdentifier: trendingCellId, for: indexPath)
+        }
+        
         return cell
     }
     

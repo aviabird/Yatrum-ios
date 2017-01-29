@@ -22,8 +22,8 @@ class FeedCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate,
     let cellId = "cellId"
     var trips: [Trip]?
     
-    func fetchTrips() {
-        TripService.sharedInstance.fetchTrips { (trips: [Trip]) in
+    func fetchTripsFeed() {
+        TripService.sharedInstance.fetchTripsFeed { (trips: [Trip]) in
             self.trips = trips
             self.collectionView.reloadData()
         }
@@ -32,7 +32,7 @@ class FeedCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate,
     override func setupViews() {
         super.setupViews()
         
-        fetchTrips()
+        fetchTripsFeed()
         
         addSubview(collectionView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: collectionView)
