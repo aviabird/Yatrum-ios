@@ -22,7 +22,7 @@ class TripCell:  BaseCell  {
                 let numberFormatter = NumberFormatter()
                 numberFormatter.numberStyle = .decimal
                 
-                let subtitleText = "\(userName) • \(numberFormatter.string(from: numberOfLikes)!)♥ • 2 hour ago"
+                let subtitleText = "\(userName) • \(numberFormatter.string(from: numberOfLikes)!) • 2 hour ago"
                 subTitleTextView.text = subtitleText
             }
             
