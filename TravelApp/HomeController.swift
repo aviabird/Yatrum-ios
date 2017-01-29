@@ -126,11 +126,21 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        var identifier: String = ""
         
-        if indexPath.item == 1 {
-            return collectionView.dequeueReusableCell(withReuseIdentifier: trendingCellId, for: indexPath)
+        switch indexPath.item {
+        case 0:
+            identifier = cellId
+        case 1:
+            identifier = trendingCellId
+        default:
+            identifier = cellId
         }
+        if indexPath.item == 1 {
+            identifier = trendingCellId
+        }
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
         
         return cell
     }

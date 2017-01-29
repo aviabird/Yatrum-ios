@@ -11,13 +11,13 @@ class TripCell:  BaseCell  {
     
     var trip: Trip? {
         didSet {
-            titleLabel.text = trip?.title
+            titleLabel.text = trip?.name
             
             setupThumbnailImage()
             
             setupProfileImage()
             
-            if let userName = trip?.user?.name, let numberOfLikes = trip?.numberOfLikes {
+            if let userName = trip?.user?.name, let numberOfLikes = trip?.trip_likes_count {
                 
                 let numberFormatter = NumberFormatter()
                 numberFormatter.numberStyle = .decimal
@@ -27,7 +27,7 @@ class TripCell:  BaseCell  {
             }
             
             // measure Title text
-            if let title = trip?.title {
+            if let title = trip?.name {
                 let size = CGSize(width: frame.width - 16 - 44 - 8 - 16 , height: 1000)
                 let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
                 let estimatedRect = NSString(string: title).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14)], context: nil)
@@ -50,13 +50,13 @@ class TripCell:  BaseCell  {
     
     
     func setupThumbnailImage() {
-        if let thumbnailImageUrl = trip?.thumbnailImageURL {
+        if let thumbnailImageUrl = trip?.thumbnail_image_url {
             thumbnailImageView.loadImageUsingUrlString(urlString: thumbnailImageUrl)
         }
     }
     
     func setupProfileImage() {
-        if let profileImageURL = trip?.user?.profileImageURL {
+        if let profileImageURL = trip?.user?.profile_pic?.url {
             userProfileImageView.loadImageUsingUrlString(urlString: profileImageURL)
         }
     }
@@ -127,7 +127,7 @@ class TripCell:  BaseCell  {
     
     func handleFollow() {
         UIView.animate(withDuration: 0.5) {
-            if (self.trip?.user?.isFollowedByCurrentUser)! {
+            if (self.trip?.user?.is_followed_by_current_user)! {
                 self.followButton.backgroundColor = UIColor.appSecondaryColor()
                 self.followButton.setTitle("Following", for: .normal)
                 self.followButton.setTitleColor(UIColor.white, for: .normal)
@@ -143,7 +143,7 @@ class TripCell:  BaseCell  {
         print("here")
         UIView.animate(withDuration: 0.5, animations: {
             self.likeImageView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-            if (self.trip?.isLikedByCurrentUser)! {
+            if (self.trip?.is_liked_by_current_user)! {
                 self.likeImageView.image = UIImage(named: "like-filled")
                 self.likeImageView.tintColor = UIColor.appSecondaryColor()
             } else {

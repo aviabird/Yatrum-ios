@@ -9,11 +9,16 @@
 import UIKit
 
 class Trip: NSObject {
-    var thumbnailImageURL: String?
-    var title: String?
-    var numberOfLikes: NSNumber?
-    var updatedAt: NSDate?
-    var isLikedByCurrentUser: Bool = false
+    var id: NSNumber?
+    var thumbnail_image_url: String?
+    var name: String?
+    var tripDescription: String?
+    var trip_likes_count: NSNumber?
+    var updated_at: NSDate?
+    var created_at: NSDate?
+    var is_liked_by_current_user: Bool = false
+    var user_id: NSNumber?
     
     var user: User?
+    var cities: [City]?
 }
