@@ -42,7 +42,7 @@ class TripService: NSObject {
                         trip.title = dictionary["name"] as! String?
                         trip.numberOfLikes = dictionary["trip_likes_count"] as! NSNumber?
                         trip.thumbnailImageURL = dictionary["thumbnail_image_url"] as! String?
-                        trip.isLikedByCurrentUser = true
+                        trip.isLikedByCurrentUser = (dictionary["is_liked_by_current_user"] as! Bool?)!
                         
                         
                         // User Data
