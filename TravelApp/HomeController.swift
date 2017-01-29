@@ -24,8 +24,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         if sharedData.getToken() == "" {
             perform(#selector(handleLogout), with: nil, afterDelay: 0)
-        } else {
-            fetchTrips()
         }
         
         setUpMenuBar()
@@ -37,10 +35,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             flowLayout.minimumLineSpacing = 0
         }
         
+        collectionView?.showsHorizontalScrollIndicator = false
         collectionView?.backgroundColor = UIColor.white
-//        collectionView?.register(TripCell.self, forCellWithReuseIdentifier: "cellId")
         
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId )
+        collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
         
         collectionView?.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 50, 0)
@@ -111,13 +109,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         menuBar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
     }
     
-    func fetchTrips() {
-//        TripService.sharedInstance.fetchTrips { (trips: [Trip]) in
-//            self.trips = trips
-//            self.collectionView?.reloadData()
-//        }
-    }
-    
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         menuBar.horizontalBarLeftAnchor?.constant = scrollView.contentOffset.x / 4
     }
@@ -133,40 +124,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-        let color: [UIColor] = [.blue, .red, .black, .brown]
-        cell.backgroundColor = color[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) 
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height)
+        return CGSize(width: view.frame.width, height: view.frame.height - 115)
     }
-    
-//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return trips?.count ?? 0
-//    }
-//    
-//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! TripCell
-//        cell.trip = trips?[indexPath.item]
-//        return cell
-//    }
-//    
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: view.frame.width, height: view.frame.height * 0.6)
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 0
-//    }
-//    
-//    override func didReceiveMemoryWarning() {
-//        super.didReceiveMemoryWarning()
-//        // Dispose of any resources that can be recreated.
-//    }
-
-
 }
 

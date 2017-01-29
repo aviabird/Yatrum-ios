@@ -39,7 +39,7 @@ class AuthService: NSObject {
                                 AuthService.sharedData.setToken()
                                 DispatchQueue.main.sync(execute: {
                                     loginController.dismiss(animated: true, completion: {
-                                        loginController.homeController?.fetchTrips()
+//                                        loginController.homeController?.fetchTrips()
                                     })
                                 })
                             }
