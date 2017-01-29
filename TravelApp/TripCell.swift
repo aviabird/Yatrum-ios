@@ -43,6 +43,9 @@ class TripCell:  BaseCell  {
                 likeImageView.tintColor = UIColor.appSecondaryColor()
             }
             
+            followButton.addTarget(self, action: #selector(handleFollow), for: .touchUpInside)
+            handleFollow()
+            
         }
         
     }
@@ -89,7 +92,7 @@ class TripCell:  BaseCell  {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = ""
         label.numberOfLines = 1
-//        label.font = label.font.withSize(14)
+        label.font = label.font.withSize(12)
         return label
     }()
     
@@ -110,6 +113,36 @@ class TripCell:  BaseCell  {
         return iv
     }()
     
+    let followButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = UIColor.white
+        button.layer.borderColor = UIColor.appBaseColor().cgColor
+        button.layer.borderWidth = 1
+        button.setTitle("Follow", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 5
+        button.layer.masksToBounds = true
+        button.setTitleColor(UIColor.appBaseColor(), for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 10)
+        return button
+    }()
+    
+    func handleFollow() {
+        UIView.animate(withDuration: 0.5) {
+            if (self.trip?.user?.isFollowedByCurrentUser)! {
+                self.followButton.backgroundColor = UIColor.appSecondaryColor()
+                self.followButton.layer.borderColor = UIColor.appSecondaryColor().cgColor
+                self.followButton.setTitle("Following", for: .normal)
+                self.followButton.setTitleColor(UIColor.white, for: .normal)
+            } else {
+                self.followButton.backgroundColor = UIColor.white
+                self.followButton.layer.borderColor = UIColor.appBaseColor().cgColor
+                self.followButton.setTitle("Follow", for: .normal)
+                self.followButton.setTitleColor(UIColor.appBaseColor(), for: .normal)
+            }
+        }
+    }
+    
     var titleLabelHeightConstraint: NSLayoutConstraint?
     
     override func setupViews() {
@@ -119,21 +152,23 @@ class TripCell:  BaseCell  {
         addSubview(thumbnailImageView)
         addSubview(separatorView)
         addSubview(likeImageView)
+        addSubview(followButton)
         
         setupThumbnailImageViews()
         
         addConstraintsWithFormat(format: "H:|-16-[v0(44)]", views: userProfileImageView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: thumbnailImageView)
+        addConstraintsWithFormat(format: "H:|[v0]|", views: separatorView)
         
         //vertical constrain
-        addConstraintsWithFormat(format: "V:|-16-[v0(44)]-19-[v1]-40-|", views: userProfileImageView, thumbnailImageView)
+        addConstraintsWithFormat(format: "V:|-16-[v0(44)]-19-[v1]-40-[v2(1)]-16-|", views: userProfileImageView, thumbnailImageView, separatorView)
         
         //top constraint
         addConstraint(NSLayoutConstraint(item: titleLabel, attribute:  .top, relatedBy: .equal, toItem: userProfileImageView , attribute: .top, multiplier: 1, constant: 0 ))
         // left constraint
         addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .left, relatedBy: .equal, toItem: userProfileImageView, attribute: .right, multiplier: 1, constant: 8))
         //right constraint
-        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .right , relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .right , relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: -80))
         // hight Constraint
         titleLabelHeightConstraint = NSLayoutConstraint(item: titleLabel, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 22)
         addConstraint(titleLabelHeightConstraint!)
@@ -151,6 +186,12 @@ class TripCell:  BaseCell  {
         likeImageView.leftAnchor.constraint(equalTo: thumbnailImageView.leftAnchor, constant: 5).isActive = true
         likeImageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
         likeImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        followButton.leftAnchor.constraint(equalTo: titleLabel.rightAnchor).isActive = true
+        followButton.rightAnchor.constraint(equalTo: thumbnailImageView.rightAnchor, constant: -16).isActive = true
+        followButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        followButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
+        
     }
     
     func setupThumbnailImageViews() {

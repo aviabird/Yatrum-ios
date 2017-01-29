@@ -50,6 +50,7 @@ class TripService: NSObject {
                         let userDict = dictionary["user"] as! [String: AnyObject]
                         let user = User()
                         user.name = userDict["name"] as! String?
+                        user.isFollowedByCurrentUser = userDict["is_followed_by_current_user"] as! Bool?
                         
                         let profilePic = userDict["profile_pic"] as! [String: AnyObject]
                         user.profileImageURL = profilePic["url"] as! String?
