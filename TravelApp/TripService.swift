@@ -47,30 +47,7 @@ class TripService: NSObject {
                     var trips = [Trip]()
                     
                     for dictionary in tripsArray as! [[String: AnyObject]] {
-                        let trip = Trip()
-                        trip.name = dictionary["name"] as! String?
-                        trip.trip_likes_count = dictionary["trip_likes_count"] as! NSNumber?
-                        trip.thumbnail_image_url = dictionary["thumbnail_image_url"] as! String?
-                        trip.is_liked_by_current_user = (dictionary["is_liked_by_current_user"] as! Bool?)!
-                        
-                        
-                        // User Data
-                        // ---------------------
-                        let userDict = dictionary["user"] as! [String: AnyObject]
-                        let user = User()
-                        user.name = userDict["name"] as! String?
-                        user.is_followed_by_current_user = userDict["is_followed_by_current_user"] as! Bool?
-                        
-                        let profilePicDict = userDict["profile_pic"] as! [String: AnyObject]
-                        let profile_pic = ProfilePic()
-                        profile_pic.public_id = profilePicDict["public_id"] as! String?
-                        profile_pic.url = profilePicDict["url"] as! String?
-                        
-                        user.profile_pic = profile_pic
-                        // --------User Data----------
-                        
-                        trip.user = user
-                        
+                        let trip = Trip(dictionary: dictionary)
                         trips.append(trip)
                     }
                     
