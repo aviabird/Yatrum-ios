@@ -8,6 +8,7 @@ target 'TravelApp' do
   # Pods for TravelApp
   pod 'RxSwift',    '~> 3.0'
   pod 'RxCocoa',    '~> 3.0'
+  pod 'Moya', '8.0.1'
 
   target 'TravelAppTests' do
     inherit! :search_paths

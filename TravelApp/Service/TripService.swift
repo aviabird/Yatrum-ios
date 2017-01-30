@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import Moya
+
+
+let provider = MoyaProvider<MultiTarget>(plugins: [NetworkLoggerPlugin(verbose: true)])
 
 class TripService: NSObject {
 
@@ -15,53 +19,52 @@ class TripService: NSObject {
     let baseUrl = TripService.sharedData.API_URL
     
     func fetchTripsFeed(completion: @escaping ([Trip]) -> () ) {
-        fetchFeedForUrlString(urlString: "\(baseUrl)/trips.json", completion: completion)
+        fetchFeedForUrlString(urlType: TravelApp.trips, completion: completion)
     }
     
     func fetchTrendingTripsFeed(completion: @escaping ([Trip]) -> () ) {
-        fetchFeedForUrlString(urlString: "\(baseUrl)/trending/trips", completion: completion)
+        fetchFeedForUrlString(urlType: TravelApp.trending_trips, completion: completion)
     }
     
-    func fetchFeedForUrlString(urlString: String, completion: @escaping ([Trip]) -> () ) {
-        let url = NSURL(string: urlString)
-        
-        let configuration = URLSessionConfiguration.default
-        
-        let urlRequest = URLRequest(url: url as! URL)
-        
-        let session = URLSession(configuration: configuration)
-        
-        let task = session.dataTask(with: urlRequest) { (data, response, error) -> Void in
-            if (error != nil) {
-                print(error!)
-                return
-            }
-                
-            else {
+    func fetchFeedForUrlString(urlType: TargetType, completion: @escaping ([Trip]) -> () ) {
+        provider.request(MultiTarget(urlType)) { result in
+            switch result {
+            case let .success(response):
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
-                    
-                    let responseJson = json as! [String: AnyObject]
-                    let tripsArray = responseJson["trips"]
-                    
-                    var trips = [Trip]()
-                    
-                    for dictionary in tripsArray as! [[String: AnyObject]] {
-                        let trip = Trip(dictionary: dictionary)
-                        trips.append(trip)
+                    if let json = try response.mapJSON() as? [String: AnyObject] {
+                        
+                        let tripsArray = json["trips"]
+    
+                        var trips = [Trip]()
+
+                        for dictionary in tripsArray as! [[String: AnyObject]] {
+                            let trip = Trip(dictionary: dictionary)
+                            trips.append(trip)
+                        }
+
+                        DispatchQueue.main.async {
+                            completion(trips)
+                        }
+                    } else {
+                        self.showAlert("Travel App Fetch", message: "Unable to fetch from Server")
                     }
-                    
-                    DispatchQueue.main.async {
-                        completion(trips)
-                    }
-                    
-                    return
+                } catch {
+                    self.showAlert("Travel App Fetch", message: "Unable to fetch from Server")
                 }
-                catch let error as NSError {
-                    print(error)
+            case let .failure(error):
+                guard let error = error as? CustomStringConvertible else {
+                    break
                 }
+               self.showAlert("Travel App Fetch", message: error.description)
             }
         }
-        task.resume()
+    }
+    
+    fileprivate func showAlert(_ title: String, message: String) {
+//        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//        let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+//        alertController.addAction(ok)
+//        present(alertController, animated: true, completion: nil)
+        print(title, message)
     }
 }
