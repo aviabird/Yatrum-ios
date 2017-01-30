@@ -20,12 +20,37 @@ class User: NSObject {
     var total_followers: NSNumber?
     var total_following: NSNumber?
     var total_trips: NSNumber?
-    var is_followed_by_current_user: Bool?
+    var is_followed_by_current_user: Bool = false
+    
+    init(dictionary: [String: AnyObject]) {
+        super.init()
+        
+        setValuesForKeys(dictionary)
+        
+        let profilePicDict = dictionary["profile_pic"] as! [String: AnyObject]
+        profile_pic = ProfilePic(dictionary: profilePicDict)
+    }
+    
+    override func setValue(_ value: Any?, forKey key: String) {
+        let _key = key
+        
+        if (["profile_pic", "cover_photo"].contains(_key)) {
+            return
+        }
+        
+        super.setValue(value, forKey: _key)
+    }
 }
 
 class ProfilePic: NSObject {
     var url: String?
     var public_id: String?
+    
+    init(dictionary: [String: AnyObject]) {
+        super.init()
+        public_id = dictionary["public_id"] as! String?
+        url = dictionary["url"] as! String?
+    }
 }
 
 class CoverPic: ProfilePic {
