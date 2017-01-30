@@ -9,8 +9,8 @@
 import UIKit
 import Moya
 
-
-let provider = MoyaProvider<MultiTarget>(plugins: [NetworkLoggerPlugin(verbose: true)])
+let authPlugin = AccessTokenPlugin(token: SharedData.sharedInstance.getToken())
+let provider = RxMoyaProvider<MultiTarget>(plugins: [NetworkLoggerPlugin(verbose: true), authPlugin])
 
 class TripService: NSObject {
 
@@ -23,7 +23,34 @@ class TripService: NSObject {
     }
     
     func fetchTrendingTripsFeed(completion: @escaping ([Trip]) -> () ) {
-        fetchFeedForUrlString(urlType: TravelApp.trending_trips, completion: completion)
+        fetchFeedForUrlString(urlType: TravelApp.trendingTrips, completion: completion)
+    }
+    
+    func likeTrip(tripId: NSNumber, completion: @escaping (Trip) -> () ) {
+        provider.request(MultiTarget(TravelApp.likeTrip(tripId))) { result in
+            switch result {
+            case let .success(response):
+                do {
+                    if let json = try response.mapJSON() as? [String: AnyObject] {
+                        
+                        let trip = Trip(dictionary: json)
+                        
+                        DispatchQueue.main.async {
+                            completion(trip)
+                        }
+                    } else {
+                        self.showAlert("Travel App Fetch", message: "Unable to fetch from Server")
+                    }
+                } catch {
+                    self.showAlert("Travel App Fetch", message: "Unable to fetch from Server")
+                }
+            case let .failure(error):
+                guard let error = error as? CustomStringConvertible else {
+                    break
+                }
+                self.showAlert("Travel App Fetch", message: error.description)
+            }
+        }
     }
     
     func fetchFeedForUrlString(urlType: TargetType, completion: @escaping ([Trip]) -> () ) {

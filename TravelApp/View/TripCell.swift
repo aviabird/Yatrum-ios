@@ -40,10 +40,14 @@ class TripCell:  BaseCell  {
             }
             
             followButton.addTarget(self, action: #selector(handleFollow), for: .touchUpInside)
+            handleFollow()
             
-            let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleLike))
-            likeImageView.addGestureRecognizer(tapRecognizer)
+            likeButton.addTarget(self, action: #selector(handleLike), for: .touchUpInside)
             
+            if (trip?.is_liked_by_current_user)! {
+                likeButton.setImage(UIImage(named: "like-filled"), for: .normal)
+                likeButton.tintColor = UIColor.appSecondaryColor()
+            }
         }
         
     }
@@ -103,12 +107,12 @@ class TripCell:  BaseCell  {
         return textView
     }()
     
-    let likeImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.image = UIImage(named: "like")?.withRenderingMode(.alwaysTemplate)
-        iv.tintColor = UIColor.gray
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        return iv
+    let likeButton: UIButton = {
+        let ub = UIButton(type: .system)
+        ub.setImage(UIImage(named: "like"), for: .normal)
+        ub.tintColor = UIColor.gray
+        ub.translatesAutoresizingMaskIntoConstraints = false
+        return ub
     }()
     
     let followButton: UIButton = {
@@ -139,19 +143,22 @@ class TripCell:  BaseCell  {
         }
     }
     
-    func handleLike() {
-        print("here")
-        UIView.animate(withDuration: 0.5, animations: {
-            self.likeImageView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-            if (self.trip?.is_liked_by_current_user)! {
-                self.likeImageView.image = UIImage(named: "like-filled")
-                self.likeImageView.tintColor = UIColor.appSecondaryColor()
-            } else {
-                self.likeImageView.image = UIImage(named: "like")
-                self.likeImageView.tintColor = UIColor.appSecondaryColor()
-            }
-        }) { (true) in
-            self.likeImageView.transform = CGAffineTransform.identity
+    func handleLike(firstChange: Bool) {
+        TripService.sharedInstance.likeTrip(tripId: (trip?.id)!) { (trip: Trip) in
+            self.trip = trip
+            
+            self.likeButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                self.likeButton.transform = CGAffineTransform.identity
+                if (self.trip?.is_liked_by_current_user)! {
+                    self.likeButton.setImage(UIImage(named: "like-filled"), for: .normal)
+                    self.likeButton.tintColor = UIColor.appSecondaryColor()
+                } else {
+                    self.likeButton.setImage(UIImage(named: "like"), for: .normal)
+                    self.likeButton.tintColor = UIColor.appSecondaryColor()
+                }
+            })
         }
     }
     
@@ -163,7 +170,7 @@ class TripCell:  BaseCell  {
         addSubview(subTitleTextView)
         addSubview(thumbnailImageView)
         addSubview(separatorView)
-        addSubview(likeImageView)
+        addSubview(likeButton)
         addSubview(followButton)
         
         setupThumbnailImageViews()
@@ -194,10 +201,10 @@ class TripCell:  BaseCell  {
         // hight Constraint
         addConstraint(NSLayoutConstraint(item: subTitleTextView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 30))
         
-        likeImageView.topAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor, constant: 5).isActive = true
-        likeImageView.leftAnchor.constraint(equalTo: thumbnailImageView.leftAnchor, constant: 5).isActive = true
-        likeImageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        likeImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        likeButton.topAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor, constant: 5).isActive = true
+        likeButton.leftAnchor.constraint(equalTo: thumbnailImageView.leftAnchor, constant: 5).isActive = true
+        likeButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        likeButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         followButton.leftAnchor.constraint(equalTo: titleLabel.rightAnchor).isActive = true
         followButton.rightAnchor.constraint(equalTo: thumbnailImageView.rightAnchor, constant: -16).isActive = true

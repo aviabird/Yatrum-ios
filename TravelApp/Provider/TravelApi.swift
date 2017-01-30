@@ -31,8 +31,9 @@ private extension String {
 
 public enum TravelApp {
     case trips
-    case trending_trips
-    case trip()
+    case trendingTrips
+    case trip(NSNumber)
+    case likeTrip(NSNumber)
 }
 
 extension TravelApp: TargetType {
@@ -41,17 +42,26 @@ extension TravelApp: TargetType {
         switch self {
         case .trips:
             return "/trips"
-        case .trending_trips:
+        case .trendingTrips:
             return "/trending/trips"
         case .trip(let id):
             return "/trip/\(id)"
+        case .likeTrip:
+            return "trips/like"
         }
     }
     public var method: Moya.Method {
-        return .get
+        switch self {
+        case .likeTrip:
+            return .post
+        default:
+            return .get
+        }
     }
     public var parameters: [String: Any]? {
         switch self {
+        case .likeTrip(let id):
+            return ["id": id]
         default:
             return nil
         }
