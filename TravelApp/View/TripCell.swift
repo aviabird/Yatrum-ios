@@ -40,7 +40,11 @@ class TripCell:  BaseCell  {
             }
             
             followButton.addTarget(self, action: #selector(handleFollow), for: .touchUpInside)
-            handleFollow()
+            if (trip?.user?.is_followed_by_current_user)! {
+                self.followButton.backgroundColor = UIColor.appSecondaryColor()
+                self.followButton.setTitle("Following", for: .normal)
+                self.followButton.setTitleColor(UIColor.white, for: .normal)
+            }
             
             likeButton.addTarget(self, action: #selector(handleLike), for: .touchUpInside)
             
@@ -130,15 +134,19 @@ class TripCell:  BaseCell  {
     }()
     
     func handleFollow() {
-        UIView.animate(withDuration: 0.5) {
-            if (self.trip?.user?.is_followed_by_current_user)! {
-                self.followButton.backgroundColor = UIColor.appSecondaryColor()
-                self.followButton.setTitle("Following", for: .normal)
-                self.followButton.setTitleColor(UIColor.white, for: .normal)
-            } else {
-                self.followButton.backgroundColor = UIColor.white
-                self.followButton.setTitle("Follow", for: .normal)
-                self.followButton.setTitleColor(UIColor.appSecondaryColor(), for: .normal)
+        UserService.sharedInstance.followUser(followedId: (trip?.user_id)!) { (user: User) in
+            self.trip?.user = user
+            
+            UIView.animate(withDuration: 0.5) {
+                if (self.trip?.user?.is_followed_by_current_user)! {
+                    self.followButton.backgroundColor = UIColor.appSecondaryColor()
+                    self.followButton.setTitle("Following", for: .normal)
+                    self.followButton.setTitleColor(UIColor.white, for: .normal)
+                } else {
+                    self.followButton.backgroundColor = UIColor.white
+                    self.followButton.setTitle("Follow", for: .normal)
+                    self.followButton.setTitleColor(UIColor.appSecondaryColor(), for: .normal)
+                }
             }
         }
     }

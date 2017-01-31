@@ -16,15 +16,15 @@ class TripService: NSObject {
     let baseUrl = TripService.sharedData.API_URL
     
     func fetchTripsFeed(completion: @escaping ([Trip]) -> () ) {
-        fetchFeedForUrlString(urlTargetType: TravelApp.trips, completion: completion)
+        fetchFeedForUrlString(urlTargetType: TripApi.trips, completion: completion)
     }
     
     func fetchTrendingTripsFeed(completion: @escaping ([Trip]) -> () ) {
-        fetchFeedForUrlString(urlTargetType: TravelApp.trendingTrips, completion: completion)
+        fetchFeedForUrlString(urlTargetType: TripApi.trendingTrips, completion: completion)
     }
     
     func likeTrip(tripId: NSNumber, completion: @escaping (Trip) -> () ) {
-        provider.request(MultiTarget(TravelApp.likeTrip(tripId))) { result in
+        provider.request(MultiTarget(TripApi.likeTrip(tripId))) { result in
             switch result {
             case let .success(response):
                 do {

@@ -1,46 +1,47 @@
 //
-//  AuthProvider.swift
+//  TravelApi.swift
 //  TravelApp
 //
-//  Created by rawat on 31/01/17.
+//  Created by rawat on 30/01/17.
 //  Copyright © 2017 Pankaj Rawat. All rights reserved.
 //
 
 import Foundation
 import Moya
 
-let AuthProvider = MoyaProvider<TravelAppAuth>(plugins: [NetworkLoggerPlugin(verbose: true, responseDataFormatter: JSONResponseDataFormatter)])
-
-public enum TravelAppAuth {
-    case authenticate(String, String)
-    case register(String, String, String)
-    case auth_user
+public enum TripApi {
+    case trips
+    case trendingTrips
+    case trip(NSNumber)
+    case likeTrip(NSNumber)
 }
 
-extension TravelAppAuth: TargetType {
+extension TripApi: TargetType {
     public var baseURL: URL { return URL(string: SharedData.sharedInstance.API_URL)! }
     public var path: String {
         switch self {
-        case .authenticate:
-            return "/authenticate"
-        case .register:
-            return "/users/create"
-        case .auth_user:
-            return "users/auth_user"
+        case .trips:
+            return "/trips"
+        case .trendingTrips:
+            return "/trending/trips"
+        case .trip(let id):
+            return "/trip/\(id)"
+        case .likeTrip:
+            return "trips/like"
         }
     }
     public var method: Moya.Method {
         switch self {
-        default:
+        case .likeTrip:
             return .post
+        default:
+            return .get
         }
     }
     public var parameters: [String: Any]? {
         switch self {
-        case .authenticate(let email, let password):
-            return ["email": email, "password": password]
-        case .register(let email, let password, let confirmPassword):
-            return ["user": ["email": email, "password": password, "password_confirmation": confirmPassword]]
+        case .likeTrip(let id):
+            return ["id": id]
         default:
             return nil
         }
@@ -59,6 +60,8 @@ extension TravelAppAuth: TargetType {
     }
     public var sampleData: Data {
         switch self {
+        case .trip(let id):
+            return "{\"name\": \"Any\", \"id\": \(id)}".data(using: String.Encoding.utf8)!
         default:
             return "".data(using: String.Encoding.utf8)!
         }
