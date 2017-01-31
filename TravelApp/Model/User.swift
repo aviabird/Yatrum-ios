@@ -20,6 +20,8 @@ class User: NSObject {
     var total_followers: NSNumber?
     var total_following: NSNumber?
     var total_trips: NSNumber?
+    var updated_at: NSDate?
+    var created_at: NSDate?
     var is_followed_by_current_user: Bool = false
     
     init(dictionary: [String: AnyObject]) {

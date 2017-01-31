@@ -31,6 +31,9 @@
 		781DBE251E3F80A0003591DA /* TripService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781DBE241E3F80A0003591DA /* TripService.swift */; };
 		781DBE271E3F80A9003591DA /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781DBE261E3F80A9003591DA /* AuthService.swift */; };
 		781DBE2C1E3F879C003591DA /* TravelApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781DBE2B1E3F879C003591DA /* TravelApi.swift */; };
+		78684EBF1E405E090074B8C2 /* TravelAuthApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78684EBE1E405E090074B8C2 /* TravelAuthApi.swift */; };
+		78684EC11E4060760074B8C2 /* Providers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78684EC01E4060760074B8C2 /* Providers.swift */; };
+		78684EC31E4063D70074B8C2 /* MultiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78684EC21E4063D70074B8C2 /* MultiProvider.swift */; };
 		78CAB94C1E33B39A0087F530 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAB94B1E33B39A0087F530 /* AppDelegate.swift */; };
 		78CAB9511E33B39A0087F530 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78CAB94F1E33B39A0087F530 /* Main.storyboard */; };
 		78CAB9531E33B39A0087F530 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78CAB9521E33B39A0087F530 /* Assets.xcassets */; };
@@ -85,6 +88,9 @@
 		781DBE241E3F80A0003591DA /* TripService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripService.swift; path = Service/TripService.swift; sourceTree = "<group>"; };
 		781DBE261E3F80A9003591DA /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthService.swift; path = Service/AuthService.swift; sourceTree = "<group>"; };
 		781DBE2B1E3F879C003591DA /* TravelApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TravelApi.swift; path = Provider/TravelApi.swift; sourceTree = "<group>"; };
+		78684EBE1E405E090074B8C2 /* TravelAuthApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelAuthApi.swift; sourceTree = "<group>"; };
+		78684EC01E4060760074B8C2 /* Providers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Providers.swift; sourceTree = "<group>"; };
+		78684EC21E4063D70074B8C2 /* MultiProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiProvider.swift; sourceTree = "<group>"; };
 		78CAB9481E33B39A0087F530 /* TravelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78CAB94B1E33B39A0087F530 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78CAB9501E33B39A0087F530 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -175,6 +181,8 @@
 			isa = PBXGroup;
 			children = (
 				781DBE2B1E3F879C003591DA /* TravelApi.swift */,
+				78684EBE1E405E090074B8C2 /* TravelAuthApi.swift */,
+				78684EC21E4063D70074B8C2 /* MultiProvider.swift */,
 			);
 			name = Provider;
 			sourceTree = "<group>";
@@ -251,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				781DBE021E3F7EB9003591DA /* Extensions.swift */,
+				78684EC01E4060760074B8C2 /* Providers.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -571,12 +580,14 @@
 				781DBE271E3F80A9003591DA /* AuthService.swift in Sources */,
 				781DBE1B1E3F8066003591DA /* SettingCell.swift in Sources */,
 				781DBE251E3F80A0003591DA /* TripService.swift in Sources */,
+				78684EC11E4060760074B8C2 /* Providers.swift in Sources */,
 				78CAB94C1E33B39A0087F530 /* AppDelegate.swift in Sources */,
 				781DBE0D1E3F7F4D003591DA /* Setting.swift in Sources */,
 				781DBE031E3F7EB9003591DA /* Extensions.swift in Sources */,
 				781DBE111E3F7F64003591DA /* Place.swift in Sources */,
 				781DBE2C1E3F879C003591DA /* TravelApi.swift in Sources */,
 				781DBE131E3F7F70003591DA /* User.swift in Sources */,
+				78684EBF1E405E090074B8C2 /* TravelAuthApi.swift in Sources */,
 				781DBDFD1E3F7E23003591DA /* LoginController.swift in Sources */,
 				781DBE151E3F7FD5003591DA /* Picture.swift in Sources */,
 				781DBE191E3F8057003591DA /* TripCell.swift in Sources */,
@@ -585,6 +596,7 @@
 				781DBE091E3F7F19003591DA /* SharedData.swift in Sources */,
 				781DBE1F1E3F8079003591DA /* MenuBar.swift in Sources */,
 				781DBE0F1E3F7F5C003591DA /* City.swift in Sources */,
+				78684EC31E4063D70074B8C2 /* MultiProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

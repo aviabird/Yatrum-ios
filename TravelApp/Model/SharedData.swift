@@ -14,6 +14,7 @@ class SharedData: NSObject {
 //    var API_URL: String = "https://travel-api-aviabird.herokuapp.com"
     var token: String = ""
     static let sharedInstance = SharedData()
+    var currentUser: User?
     
     func getToken() -> String {
         if token == "" {
@@ -35,14 +36,18 @@ class SharedData: NSObject {
         UserDefaults.standard.removeObject(forKey: "Token")
     }
     
-    func currentUser() -> User? {
-        let user = UserDefaults.standard.object(forKey: "User") as? User
+    func getCurrentUser() -> User? {
+        let user = currentUser
         
         if (user != nil) {
             return user!
+        } else {
+            return nil
         }
-        
-        return nil
+    }
+    
+    func SetCurrentUser(user: User) {
+        currentUser = user
     }
     
 }

@@ -9,9 +9,6 @@
 import UIKit
 import Moya
 
-let authPlugin = AccessTokenPlugin(token: SharedData.sharedInstance.getToken())
-let provider = RxMoyaProvider<MultiTarget>(plugins: [NetworkLoggerPlugin(verbose: true), authPlugin])
-
 class TripService: NSObject {
 
     static let sharedInstance = TripService()
@@ -19,11 +16,11 @@ class TripService: NSObject {
     let baseUrl = TripService.sharedData.API_URL
     
     func fetchTripsFeed(completion: @escaping ([Trip]) -> () ) {
-        fetchFeedForUrlString(urlType: TravelApp.trips, completion: completion)
+        fetchFeedForUrlString(urlTargetType: TravelApp.trips, completion: completion)
     }
     
     func fetchTrendingTripsFeed(completion: @escaping ([Trip]) -> () ) {
-        fetchFeedForUrlString(urlType: TravelApp.trendingTrips, completion: completion)
+        fetchFeedForUrlString(urlTargetType: TravelApp.trendingTrips, completion: completion)
     }
     
     func likeTrip(tripId: NSNumber, completion: @escaping (Trip) -> () ) {
@@ -53,8 +50,8 @@ class TripService: NSObject {
         }
     }
     
-    func fetchFeedForUrlString(urlType: TargetType, completion: @escaping ([Trip]) -> () ) {
-        provider.request(MultiTarget(urlType)) { result in
+    func fetchFeedForUrlString(urlTargetType: TargetType, completion: @escaping ([Trip]) -> () ) {
+        provider.request(MultiTarget(urlTargetType)) { result in
             switch result {
             case let .success(response):
                 do {
