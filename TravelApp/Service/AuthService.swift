@@ -31,6 +31,8 @@ class AuthService: NSObject {
                             SharedData.sharedInstance.setToken()
                             SharedData.sharedInstance.SetCurrentUser(user: User(dictionary: jsonResult["user"] as! [String: AnyObject]))
                             
+                            self.refreshProvider()
+                            
                             loginController.dismiss(animated: true, completion: nil)
                         }
                     }
@@ -79,7 +81,7 @@ class AuthService: NSObject {
     }
     
     func auth_user() -> User {
-        var user: User?
+        var user: User = User(dictionary: [:])
         
         provider.request(MultiTarget(UserApi.auth_user)) { result in
             switch result {
@@ -92,8 +94,8 @@ class AuthService: NSObject {
                     if let error = ((jsonResult["error"] as? String)) {
                         print(error)
                     }else {
-                        user = User(dictionary: jsonResult["user"] as! [String: AnyObject])
-                        SharedData.sharedInstance.SetCurrentUser(user: user!)
+                        user = User(dictionary: jsonResult as! [String: AnyObject])
+                        SharedData.sharedInstance.SetCurrentUser(user: user)
                     }
                 } catch {
                     print("Api Error")
@@ -106,8 +108,13 @@ class AuthService: NSObject {
             }
         }
         
-        return user!
+        return user
         
+    }
+    
+    private func refreshProvider() {
+        authPlugin = AccessTokenPlugin(token: SharedData.sharedInstance.getToken())
+        provider = RxMoyaProvider<MultiTarget>(plugins: [NetworkLoggerPlugin(verbose: true), authPlugin])
     }
     
 }

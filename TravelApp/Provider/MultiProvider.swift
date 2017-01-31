@@ -9,5 +9,5 @@
 import Foundation
 import Moya
 
-let authPlugin = AccessTokenPlugin(token: SharedData.sharedInstance.getToken())
-let provider = RxMoyaProvider<MultiTarget>(plugins: [NetworkLoggerPlugin(verbose: true), authPlugin])
+var authPlugin = AccessTokenPlugin(token: SharedData.sharedInstance.getToken())
+var provider = RxMoyaProvider<MultiTarget>(plugins: [NetworkLoggerPlugin(verbose: true), authPlugin])
