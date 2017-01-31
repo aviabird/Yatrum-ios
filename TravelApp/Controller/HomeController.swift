@@ -25,6 +25,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         if sharedData.getToken() == "" {
             perform(#selector(handleLogout), with: nil, afterDelay: 0)
+        } else {
+            
         }
         
         setUpMenuBar()
