@@ -170,6 +170,7 @@ class TripCell:  BaseCell  {
     
     func handleLike(firstChange: Bool) {
         trip?.is_liked_by_current_user = !(trip?.is_liked_by_current_user)!
+        self.likeButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         toggleLike()
         
         TripService.sharedInstance.likeTrip(tripId: (trip?.id)!) { (trip: Trip) in
@@ -178,7 +179,6 @@ class TripCell:  BaseCell  {
             }
             
             self.trip = trip
-            self.likeButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
             self.toggleLike()
         }
     }
