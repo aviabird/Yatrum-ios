@@ -15,7 +15,7 @@ class AuthService: NSObject {
     static var sharedData = SharedData()
     
     func login(email: String, password: String, loginController: LoginController) {
-        provider.request(MultiTarget(TravelAppAuth.authenticate(email, password))) { result in
+        provider.request(MultiTarget(UserApi.authenticate(email, password))) { result in
             switch result {
             case let .success(response):
                 do {
@@ -47,7 +47,7 @@ class AuthService: NSObject {
     }
     
     func register(email: String, password: String, confirmPassword: String, loginController: LoginController) {
-        provider.request(MultiTarget(TravelAppAuth.register(email, password, confirmPassword))) { result in
+        provider.request(MultiTarget(UserApi.register(email, password, confirmPassword))) { result in
             switch result {
             case let .success(response):
                 do {
@@ -77,4 +77,37 @@ class AuthService: NSObject {
             }
         }
     }
+    
+    func auth_user() -> User {
+        var user: User?
+        
+        provider.request(MultiTarget(UserApi.auth_user)) { result in
+            switch result {
+            case let .success(response):
+                do {
+                    let data = response.data
+                    
+                    let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as AnyObject
+                    
+                    if let error = ((jsonResult["error"] as? String)) {
+                        print(error)
+                    }else {
+                        user = User(dictionary: jsonResult["user"] as! [String: AnyObject])
+                        SharedData.sharedInstance.SetCurrentUser(user: user!)
+                    }
+                } catch {
+                    print("Api Error")
+                }
+            case let .failure(error):
+                guard let error = error as? CustomStringConvertible else {
+                    break
+                }
+                print("Auth User Error", error.description)
+            }
+        }
+        
+        return user!
+        
+    }
+    
 }
