@@ -46,12 +46,17 @@ class TripCell:  BaseCell  {
                 self.followButton.setTitleColor(UIColor.white, for: .normal)
             }
             
+            if SharedData.sharedInstance.getCurrentUser()?.id == trip?.user_id {
+                self.followButton.isHidden = true
+            }
+            
             likeButton.addTarget(self, action: #selector(handleLike), for: .touchUpInside)
             
             if (trip?.is_liked_by_current_user)! {
                 likeButton.setImage(UIImage(named: "like-filled"), for: .normal)
                 likeButton.tintColor = UIColor.appSecondaryColor()
             }
+            
         }
         
     }
@@ -134,40 +139,61 @@ class TripCell:  BaseCell  {
     }()
     
     func handleFollow() {
+        trip?.user?.is_followed_by_current_user = !(self.trip?.user?.is_followed_by_current_user)!
+        
+        toggleFollow()
+        
         UserService.sharedInstance.followUser(followedId: (trip?.user_id)!) { (user: User) in
-            self.trip?.user = user
             
-            UIView.animate(withDuration: 0.5) {
-                if (self.trip?.user?.is_followed_by_current_user)! {
-                    self.followButton.backgroundColor = UIColor.appSecondaryColor()
-                    self.followButton.setTitle("Following", for: .normal)
-                    self.followButton.setTitleColor(UIColor.white, for: .normal)
-                } else {
-                    self.followButton.backgroundColor = UIColor.white
-                    self.followButton.setTitle("Follow", for: .normal)
-                    self.followButton.setTitleColor(UIColor.appSecondaryColor(), for: .normal)
-                }
+            guard user.is_followed_by_current_user != self.trip?.user?.is_followed_by_current_user else {
+                return
+            }
+            
+            self.trip?.user = user
+            self.toggleFollow()
+        }
+    }
+    
+    func toggleFollow() {
+        UIView.animate(withDuration: 0.5) {
+            if (self.trip?.user?.is_followed_by_current_user)! {
+                self.followButton.backgroundColor = UIColor.appSecondaryColor()
+                self.followButton.setTitle("Following", for: .normal)
+                self.followButton.setTitleColor(UIColor.white, for: .normal)
+            } else {
+                self.followButton.backgroundColor = UIColor.white
+                self.followButton.setTitle("Follow", for: .normal)
+                self.followButton.setTitleColor(UIColor.appSecondaryColor(), for: .normal)
             }
         }
     }
     
     func handleLike(firstChange: Bool) {
+        trip?.is_liked_by_current_user = !(trip?.is_liked_by_current_user)!
+        toggleLike()
+        
         TripService.sharedInstance.likeTrip(tripId: (trip?.id)!) { (trip: Trip) in
+            guard trip.is_liked_by_current_user != self.trip?.is_liked_by_current_user else {
+                return
+            }
+            
             self.trip = trip
-            
             self.likeButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-            
-            UIView.animate(withDuration: 0.5, animations: {
-                self.likeButton.transform = CGAffineTransform.identity
-                if (self.trip?.is_liked_by_current_user)! {
-                    self.likeButton.setImage(UIImage(named: "like-filled"), for: .normal)
-                    self.likeButton.tintColor = UIColor.appSecondaryColor()
-                } else {
-                    self.likeButton.setImage(UIImage(named: "like"), for: .normal)
-                    self.likeButton.tintColor = UIColor.appSecondaryColor()
-                }
-            })
+            self.toggleLike()
         }
+    }
+    
+    func toggleLike() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.likeButton.transform = CGAffineTransform.identity
+            if (self.trip?.is_liked_by_current_user)! {
+                self.likeButton.setImage(UIImage(named: "like-filled"), for: .normal)
+                self.likeButton.tintColor = UIColor.appSecondaryColor()
+            } else {
+                self.likeButton.setImage(UIImage(named: "like"), for: .normal)
+                self.likeButton.tintColor = UIColor.appSecondaryColor()
+            }
+        })
     }
     
     var titleLabelHeightConstraint: NSLayoutConstraint?
