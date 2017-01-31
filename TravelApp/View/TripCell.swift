@@ -191,7 +191,7 @@ class TripCell:  BaseCell  {
                 self.likeButton.tintColor = UIColor.appSecondaryColor()
             } else {
                 self.likeButton.setImage(UIImage(named: "like"), for: .normal)
-                self.likeButton.tintColor = UIColor.appSecondaryColor()
+                self.likeButton.tintColor = UIColor.gray
             }
         })
     }
@@ -236,7 +236,7 @@ class TripCell:  BaseCell  {
         addConstraint(NSLayoutConstraint(item: subTitleTextView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 30))
         
         likeButton.topAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor, constant: 5).isActive = true
-        likeButton.leftAnchor.constraint(equalTo: thumbnailImageView.leftAnchor, constant: 5).isActive = true
+        likeButton.leftAnchor.constraint(equalTo: thumbnailImageView.leftAnchor, constant: 16).isActive = true
         likeButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
         likeButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
