@@ -45,6 +45,8 @@
 		78CAB9611E33B39B0087F530 /* TravelAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAB9601E33B39B0087F530 /* TravelAppTests.swift */; };
 		78CAB96C1E33B39B0087F530 /* TravelAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAB96B1E33B39B0087F530 /* TravelAppUITests.swift */; };
 		85E49A2B2F82B9CFFBFDED0E /* Pods_TravelApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6BC1A7BA229A0C84477C713 /* Pods_TravelApp.framework */; };
+		C783C6841E41DD4400870E9B /* SearchTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C783C6831E41DD4400870E9B /* SearchTripViewController.swift */; };
+		C7F9C62C1E433FA600E9B664 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F9C62B1E433FA600E9B664 /* SearchBar.swift */; };
 		C872CCCA74F945B8C43595C1 /* Pods_TravelAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30A16FD43D6C973DF44F884 /* Pods_TravelAppTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -114,6 +116,8 @@
 		90C2D25E7B38CBE630322CB8 /* Pods-TravelAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TravelAppTests/Pods-TravelAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		BE1D77A28EE3CC48998822AC /* Pods-TravelAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TravelAppTests/Pods-TravelAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C30A16FD43D6C973DF44F884 /* Pods_TravelAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C783C6831E41DD4400870E9B /* SearchTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchTripViewController.swift; path = Controller/SearchTripViewController.swift; sourceTree = "<group>"; };
+		C7F9C62B1E433FA600E9B664 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchBar.swift; path = View/SearchBar.swift; sourceTree = "<group>"; };
 		E3FB5D723B4B0B2413325BD7 /* Pods_TravelAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6BC1A7BA229A0C84477C713 /* Pods_TravelApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCCABEDC220368A6B7E6FBB9 /* Pods-TravelApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TravelApp/Pods-TravelApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -172,6 +176,7 @@
 				781DBE1E1E3F8079003591DA /* MenuBar.swift */,
 				781DBE201E3F8084003591DA /* FeedCell.swift */,
 				781DBE221E3F808C003591DA /* TrendingCell.swift */,
+				C7F9C62B1E433FA600E9B664 /* SearchBar.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -271,6 +276,7 @@
 				781DBDFC1E3F7E23003591DA /* LoginController.swift */,
 				781DBDFE1E3F7E65003591DA /* HomeController.swift */,
 				781DBE001E3F7E78003591DA /* CreateTripController.swift */,
+				C783C6831E41DD4400870E9B /* SearchTripViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -598,6 +604,7 @@
 				781DBE171E3F8046003591DA /* SettingsLauncher.swift in Sources */,
 				781DBE011E3F7E78003591DA /* CreateTripController.swift in Sources */,
 				781DBE271E3F80A9003591DA /* AuthService.swift in Sources */,
+				C7F9C62C1E433FA600E9B664 /* SearchBar.swift in Sources */,
 				78684EC71E4082EB0074B8C2 /* UserService.swift in Sources */,
 				781DBE1B1E3F8066003591DA /* SettingCell.swift in Sources */,
 				78684ECD1E4083220074B8C2 /* Providers.swift in Sources */,
@@ -617,6 +624,7 @@
 				781DBE211E3F8084003591DA /* FeedCell.swift in Sources */,
 				781DBE1D1E3F806F003591DA /* BaseCell.swift in Sources */,
 				781DBE091E3F7F19003591DA /* SharedData.swift in Sources */,
+				C783C6841E41DD4400870E9B /* SearchTripViewController.swift in Sources */,
 				783044331E40D43200AA05FD /* AppState.swift in Sources */,
 				7830442F1E40C98300AA05FD /* TripState.swift in Sources */,
 				781DBE1F1E3F8079003591DA /* MenuBar.swift in Sources */,
