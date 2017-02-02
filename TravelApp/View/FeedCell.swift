@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import ReSwift
 
-class FeedCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class FeedCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, StoreSubscriber {
+    typealias StoreSubscriberStateType = AppState
     
     lazy var  collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -23,14 +25,18 @@ class FeedCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate,
     var trips: [Trip]?
     
     func fetchTripsFeed() {
-        TripService.sharedInstance.fetchTripsFeed { (trips: [Trip]) in
-            self.trips = trips
-            self.collectionView.reloadData()
-        }
+        store.dispatch(FetchTripsFeed)
+    }
+    
+    func newState(state: AppState) {
+        trips = state.tripState.tripFeeds
+        collectionView.reloadData()
     }
 
     override func setupViews() {
         super.setupViews()
+        
+        store.subscribe(self)
         
         fetchTripsFeed()
         

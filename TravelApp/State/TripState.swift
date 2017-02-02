@@ -8,8 +8,7 @@
 
 
 struct TripState {
-    var ids: [String]?
-    var entities: [String: Trip]?
+    var tripFeeds: [Trip]?
     var selectedTripId: String?
     var searchTerms: String?
 }
