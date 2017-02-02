@@ -17,3 +17,13 @@ func FetchTripsFeed(state: AppState, store: Store<AppState>) -> Action? {
     
     return nil
 }
+
+func FetchTrendingTripsFeed(state: AppState, store: Store<AppState>) -> Action? {
+    TripService.sharedInstance.fetchTrendingTripsFeed { (trips: [Trip]) in
+        DispatchQueue.main.async {
+            store.dispatch(SetTrendingTrips(trips: trips))
+        }
+    }
+    
+    return nil
+}

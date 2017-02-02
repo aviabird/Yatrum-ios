@@ -15,20 +15,15 @@ func tripReducer(state: TripState?, action: Action) -> TripState {
     case _ as ReSwiftInit:
         break
     case let action as SetFeedTrips:
-        let trips = action.trips
-        
-        let newIds = trips.filter({ (trip) -> Bool in
-            !(state.feedTripIds.contains(trip.id!))
-        }).map({ (trip) -> NSNumber in
-            trip.id!
-        })
-        
-        state.feedTripIds.append(contentsOf: newIds)
-        
-        trips.forEach({ (trip) in
+        state.pushTrips(tripType: .feedTrips, trips: action.trips)
+        break
+    case let action as SetTrendingTrips:
+        state.pushTrips(tripType: .trendingTrips, trips: action.trips)
+        break
+    case let action as UpdateTrips:
+        action.trips.forEach({ (trip) in
             state.entities[trip.id!] = trip
         })
-        
         break
     default:
         break

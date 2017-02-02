@@ -151,6 +151,7 @@ class TripCell:  BaseCell  {
             
             self.trip?.user = user
             self.toggleFollow()
+            store.dispatch(UpdateTrips(trips: [self.trip!]))
         }
     }
     
