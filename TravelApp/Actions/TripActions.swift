@@ -16,3 +16,7 @@ struct SetFeedTrips: Action {
 struct SetTrendingTrips: Action {
     let trips: [Trip]
 }
+
+struct UpdateTrips: Action {
+    let trips: [Trip]
+}
