@@ -9,6 +9,10 @@
 import Foundation
 import ReSwift
 
-struct SetTrips: Action {
+struct SetFeedTrips: Action {
+    let trips: [Trip]
+}
+
+struct SetTrendingTrips: Action {
     let trips: [Trip]
 }
