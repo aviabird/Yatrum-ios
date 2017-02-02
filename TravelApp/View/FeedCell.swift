@@ -29,7 +29,7 @@ class FeedCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate,
     }
     
     func newState(state: AppState) {
-        trips = state.tripState.tripFeeds
+        trips = state.tripState.feedTrips()
         collectionView.reloadData()
     }
 
