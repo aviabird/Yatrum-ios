@@ -12,6 +12,7 @@
 		780ABCCA1E424E0200043261 /* TripReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ABCC91E424E0200043261 /* TripReducer.swift */; };
 		780ABCCC1E42E24A00043261 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ABCCB1E42E24A00043261 /* AppReducer.swift */; };
 		780ABCCE1E42E57000043261 /* AuthenticationReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ABCCD1E42E57000043261 /* AuthenticationReducer.swift */; };
+		780ABCD31E4310CE00043261 /* TripEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ABCD21E4310CE00043261 /* TripEffect.swift */; };
 		7813D0871E3D295700FB960C /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7813D0861E3D295700FB960C /* RxCocoa.framework */; };
 		7813D0891E3D295B00FB960C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7813D0881E3D295B00FB960C /* RxSwift.framework */; };
 		781DBDFD1E3F7E23003591DA /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781DBDFC1E3F7E23003591DA /* LoginController.swift */; };
@@ -77,6 +78,7 @@
 		780ABCC91E424E0200043261 /* TripReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripReducer.swift; path = Reducers/TripReducer.swift; sourceTree = "<group>"; };
 		780ABCCB1E42E24A00043261 /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppReducer.swift; path = Reducers/AppReducer.swift; sourceTree = "<group>"; };
 		780ABCCD1E42E57000043261 /* AuthenticationReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationReducer.swift; path = Reducers/AuthenticationReducer.swift; sourceTree = "<group>"; };
+		780ABCD21E4310CE00043261 /* TripEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripEffect.swift; path = Effects/TripEffect.swift; sourceTree = "<group>"; };
 		7813D0861E3D295700FB960C /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = "../../../../Library/Developer/Xcode/DerivedData/TravelApp-datguvlsjcpgkbdbaefqmrmfvncy/Build/Products/Debug-iphonesimulator/RxCocoa/RxCocoa.framework"; sourceTree = "<group>"; };
 		7813D0881E3D295B00FB960C /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = "../../../../Library/Developer/Xcode/DerivedData/TravelApp-datguvlsjcpgkbdbaefqmrmfvncy/Build/Products/Debug-iphonesimulator/RxSwift/RxSwift.framework"; sourceTree = "<group>"; };
 		781DBDFC1E3F7E23003591DA /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginController.swift; path = Controller/LoginController.swift; sourceTree = "<group>"; };
@@ -202,6 +204,14 @@
 			name = Reducers;
 			sourceTree = "<group>";
 		};
+		780ABCCF1E43103600043261 /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				780ABCD21E4310CE00043261 /* TripEffect.swift */,
+			);
+			name = Effects;
+			sourceTree = "<group>";
+		};
 		781033591E3B8925008CB615 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +267,7 @@
 		78CAB94A1E33B39A0087F530 /* TravelApp */ = {
 			isa = PBXGroup;
 			children = (
+				780ABCCF1E43103600043261 /* Effects */,
 				780ABCC61E424D9B00043261 /* Reducers */,
 				780ABCC31E424D0000043261 /* Actions */,
 				7830442D1E40C94100AA05FD /* State */,
@@ -645,6 +656,7 @@
 				781DBE151E3F7FD5003591DA /* Picture.swift in Sources */,
 				780ABCCC1E42E24A00043261 /* AppReducer.swift in Sources */,
 				781DBE191E3F8057003591DA /* TripCell.swift in Sources */,
+				780ABCD31E4310CE00043261 /* TripEffect.swift in Sources */,
 				781DBE211E3F8084003591DA /* FeedCell.swift in Sources */,
 				781DBE1D1E3F806F003591DA /* BaseCell.swift in Sources */,
 				780ABCC51E424D3400043261 /* TripActions.swift in Sources */,
