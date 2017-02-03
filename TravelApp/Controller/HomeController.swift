@@ -28,6 +28,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         }
         
         setUpMenuBar()
+        
+//        present(SearchTripViewController().self, animated: true, completion: nil)
     }
     
     func setupCollectionView() {
@@ -82,7 +84,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func handleSearch() {
-        print(123)
+        let searchTripController = SearchTripViewController()
+        navigationController?.pushViewController(searchTripController, animated: true)
     }
     
     func scrollToMenuIndex(menuIndex: Int) {

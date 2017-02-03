@@ -50,6 +50,42 @@ class TripService: NSObject {
         }
     }
     
+    func searchTrips(keywords: String, completion: @escaping ([Trip]) -> () ) {
+        
+        provider.request(MultiTarget(TripApi.search(keywords))) { result in
+            switch result {
+            case let .success(response):
+                do {
+                    if let json = try response.mapJSON() as? [[String: AnyObject]] {
+                        
+                        var trips = [Trip]()
+                        
+                        for dictionary in json {
+                            let trip = Trip(dictionary: dictionary)
+                            trips.append(trip)
+                        }
+                        
+                        DispatchQueue.main.async {
+                            completion(trips)
+                        }
+                    } else {
+                        self.showAlert("Travel App Search", message: "Unable to Search from Server")
+                    }
+                } catch {
+                    self.showAlert("Travel App Search", message: "Unable to Search from Server")
+                }
+            case let .failure(error):
+                guard let error = error as? CustomStringConvertible else {
+                    break
+                }
+                self.showAlert("Travel App Search", message: error.description)
+            }
+            
+        }
+        
+    }
+    
+    
     func fetchFeedForUrlString(urlTargetType: TargetType, completion: @escaping ([Trip]) -> () ) {
         provider.request(MultiTarget(urlTargetType)) { result in
             switch result {

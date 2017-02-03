@@ -14,6 +14,7 @@ public enum TripApi {
     case trendingTrips
     case trip(NSNumber)
     case likeTrip(NSNumber)
+    case search(String)
 }
 
 extension TripApi: TargetType {
@@ -28,11 +29,13 @@ extension TripApi: TargetType {
             return "/trip/\(id)"
         case .likeTrip:
             return "trips/like"
+        case .search:
+            return "/trips/search"
         }
     }
     public var method: Moya.Method {
         switch self {
-        case .likeTrip:
+        case .likeTrip, .search:
             return .post
         default:
             return .get
@@ -42,6 +45,8 @@ extension TripApi: TargetType {
         switch self {
         case .likeTrip(let id):
             return ["id": id]
+        case .search(let keywords):
+            return ["keywords": keywords]
         default:
             return nil
         }
