@@ -11,10 +11,12 @@ import UIKit
 class TrendingCell: FeedCell {
 
     override func fetchTripsFeed() {
-        TripService.sharedInstance.fetchTrendingTripsFeed { (trips: [Trip]) in
-            self.trips = trips
-            self.collectionView.reloadData()
-        }
+        store.dispatch(FetchTrendingTripsFeed)
+    }
+    
+    override func newState(state: AppState) {
+        trips = state.tripState.trendingTrips()
+        collectionView.reloadData()
     }
 
 }
