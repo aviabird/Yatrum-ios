@@ -38,7 +38,7 @@ class SearchTripViewController: UIViewController, UICollectionViewDataSource,  U
         view.addSubview(collectionView)
         
         setupSearchBar()
-        searchBar.rx.value.asDriver().drive(onNext: { (val) in
+        searchBar.rx.value.asDriver().debounce(0.5).drive(onNext: { (val) in
             TripService.sharedInstance.searchTrips(keywords: val!,
                 completion: { (searchedTrips: [Trip]) in
                 self.trips = searchedTrips
