@@ -9,27 +9,28 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import ReSwift
 
-class SearchTripViewController: UIViewController, UICollectionViewDataSource,  UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class SearchTripViewController: UIViewController, UICollectionViewDataSource,  UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, StoreSubscriber {
     
     
     let cellId = "cellId"
     lazy var  collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: CGRect.init(), collectionViewLayout: layout)
-        cv.backgroundColor = UIColor.white
+        cv.backgroundColor = UIColor.rgb(red: 100, green: 100, blue: 100, alpha: 0.2)
         cv.dataSource = self
         cv.delegate = self
         return cv
     }()
     
-    
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        store.subscribe(self)
 
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(SearchTripCell.self, forCellWithReuseIdentifier: cellId)
         view.backgroundColor = UIColor.white
         navigationItem.title = "Search Trip"
         
@@ -41,9 +42,22 @@ class SearchTripViewController: UIViewController, UICollectionViewDataSource,  U
             print(val!)
         }).addDisposableTo(disposeBag)
         
+        
+        fetchTripsFeed()
+        
+    }
+        
+    var searchBar: UISearchBar = UISearchBar(frame: CGRect.zero)    
+    
+    var trips: [Trip]?
+    func fetchTripsFeed() {
+        store.dispatch(FetchTripsFeed)
     }
     
-    var searchBar: UISearchBar = UISearchBar(frame: CGRect.zero)    
+    func newState(state: AppState) {
+        trips = state.tripState.feedTrips()
+        collectionView.reloadData()
+    }
     
     func setupSearchBar() {
         searchBar.placeholder = "Search"
@@ -58,17 +72,19 @@ class SearchTripViewController: UIViewController, UICollectionViewDataSource,  U
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return trips?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
-        cell.backgroundColor = UIColor.blue
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! SearchTripCell
+        cell.backgroundColor = UIColor.white
+        cell.layer.shadowOffset = CGSize(width: 5, height: 5)
+        cell.trip = trips?[indexPath.item]
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height / 4)
+        return CGSize(width: view.frame.width, height: 250)
     }
     
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
