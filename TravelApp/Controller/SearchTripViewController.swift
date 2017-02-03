@@ -39,7 +39,11 @@ class SearchTripViewController: UIViewController, UICollectionViewDataSource,  U
         
         setupSearchBar()
         searchBar.rx.value.asDriver().drive(onNext: { (val) in
-            print(val!)
+            TripService.sharedInstance.searchTrips(keywords: val!,
+                completion: { (searchedTrips: [Trip]) in
+                self.trips = searchedTrips
+                self.collectionView.reloadData()
+            })
         }).addDisposableTo(disposeBag)
         
         
@@ -51,12 +55,12 @@ class SearchTripViewController: UIViewController, UICollectionViewDataSource,  U
     
     var trips: [Trip]?
     func fetchTripsFeed() {
-        store.dispatch(FetchTripsFeed)
+//        store.dispatch(FetchTripsFeed)
     }
     
     func newState(state: AppState) {
-        trips = state.tripState.feedTrips()
-        collectionView.reloadData()
+//        trips = state.tripState.feedTrips()
+//        collectionView.reloadData()
     }
     
     func setupSearchBar() {

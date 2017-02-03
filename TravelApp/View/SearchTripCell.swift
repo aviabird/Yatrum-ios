@@ -33,10 +33,10 @@ class SearchTripCell: BaseCell {
 //                dateFormatter.timeStyle = .long
 //                let newString = dateFormatter.string(from: date as Date)
 //                print(newString)
+                
             }
             setupThumbnailImage()
             setupProfileImage()
-            
         }
         
     }
