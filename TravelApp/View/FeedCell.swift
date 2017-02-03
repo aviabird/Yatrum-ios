@@ -10,7 +10,6 @@ import UIKit
 import ReSwift
 
 class FeedCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, StoreSubscriber {
-    typealias StoreSubscriberStateType = AppState
     
     lazy var  collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
