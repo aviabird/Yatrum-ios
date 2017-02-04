@@ -10,7 +10,7 @@ import UIKit
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var sharedData = SharedData()
+    var sharedData = SharedData.sharedInstance
     var trips: [Trip]?
     let cellId = "cellId"
     let trendingCellId = "trendingCellId"
@@ -18,6 +18,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        sharedData.homeController = self
         
         setupCollectionView()
         
