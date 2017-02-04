@@ -16,6 +16,7 @@ class TripDetail: NSObject {
     }
     
     var tripView: UIView!
+    var tripHeader: TripHeader!
     var keyWindow = UIApplication.shared.keyWindow!
     
     func showTripDetai() {
@@ -26,7 +27,7 @@ class TripDetail: NSObject {
         
         let height = keyWindow.frame.width * 9 / 16
         let tripHeaderFrame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: height)
-        let tripHeader = TripHeader(frame: tripHeaderFrame)
+        tripHeader = TripHeader(frame: tripHeaderFrame)
         tripHeader.trip = self.trip
         tripHeader.tripDetail = self
         tripView.addSubview(tripHeader)
@@ -46,8 +47,13 @@ class TripDetail: NSObject {
     }
     
     func closeView() {
-        keyWindow.willRemoveSubview(tripView)
-        keyWindow.removeFromSuperview()
+        self.tripView.backgroundColor = nil
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.tripView.frame = CGRect(x: self.keyWindow.frame.width, y: self.keyWindow.frame.height, width: 0, height: 0)
+            self.tripHeader.frame = CGRect()
+        }, completion: { (completedAnimation) in
+            UIApplication.shared.setStatusBarHidden(false, with: .fade)
+        })
     }
     
 }
