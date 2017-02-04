@@ -23,7 +23,7 @@ class TripCell:  BaseCell  {
                 numberFormatter.numberStyle = .decimal
                 
                 let subtitleText = "\(userName) • \(numberFormatter.string(from: numberOfLikes)!) • 2 hour ago"
-                subTitleTextView.text = subtitleText
+                subTitleLabel.text = subtitleText
             }
             
             // measure Title text
@@ -79,6 +79,7 @@ class TripCell:  BaseCell  {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.image = UIImage(named: "")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -89,6 +90,7 @@ class TripCell:  BaseCell  {
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 22
         imageView.layer.masksToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -103,17 +105,17 @@ class TripCell:  BaseCell  {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = ""
         label.numberOfLines = 1
-        label.font = label.font.withSize(12)
+        label.font = label.font.withSize(14)
         return label
     }()
     
-    let subTitleTextView: UITextView = {
-        let textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.text = ""
-        textView.textContainerInset = UIEdgeInsetsMake(0, -4, 0, 0)
-        textView.textColor = UIColor.gray
-        return textView
+    let subTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = ""
+        label.numberOfLines = 1
+        label.font = label.font.withSize(12)
+        return label
     }()
     
     let likeButton: UIButton = {
@@ -202,7 +204,7 @@ class TripCell:  BaseCell  {
     override func setupViews() {
         addSubview(userProfileImageView)
         addSubview(titleLabel)
-        addSubview(subTitleTextView)
+        addSubview(subTitleLabel)
         addSubview(thumbnailImageView)
         addSubview(separatorView)
         addSubview(likeButton)
@@ -228,13 +230,13 @@ class TripCell:  BaseCell  {
         addConstraint(titleLabelHeightConstraint!)
         
         //top constraint
-        addConstraint(NSLayoutConstraint(item: subTitleTextView, attribute:  .top, relatedBy: .equal, toItem: titleLabel , attribute: .bottom, multiplier: 1, constant: 4 ))
+        addConstraint(NSLayoutConstraint(item: subTitleLabel, attribute:  .top, relatedBy: .equal, toItem: titleLabel , attribute: .bottom, multiplier: 1, constant: 0 ))
         // left constraint
-        addConstraint(NSLayoutConstraint(item: subTitleTextView, attribute: .left, relatedBy: .equal, toItem: userProfileImageView, attribute: .right, multiplier: 1, constant: 8))
+        addConstraint(NSLayoutConstraint(item: subTitleLabel, attribute: .left, relatedBy: .equal, toItem: userProfileImageView, attribute: .right, multiplier: 1, constant: 8))
         //right constraint
-        addConstraint(NSLayoutConstraint(item: subTitleTextView, attribute: .right , relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: -80))
+        addConstraint(NSLayoutConstraint(item: subTitleLabel, attribute: .right , relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: -80))
         // hight Constraint
-        addConstraint(NSLayoutConstraint(item: subTitleTextView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 30))
+        addConstraint(NSLayoutConstraint(item: subTitleLabel, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 30))
         
         likeButton.topAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor, constant: 5).isActive = true
         likeButton.leftAnchor.constraint(equalTo: thumbnailImageView.leftAnchor, constant: 16).isActive = true
