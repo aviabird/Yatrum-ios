@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-class TripDetail: NSObject, StoreSubscriber {
+class TripDetail: NSObject, UICollectionViewDataSource,  UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, StoreSubscriber {
     
     var trip: Trip?
     
@@ -17,8 +17,21 @@ class TripDetail: NSObject, StoreSubscriber {
     var tripHeader: TripHeader!
     var keyWindow = UIApplication.shared.keyWindow!
     
+    lazy var  collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.backgroundColor = UIColor(white: 1, alpha: 0)
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.dataSource = self
+        cv.delegate = self
+        return cv
+    }()
+    
+    let cellId = "cellId"
+    
     func newState(state: AppState) {
         trip = state.tripState.selectedTrip()
+        collectionView.reloadData()
     }
     
     func showTripDetai() {
@@ -28,12 +41,6 @@ class TripDetail: NSObject, StoreSubscriber {
         tripView.backgroundColor = UIColor.rgb(red: 245, green: 245, blue: 245)
         
         tripView.frame = CGRect(x: keyWindow.frame.width - 10, y: keyWindow.frame.height - 50, width: 10, height: 10)
-        
-        let height = keyWindow.frame.width * 9 / 16
-        let tripHeaderFrame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: height)
-        tripHeader = TripHeader(frame: tripHeaderFrame)
-        tripHeader.tripDetail = self
-        tripView.addSubview(tripHeader)
         
         keyWindow.addSubview(tripView)
         
@@ -47,6 +54,13 @@ class TripDetail: NSObject, StoreSubscriber {
     }
     
     func addSubViews() {
+        let height = keyWindow.frame.width * 9 / 16
+        let tripHeaderFrame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: height)
+        tripHeader = TripHeader(frame: tripHeaderFrame)
+        tripHeader.tripDetail = self
+        tripView.addSubview(tripHeader)
+        
+        setupCollectionViews()
     }
     
     func closeView() {
@@ -57,6 +71,39 @@ class TripDetail: NSObject, StoreSubscriber {
             UIApplication.shared.statusBarStyle = .default
         }, completion: { (completedAnimation) in
         })
+    }
+    
+    func setupCollectionViews() {
+        tripView.addSubview(collectionView)
+        collectionView.topAnchor.constraint(equalTo: tripView.topAnchor, constant: keyWindow.frame.width * 9 / 16 + 10).isActive = true
+        collectionView.widthAnchor.constraint(equalTo: tripView.widthAnchor).isActive = true
+        collectionView.leftAnchor.constraint(equalTo: tripView.leftAnchor, constant: 5).isActive = true
+        collectionView.heightAnchor.constraint(equalTo: tripView.heightAnchor).isActive = true
+        
+        
+        collectionView.register(PlaceCell.self, forCellWithReuseIdentifier: cellId)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return trip?.cities.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! PlaceCell
+        cell.city = trip?.cities[indexPath.item]
+        cell.placeViewBadgeLabel.text = "Day \(indexPath.item + 1)"
+        if let placeDescription = cell.city.places.first?.placeDescription {
+            cell.subTitleLabel.text = placeDescription
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: tripView.frame.width, height: 200)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
     
 }
