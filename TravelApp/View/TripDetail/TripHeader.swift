@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import ReSwift
 
-class TripHeader: UIView {
+class TripHeader: UIView, StoreSubscriber {
     var tripDetail: TripDetail?
     
     var trip: Trip? {
@@ -29,10 +30,16 @@ class TripHeader: UIView {
         }
     }
     
+    func newState(state: AppState) {
+        trip = state.tripState.selectedTrip()
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         backgroundColor = UIColor.black
+        
+        store.subscribe(self)
         
         setupViews()
     }

@@ -1,15 +1,15 @@
 //
-//  FeedCell.swift
+//  TripPlaces.swift
 //  TravelApp
 //
-//  Created by rawat on 29/01/17.
+//  Created by rawat on 05/02/17.
 //  Copyright © 2017 Pankaj Rawat. All rights reserved.
 //
 
 import UIKit
 import ReSwift
 
-class FeedCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, StoreSubscriber {
+class TripPlaces: UICollectionView, UICollectionViewDataSource,  UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, StoreSubscriber {
     
     lazy var  collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -21,20 +21,18 @@ class FeedCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate,
     }()
     
     let cellId = "cellId"
-    var trips: [Trip]?
+    var trip: Trip?
     
     func fetchTripsFeed() {
         store.dispatch(FetchTripsFeed)
     }
     
     func newState(state: AppState) {
-        trips = state.tripState.feedTrips()
+        trip = state.tripState.selectedTrip()
         collectionView.reloadData()
     }
-
-    override func setupViews() {
-        super.setupViews()
-        
+    
+    func setupViews() {
         store.subscribe(self)
         
         fetchTripsFeed()
@@ -47,12 +45,12 @@ class FeedCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return trips?.count ?? 0
+        return trip?.cities.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! TripCell
-        cell.trip = trips?[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! PlaceCell
+        cell.city = trip?.cities[indexPath.item]
         return cell
     }
     
@@ -63,5 +61,6 @@ class FeedCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-
+    
 }
+

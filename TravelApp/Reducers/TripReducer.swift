@@ -25,6 +25,9 @@ func tripReducer(state: TripState?, action: Action) -> TripState {
             state.entities[trip.id!] = trip
         })
         break
+    case let action as SelectTrip:
+        state.selectedTripId = action.tripId
+        break
     default:
         break
     }

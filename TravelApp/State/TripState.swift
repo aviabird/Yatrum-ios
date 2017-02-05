@@ -66,6 +66,10 @@ struct TripState {
             self.entities[trip.id!] = trip
         })
     }
+    
+    func selectedTrip() -> Trip {
+        return entities[selectedTripId!]!
+    }
 }
 
 

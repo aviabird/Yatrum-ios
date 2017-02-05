@@ -66,6 +66,16 @@ class TripCell:  BaseCell  {
         if let thumbnailImageUrl = trip?.thumbnail_image_url {
             thumbnailImageView.loadImageUsingUrlString(urlString: thumbnailImageUrl)
         }
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(showTripDetail))
+        thumbnailImageView.isUserInteractionEnabled = true
+        thumbnailImageView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    func showTripDetail() {
+        let tripDetail = TripDetail()
+        store.dispatch(SelectTrip(tripId: (trip?.id)!))
+        tripDetail.showTripDetai()
     }
     
     func setupProfileImage() {

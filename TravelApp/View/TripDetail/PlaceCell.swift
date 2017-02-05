@@ -6,4 +6,10 @@
 //  Copyright © 2017 Pankaj Rawat. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class PlaceCell: BaseCell {
+    
+    var city: City?
+    var place: Place?
+}

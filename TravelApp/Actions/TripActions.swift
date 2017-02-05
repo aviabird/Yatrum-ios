@@ -20,3 +20,7 @@ struct SetTrendingTrips: Action {
 struct UpdateTrips: Action {
     let trips: [Trip]
 }
+
+struct SelectTrip: Action {
+    let tripId: NSNumber
+}
