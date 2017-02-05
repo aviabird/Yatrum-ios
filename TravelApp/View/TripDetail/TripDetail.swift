@@ -78,8 +78,7 @@ class TripDetail: NSObject, UICollectionViewDataSource,  UICollectionViewDelegat
         collectionView.topAnchor.constraint(equalTo: tripView.topAnchor, constant: keyWindow.frame.width * 9 / 16 + 10).isActive = true
         collectionView.widthAnchor.constraint(equalTo: tripView.widthAnchor).isActive = true
         collectionView.leftAnchor.constraint(equalTo: tripView.leftAnchor, constant: 5).isActive = true
-        collectionView.heightAnchor.constraint(equalTo: tripView.heightAnchor).isActive = true
-        
+        collectionView.bottomAnchor.constraint(equalTo: keyWindow.bottomAnchor).isActive = true
         
         collectionView.register(PlaceCell.self, forCellWithReuseIdentifier: cellId)
     }

@@ -15,17 +15,18 @@ class TripHeader: UIView, StoreSubscriber {
     var trip: Trip? {
         didSet {
             titleLabel.text = trip?.name
+            userNameLabel.text = trip?.user?.name
             
             setupThumbnailImage()
             setupProfileImage()
             
-            if let userName = trip?.user?.name, let numberOfLikes = trip?.trip_likes_count {
+            if let numberOfLikes = trip?.trip_likes_count {
                 
                 let numberFormatter = NumberFormatter()
                 numberFormatter.numberStyle = .decimal
                 
-                let subtitleText = "\(userName) • \(numberFormatter.string(from: numberOfLikes)!) • 2 hour ago"
-                subTitleLabel.text = subtitleText
+                let subtitleText = "\(numberFormatter.string(from: numberOfLikes)!) Likes, Posted 2 hour ago"
+                userNameSubTitle.text = subtitleText
             }
         }
     }
@@ -89,12 +90,23 @@ class TripHeader: UIView, StoreSubscriber {
         return label
     }()
     
-    let subTitleLabel: UILabel = {
+    let userNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = ""
         label.numberOfLines = 1
-        label.font = label.font.withSize(12)
+        label.font = label.font.withSize(16)
+        label.textColor = UIColor.white
+        return label
+    }()
+    
+    let userNameSubTitle: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = ""
+        label.numberOfLines = 1
+        label.font = label.font.withSize(14)
+        label.textColor = UIColor.white
         return label
     }()
     
@@ -128,6 +140,8 @@ class TripHeader: UIView, StoreSubscriber {
         addSubview(userProfileImageView)
         addSubview(closeButton)
         addSubview(titleLabel)
+        addSubview(userNameLabel)
+        addSubview(userNameSubTitle)
         
         thumbnailImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         thumbnailImageView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
@@ -143,6 +157,16 @@ class TripHeader: UIView, StoreSubscriber {
         
         titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        
+        userNameLabel.topAnchor.constraint(equalTo: userProfileImageView.topAnchor).isActive = true
+        userNameLabel.leftAnchor.constraint(equalTo: thumbnailImageView.leftAnchor, constant: 60).isActive = true
+        userNameLabel.rightAnchor.constraint(equalTo: thumbnailImageView.rightAnchor, constant: -10).isActive = true
+        userNameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        userNameSubTitle.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 2).isActive = true
+        userNameSubTitle.leftAnchor.constraint(equalTo: thumbnailImageView.leftAnchor, constant: 60).isActive = true
+        userNameSubTitle.rightAnchor.constraint(equalTo: thumbnailImageView.rightAnchor, constant: -10).isActive = true
+        userNameSubTitle.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {

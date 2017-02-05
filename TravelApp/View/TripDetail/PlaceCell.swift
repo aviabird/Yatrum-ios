@@ -68,7 +68,7 @@ class PlaceCell: BaseCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = ""
         label.numberOfLines = 100
-        label.font = label.font.withSize(12)
+        label.font = label.font.withSize(14)
         return label
     }()
     
@@ -99,8 +99,8 @@ class PlaceCell: BaseCell {
         addSubview(placeView)
         
         placeView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        placeView.widthAnchor.constraint(equalTo: widthAnchor, constant: -10).isActive = true
-        placeView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
+        placeView.widthAnchor.constraint(equalTo: widthAnchor, constant: -20).isActive = true
+        placeView.leftAnchor.constraint(equalTo: leftAnchor, constant: 5).isActive = true
         placeView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
     }
     
@@ -118,8 +118,9 @@ class PlaceCell: BaseCell {
         subTitleLabel.widthAnchor.constraint(equalTo: placeView.widthAnchor, constant: -10).isActive = true
         subTitleLabel.leftAnchor.constraint(equalTo: placeView.leftAnchor, constant: 5).isActive = true
         
-        placeViewSeparator.topAnchor.constraint(equalTo: bottomAnchor, constant: -1).isActive = true
-        placeViewSeparator.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        placeViewSeparator.topAnchor.constraint(equalTo: placeView.bottomAnchor, constant: -1).isActive = true
+        placeViewSeparator.widthAnchor.constraint(equalTo: placeView.widthAnchor).isActive = true
+        placeViewSeparator.leftAnchor.constraint(equalTo: placeView.leftAnchor).isActive = true
         placeViewSeparator.heightAnchor.constraint(equalToConstant: 1).isActive = true
     }
     
