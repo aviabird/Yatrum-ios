@@ -31,6 +31,23 @@ class TripHeader: UIView, StoreSubscriber {
         }
     }
     
+    func hideAll() {
+        titleLabel.isHidden = true
+        userNameLabel.isHidden = true
+        userProfileImageView.isHidden = true
+        userNameSubTitle.isHidden = true
+        thumbnailImageView.alpha = 0.3
+    }
+    
+    func showAll() {
+        titleLabel.isHidden = false
+        userNameLabel.isHidden = false
+        thumbnailImageView.isHidden = false
+        userProfileImageView.isHidden = false
+        userNameSubTitle.isHidden = false
+        thumbnailImageView.alpha = 0.5
+    }
+    
     func newState(state: AppState) {
         trip = state.tripState.selectedTrip()
     }
@@ -153,7 +170,7 @@ class TripHeader: UIView, StoreSubscriber {
         userProfileImageView.heightAnchor.constraint(equalToConstant: 44).isActive = true
         
         closeButton.topAnchor.constraint(equalTo: thumbnailImageView.topAnchor, constant: 20).isActive = true
-        closeButton.leftAnchor.constraint(equalTo: thumbnailImageView.leftAnchor, constant: 5).isActive = true
+        closeButton.leftAnchor.constraint(equalTo: thumbnailImageView.leftAnchor, constant: 20).isActive = true
         
         titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true

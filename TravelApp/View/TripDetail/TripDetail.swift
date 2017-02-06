@@ -75,7 +75,7 @@ class TripDetail: NSObject, UICollectionViewDataSource,  UICollectionViewDelegat
     
     func setupCollectionViews() {
         tripView.addSubview(collectionView)
-        collectionView.topAnchor.constraint(equalTo: tripView.topAnchor, constant: keyWindow.frame.width * 9 / 16 + 10).isActive = true
+        collectionView.topAnchor.constraint(equalTo: tripHeader.bottomAnchor, constant: 5).isActive = true
         collectionView.widthAnchor.constraint(equalTo: tripView.widthAnchor).isActive = true
         collectionView.leftAnchor.constraint(equalTo: tripView.leftAnchor, constant: 5).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: keyWindow.bottomAnchor).isActive = true
@@ -104,6 +104,22 @@ class TripDetail: NSObject, UICollectionViewDataSource,  UICollectionViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        switch true {
+        case scrollView.contentOffset.y >= 50:
+            self.tripHeader.frame = CGRect(x: 0, y: 0, width: self.keyWindow.frame.width, height: 50)
+            self.tripHeader.hideAll()
+            break
+        case scrollView.contentOffset.y <= 45:
+            let height = self.keyWindow.frame.width * 9 / 16
+            self.tripHeader.frame = CGRect(x: 0, y: 0, width: self.keyWindow.frame.width, height: height)
+            self.tripHeader.showAll()
+            break
+        default:
+            break
+        }
     }
     
 }
