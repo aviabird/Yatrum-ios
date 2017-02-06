@@ -20,7 +20,7 @@ class TripDetail: NSObject, UICollectionViewDataSource,  UICollectionViewDelegat
     lazy var  collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = UIColor(white: 1, alpha: 0)
+        cv.backgroundColor = UIColor.white
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.dataSource = self
         cv.delegate = self
@@ -38,7 +38,7 @@ class TripDetail: NSObject, UICollectionViewDataSource,  UICollectionViewDelegat
         store.subscribe(self)
         
         tripView = UIView(frame: keyWindow.frame)
-        tripView.backgroundColor = UIColor.rgb(red: 245, green: 245, blue: 245)
+        tripView.backgroundColor = UIColor.white
         
         tripView.frame = CGRect(x: keyWindow.frame.width - 10, y: keyWindow.frame.height - 50, width: 10, height: 10)
         
@@ -90,15 +90,16 @@ class TripDetail: NSObject, UICollectionViewDataSource,  UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! PlaceCell
         cell.place = trip?.places[indexPath.item]
-        cell.placeViewBadgeLabel.text = "Day \(indexPath.item + 1)"
-        if let placeDescription = cell.place.placeDescription {
-            cell.subTitleLabel.text = placeDescription
-        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: tripView.frame.width, height: 200)
+        
+        let tempTextView = UITextView()
+        tempTextView.text = trip?.places[indexPath.item].placeDescription
+        let height = tempTextView.contentSize.height + 150
+        
+        return CGSize(width: tripView.frame.width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

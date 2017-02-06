@@ -18,7 +18,7 @@ extension UIColor {
     }
     
     static func appSecondaryColor() -> UIColor {
-        return rgb(red: 247, green: 84, blue: 56, alpha: 1)
+        return rgb(red: 231, green: 76, blue: 60, alpha: 1)
     }
 }
 
@@ -94,4 +94,16 @@ class CustomImageView: UIImageView {
             }
         }.resume()
     }
+}
+
+//MARK: - UITextView
+extension UITextView{
+    
+    func numberOfLines() -> Int{
+        if let fontUnwrapped = self.font{
+            return Int(self.contentSize.height / fontUnwrapped.lineHeight)
+        }
+        return 0
+    }
+    
 }
