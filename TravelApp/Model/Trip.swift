@@ -20,7 +20,7 @@ class Trip: NSObject{
     var user_id: NSNumber?
     
     var user: User?
-    var cities: [City] = []
+    var places: [Place] = []
     
     init(dictionary: [String: AnyObject]) {
         super.init()
@@ -29,9 +29,9 @@ class Trip: NSObject{
         
         user = User(dictionary: dictionary["user"] as! [String: AnyObject])
         
-        if let citiesArray = dictionary["cities"] {
-            for cityDict in citiesArray as! [[String: AnyObject]] {
-                cities.append(City(dictionary: cityDict))
+        if let placesArray = dictionary["places"] {
+            for placeDict in placesArray as! [[String: AnyObject]] {
+                places.append(Place(dictionary: placeDict))
             }
         }
     }
@@ -43,7 +43,7 @@ class Trip: NSObject{
             _key = "tripDescription"
         }
         
-        if (["user", "cities"].contains(_key)) {
+        if (["user", "places"].contains(_key)) {
             return
         }
         

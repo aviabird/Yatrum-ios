@@ -84,14 +84,14 @@ class TripDetail: NSObject, UICollectionViewDataSource,  UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return trip?.cities.count ?? 0
+        return trip?.places.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! PlaceCell
-        cell.city = trip?.cities[indexPath.item]
+        cell.place = trip?.places[indexPath.item]
         cell.placeViewBadgeLabel.text = "Day \(indexPath.item + 1)"
-        if let placeDescription = cell.city.places.first?.placeDescription {
+        if let placeDescription = cell.place.placeDescription {
             cell.subTitleLabel.text = placeDescription
         }
         return cell

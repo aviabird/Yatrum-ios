@@ -10,12 +10,11 @@ import UIKit
 
 class PlaceCell: BaseCell {
     
-    var city: City! {
+    var place: Place! {
         didSet{
-            titleLabel.text = city.name
+            titleLabel.text = place.name
         }
     }
-    var place: Place!
     
     let placeView: UIView = {
         let view = UIView()
