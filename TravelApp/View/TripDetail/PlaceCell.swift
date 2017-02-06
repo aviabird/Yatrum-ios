@@ -18,6 +18,8 @@ class PlaceCell: BaseCell {
             
             placeDescTextHeightConstraint.constant = placeDescText.contentSize.height + 30
             placeDescTextHeightConstraint.isActive = true
+            
+            addPlaceImages()
         }
     }
     
@@ -88,6 +90,7 @@ class PlaceCell: BaseCell {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.text = "Amazing View of eiffel tower."
         textView.textColor = UIColor.gray
+        textView.backgroundColor = UIColor(white: 0, alpha: 0)
         textView.isEditable = false
         textView.textAlignment = .justified
         return textView
@@ -158,12 +161,94 @@ class PlaceCell: BaseCell {
         placeDescText.widthAnchor.constraint(equalTo: placeViewBadge.widthAnchor, constant: -20).isActive = true
         placeDescText.rightAnchor.constraint(equalTo: placeViewBadge.rightAnchor, constant: -20).isActive = true
         placeDescTextHeightConstraint = placeDescText.heightAnchor.constraint(equalToConstant: 10)
+        placeDescTextHeightConstraint.constant = 100
         
 //        placeViewSeparator.topAnchor.constraint(equalTo: placeDescText.bottomAnchor, constant: 10).isActive = true
 //        placeViewSeparator.widthAnchor.constraint(equalTo: placeDescText.widthAnchor).isActive = true
 //        placeViewSeparator.leftAnchor.constraint(equalTo: placeDescText.leftAnchor).isActive = true
 //        placeViewSeparator.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
+    }
+    
+    func addPlaceImages() {
+        let placeImagesCount = place.pictures.count
+        let placeImages = place.pictures[0..<(placeImagesCount < 3 ? placeImagesCount : 3)]
+        let imagesCount = placeImages.count
+        
+        let placeImageView0: CustomImageView = {
+            let imageView = CustomImageView()
+            imageView.contentMode = .scaleAspectFill
+            imageView.clipsToBounds = true
+            imageView.image = UIImage(named: "")
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            return imageView
+        }()
+        
+        let placeImageView1: CustomImageView = {
+            let imageView = CustomImageView()
+            imageView.contentMode = .scaleAspectFill
+            imageView.clipsToBounds = true
+            imageView.image = UIImage(named: "")
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            return imageView
+        }()
+        
+        let placeImageView2: CustomImageView = {
+            let imageView = CustomImageView()
+            imageView.contentMode = .scaleAspectFill
+            imageView.clipsToBounds = true
+            imageView.image = UIImage(named: "")
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            return imageView
+        }()
+        
+        placeView.addSubview(placeImageView0)
+        placeView.addSubview(placeImageView1)
+        placeView.addSubview(placeImageView2)
+        
+        for idx in [0, 1, 2] {
+            if(idx >= placeImagesCount) { return }
+            
+            switch idx {
+            case 0:
+                placeImageView0.leftAnchor.constraint(equalTo: placeDescText.leftAnchor).isActive = true
+                placeImageView0.topAnchor.constraint(equalTo: placeDescText.bottomAnchor).isActive = true
+                placeImageView0.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
+                
+                if imagesCount == 1 {
+                    placeImageView0.rightAnchor.constraint(equalTo: placeDescText.rightAnchor).isActive = true
+                } else {
+                    placeImageView0.widthAnchor.constraint(equalTo: placeDescText.widthAnchor, multiplier: 1/2, constant: -5).isActive = true
+                }
+                
+                placeImageView0.loadImageUsingUrlString(urlString: placeImages[idx].url!)
+                
+                break
+            case 1:
+                placeImageView1.widthAnchor.constraint(equalTo: placeImageView0.widthAnchor).isActive = true
+                placeImageView1.leftAnchor.constraint(equalTo: placeImageView0.rightAnchor, constant: 5).isActive = true
+                placeImageView1.topAnchor.constraint(equalTo: placeImageView0.topAnchor).isActive = true
+                
+                if imagesCount == 2 {
+                    placeImageView1.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
+                } else {
+                    placeImageView1.heightAnchor.constraint(equalTo: placeImageView0.heightAnchor, multiplier: 1/2, constant: -5).isActive = true
+                }
+                
+                placeImageView1.loadImageUsingUrlString(urlString: placeImages[idx].url!)
+                break
+            case 2:
+                placeImageView2.widthAnchor.constraint(equalTo: placeImageView1.widthAnchor).isActive = true
+                placeImageView2.rightAnchor.constraint(equalTo: placeImageView1.rightAnchor).isActive = true
+                placeImageView2.bottomAnchor.constraint(equalTo: placeImageView0.bottomAnchor).isActive = true
+                placeImageView2.heightAnchor.constraint(equalTo: placeImageView0.heightAnchor, multiplier: 1/2, constant: -5).isActive = true
+                
+                placeImageView2.loadImageUsingUrlString(urlString: placeImages[idx].url!)
+                break
+            default:
+                break
+            }
+        }
     }
     
     

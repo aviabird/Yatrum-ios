@@ -96,10 +96,12 @@ class TripService: NSObject {
                         let tripsArray = json["trips"]
     
                         var trips = [Trip]()
-
-                        for dictionary in tripsArray as! [[String: AnyObject]] {
-                            let trip = Trip(dictionary: dictionary)
-                            trips.append(trip)
+                        
+                        if tripsArray != nil {
+                            for dictionary in tripsArray as! [[String: AnyObject]] {
+                                let trip = Trip(dictionary: dictionary)
+                                trips.append(trip)
+                            }
                         }
 
                         DispatchQueue.main.async {
