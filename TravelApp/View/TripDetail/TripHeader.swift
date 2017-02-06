@@ -169,8 +169,9 @@ class TripHeader: UIView, StoreSubscriber {
         userProfileImageView.widthAnchor.constraint(equalToConstant: 44).isActive = true
         userProfileImageView.heightAnchor.constraint(equalToConstant: 44).isActive = true
         
-        closeButton.topAnchor.constraint(equalTo: thumbnailImageView.topAnchor, constant: 20).isActive = true
+        closeButton.topAnchor.constraint(equalTo: thumbnailImageView.topAnchor, constant: 10).isActive = true
         closeButton.leftAnchor.constraint(equalTo: thumbnailImageView.leftAnchor, constant: 20).isActive = true
+        closeButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
