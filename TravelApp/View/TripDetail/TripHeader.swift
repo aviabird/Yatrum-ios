@@ -15,6 +15,7 @@ class TripHeader: UIView, StoreSubscriber {
     var trip: Trip? {
         didSet {
             titleLabel.text = trip?.name
+            scrollTitleLabel.text = trip?.name
             userNameLabel.text = trip?.user?.name
             
             setupThumbnailImage()
@@ -32,7 +33,10 @@ class TripHeader: UIView, StoreSubscriber {
     }
     
     func hideAll() {
+        thumbnailImageView.frame = CGRect(x: 0, y: 0, width: thumbnailImageView.frame.width, height: 50)
+        
         titleLabel.isHidden = true
+        scrollTitleLabel.alpha = 1
         userNameLabel.isHidden = true
         userProfileImageView.isHidden = true
         userNameSubTitle.isHidden = true
@@ -40,7 +44,9 @@ class TripHeader: UIView, StoreSubscriber {
     }
     
     func showAll() {
+        thumbnailImageView.frame = CGRect(x: 0, y: 0, width: thumbnailImageView.frame.width, height: frame.height)
         titleLabel.isHidden = false
+        scrollTitleLabel.alpha = 0
         userNameLabel.isHidden = false
         thumbnailImageView.isHidden = false
         userProfileImageView.isHidden = false
@@ -97,13 +103,26 @@ class TripHeader: UIView, StoreSubscriber {
         return imageView
     }()
     
-    let titleLabel: UILabel = {
+    let scrollTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = ""
         label.numberOfLines = 1
+        label.font = label.font.withSize(14)
+        label.textColor = UIColor.white
+        label.alpha = 0
+        label.textAlignment = .center
+        return label
+    }()
+    
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = ""
+        label.numberOfLines = 2
         label.font = label.font.withSize(20)
         label.textColor = UIColor.white
+        label.textAlignment = .center
         return label
     }()
     
@@ -159,10 +178,15 @@ class TripHeader: UIView, StoreSubscriber {
         addSubview(titleLabel)
         addSubview(userNameLabel)
         addSubview(userNameSubTitle)
+        addSubview(scrollTitleLabel)
         
         thumbnailImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         thumbnailImageView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         thumbnailImageView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
+        
+        scrollTitleLabel.topAnchor.constraint(equalTo: thumbnailImageView.topAnchor, constant: 25).isActive = true
+        scrollTitleLabel.leftAnchor.constraint(equalTo: thumbnailImageView.leftAnchor, constant: 50).isActive = true
+        scrollTitleLabel.widthAnchor.constraint(equalTo: thumbnailImageView.widthAnchor, constant: -100).isActive = true
         
         userProfileImageView.bottomAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor, constant: -10).isActive = true
         userProfileImageView.leftAnchor.constraint(equalTo: thumbnailImageView.leftAnchor, constant: 10).isActive = true
@@ -173,8 +197,9 @@ class TripHeader: UIView, StoreSubscriber {
         closeButton.leftAnchor.constraint(equalTo: thumbnailImageView.leftAnchor, constant: 20).isActive = true
         closeButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        titleLabel.widthAnchor.constraint(equalTo: thumbnailImageView.widthAnchor, constant: -20).isActive = true
+        titleLabel.centerYAnchor.constraint(equalTo: thumbnailImageView.centerYAnchor).isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         userNameLabel.topAnchor.constraint(equalTo: userProfileImageView.topAnchor).isActive = true
         userNameLabel.leftAnchor.constraint(equalTo: thumbnailImageView.leftAnchor, constant: 60).isActive = true

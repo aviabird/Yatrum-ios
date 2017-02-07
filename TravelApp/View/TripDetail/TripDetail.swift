@@ -107,19 +107,24 @@ class TripDetail: NSObject, UICollectionViewDataSource,  UICollectionViewDelegat
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        switch true {
-        case scrollView.contentOffset.y >= 50:
-            self.tripHeader.frame = CGRect(x: 0, y: 0, width: self.keyWindow.frame.width, height: 50)
-            self.tripHeader.hideAll()
-            break
-        case scrollView.contentOffset.y <= 45:
-            let height = self.keyWindow.frame.width * 9 / 16
-            self.tripHeader.frame = CGRect(x: 0, y: 0, width: self.keyWindow.frame.width, height: height)
-            self.tripHeader.showAll()
-            break
-        default:
-            break
-        }
+        UIView.animate(withDuration: 2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            switch true {
+            case scrollView.contentOffset.y >= 100:
+                self.tripHeader.frame = CGRect(x: 0, y: 0, width: self.keyWindow.frame.width, height: 50)
+                self.collectionView.frame = CGRect(x: 0, y: 50, width: self.keyWindow.frame.width, height: self.keyWindow.frame.height - 50)
+                self.tripHeader.hideAll()
+                break
+            case scrollView.contentOffset.y <= 95:
+                let height = self.keyWindow.frame.width * 9 / 16
+                self.tripHeader.frame = CGRect(x: 0, y: 0, width: self.keyWindow.frame.width, height: height)
+                self.collectionView.frame = CGRect(x: 0, y: height, width: self.keyWindow.frame.width, height: self.keyWindow.frame.height - height)
+                self.tripHeader.showAll()
+                break
+            default:
+                break
+            }
+        }, completion: nil)
+        
     }
     
 }
