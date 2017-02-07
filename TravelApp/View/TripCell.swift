@@ -46,10 +46,6 @@ class TripCell:  BaseCell  {
                 self.followButton.setTitleColor(UIColor.white, for: .normal)
             }
             
-            if SharedData.sharedInstance.getCurrentUser()?.id == trip?.user_id {
-                self.followButton.isHidden = true
-            }
-            
             likeButton.addTarget(self, action: #selector(handleLike), for: .touchUpInside)
             
             if (trip?.is_liked_by_current_user)! {
