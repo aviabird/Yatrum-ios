@@ -76,8 +76,8 @@ class TripDetail: NSObject, UICollectionViewDataSource,  UICollectionViewDelegat
     func setupCollectionViews() {
         tripView.addSubview(collectionView)
         collectionView.topAnchor.constraint(equalTo: tripHeader.bottomAnchor, constant: 5).isActive = true
-        collectionView.widthAnchor.constraint(equalTo: tripView.widthAnchor).isActive = true
-        collectionView.leftAnchor.constraint(equalTo: tripView.leftAnchor, constant: 5).isActive = true
+        collectionView.leftAnchor.constraint(equalTo: keyWindow.leftAnchor).isActive = true
+        collectionView.rightAnchor.constraint(equalTo: keyWindow.rightAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: keyWindow.bottomAnchor).isActive = true
         
         collectionView.showsVerticalScrollIndicator = false
@@ -99,7 +99,7 @@ class TripDetail: NSObject, UICollectionViewDataSource,  UICollectionViewDelegat
         
         let tempTextView = UITextView()
         tempTextView.text = trip?.places[indexPath.item].placeDescription
-        let height = tempTextView.contentSize.height + 300
+        let height = tempTextView.contentSize.height + 400
         
         return CGSize(width: tripView.frame.width, height: height)
     }
@@ -109,14 +109,14 @@ class TripDetail: NSObject, UICollectionViewDataSource,  UICollectionViewDelegat
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        UIView.animate(withDuration: 2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             switch true {
             case scrollView.contentOffset.y >= 100:
                 self.tripHeader.frame = CGRect(x: 0, y: 0, width: self.keyWindow.frame.width, height: 50)
                 self.collectionView.frame = CGRect(x: 0, y: 50, width: self.keyWindow.frame.width, height: self.keyWindow.frame.height - 50)
                 self.tripHeader.hideAll()
                 break
-            case scrollView.contentOffset.y <= 95:
+            case scrollView.contentOffset.y <= 1:
                 let height = self.keyWindow.frame.width * 9 / 16
                 self.tripHeader.frame = CGRect(x: 0, y: 0, width: self.keyWindow.frame.width, height: height)
                 self.collectionView.frame = CGRect(x: 0, y: height, width: self.keyWindow.frame.width, height: self.keyWindow.frame.height - height)

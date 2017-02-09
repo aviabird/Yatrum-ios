@@ -43,13 +43,13 @@ class SearchTripCell: BaseCell {
     
     func setupThumbnailImage() {
         if let thumbnailImageUrl = trip?.thumbnail_image_url {
-            thumbnailImageView.loadImageUsingUrlString(urlString: thumbnailImageUrl)
+            thumbnailImageView.loadImageUsingUrlString(urlString: thumbnailImageUrl, width: Float(thumbnailImageView.frame.width))
         }
     }
     
     func setupProfileImage() {
         if let profileImageURL = trip?.user?.profile_pic?.url {
-            userProfileImageView.loadImageUsingUrlString(urlString: profileImageURL)
+            userProfileImageView.loadImageUsingUrlString(urlString: profileImageURL, width: Float(userProfileImageView.frame.width))
         }
     }
     

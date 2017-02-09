@@ -9,15 +9,20 @@ import UIKit
 
 class TripCell:  BaseCell  {
     
-    var trip: Trip? {
+    var user: User!
+    
+    var trip: Trip! {
         didSet {
-            titleLabel.text = trip?.name
+            
+            user = trip.user
+            
+            titleLabel.text = trip.name
             
             setupThumbnailImage()
             
             setupProfileImage()
             
-            if let userName = trip?.user?.name, let numberOfLikes = trip?.trip_likes_count {
+            if let userName = user.name, let numberOfLikes = trip.trip_likes_count {
                 
                 let numberFormatter = NumberFormatter()
                 numberFormatter.numberStyle = .decimal
@@ -27,7 +32,7 @@ class TripCell:  BaseCell  {
             }
             
             // measure Title text
-            if let title = trip?.name {
+            if let title = trip.name {
                 let size = CGSize(width: frame.width - 16 - 44 - 8 - 16 , height: 1000)
                 let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
                 let estimatedRect = NSString(string: title).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14)], context: nil)
@@ -40,17 +45,25 @@ class TripCell:  BaseCell  {
             }
             
             followButton.addTarget(self, action: #selector(handleFollow), for: .touchUpInside)
-            if (trip?.user?.is_followed_by_current_user)! {
-                self.followButton.backgroundColor = UIColor.appSecondaryColor()
+            
+            if user.is_followed_by_current_user {
+                self.followButton.backgroundColor = UIColor.callToActionColor()
                 self.followButton.setTitle("Following", for: .normal)
                 self.followButton.setTitleColor(UIColor.white, for: .normal)
+            } else {
+                self.followButton.backgroundColor = UIColor.white
+                self.followButton.setTitle("Follow", for: .normal)
+                self.followButton.setTitleColor(UIColor.callToActionColor(), for: .normal)
             }
             
             likeButton.addTarget(self, action: #selector(handleLike), for: .touchUpInside)
             
-            if (trip?.is_liked_by_current_user)! {
+            if trip.is_liked_by_current_user {
                 likeButton.setImage(UIImage(named: "like-filled"), for: .normal)
-                likeButton.tintColor = UIColor.appSecondaryColor()
+                likeButton.tintColor = UIColor.callToActionColor()
+            } else {
+                likeButton.setImage(UIImage(named: "like"), for: .normal)
+                likeButton.tintColor = UIColor.gray
             }
             
         }
@@ -59,8 +72,8 @@ class TripCell:  BaseCell  {
     
     
     func setupThumbnailImage() {
-        if let thumbnailImageUrl = trip?.thumbnail_image_url {
-            thumbnailImageView.loadImageUsingUrlString(urlString: thumbnailImageUrl)
+        if let thumbnailImageUrl = trip.thumbnail_image_url {
+            thumbnailImageView.loadImageUsingUrlString(urlString: thumbnailImageUrl, width: Float(frame.width))
         }
         
         let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(showTripDetail))
@@ -70,13 +83,13 @@ class TripCell:  BaseCell  {
     
     func showTripDetail() {
         let tripDetail = TripDetail()
-        store.dispatch(SelectTrip(tripId: (trip?.id)!))
+        store.dispatch(SelectTrip(tripId: trip.id!))
         tripDetail.showTripDetai()
     }
     
     func setupProfileImage() {
-        if let profileImageURL = trip?.user?.profile_pic?.url {
-            userProfileImageView.loadImageUsingUrlString(urlString: profileImageURL)
+        if let profileImageURL = user.profile_pic?.url {
+            userProfileImageView.loadImageUsingUrlString(urlString: profileImageURL, width: 44)
         }
     }
     
@@ -135,58 +148,56 @@ class TripCell:  BaseCell  {
     let followButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = UIColor.white
-        button.layer.borderColor = UIColor.appSecondaryColor().cgColor
+        button.layer.borderColor = UIColor.callToActionColor().cgColor
         button.layer.borderWidth = 1
         button.setTitle("Follow", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 5
         button.layer.masksToBounds = true
-        button.setTitleColor(UIColor.appSecondaryColor(), for: .normal)
+        button.setTitleColor(UIColor.callToActionColor(), for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 10)
         return button
     }()
     
     func handleFollow() {
-        trip?.user?.is_followed_by_current_user = !(self.trip?.user?.is_followed_by_current_user)!
+        user.is_followed_by_current_user = !user.is_followed_by_current_user
         
         toggleFollow()
         
-        UserService.sharedInstance.followUser(followedId: (trip?.user_id)!) { (user: User) in
+        UserService.sharedInstance.followUser(followedId: (trip.user_id)!) { (user: User) in
             
-            guard user.is_followed_by_current_user != self.trip?.user?.is_followed_by_current_user else {
+            guard user.is_followed_by_current_user != self.user.is_followed_by_current_user else {
                 return
             }
-            
-            self.trip?.user = user
+
             self.toggleFollow()
         }
     }
     
     func toggleFollow() {
         UIView.animate(withDuration: 0.5) {
-            if (self.trip?.user?.is_followed_by_current_user)! {
-                self.followButton.backgroundColor = UIColor.appSecondaryColor()
+            if self.user.is_followed_by_current_user {
+                self.followButton.backgroundColor = UIColor.callToActionColor()
                 self.followButton.setTitle("Following", for: .normal)
                 self.followButton.setTitleColor(UIColor.white, for: .normal)
             } else {
                 self.followButton.backgroundColor = UIColor.white
                 self.followButton.setTitle("Follow", for: .normal)
-                self.followButton.setTitleColor(UIColor.appSecondaryColor(), for: .normal)
+                self.followButton.setTitleColor(UIColor.callToActionColor(), for: .normal)
             }
         }
     }
     
     func handleLike(firstChange: Bool) {
-        trip?.is_liked_by_current_user = !(trip?.is_liked_by_current_user)!
+        trip.is_liked_by_current_user = !trip.is_liked_by_current_user
         self.likeButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         toggleLike()
         
-        TripService.sharedInstance.likeTrip(tripId: (trip?.id)!) { (trip: Trip) in
-            guard trip.is_liked_by_current_user != self.trip?.is_liked_by_current_user else {
+        TripService.sharedInstance.likeTrip(tripId: (trip.id)!) { (trip: Trip) in
+            guard trip.is_liked_by_current_user != self.trip.is_liked_by_current_user else {
                 return
             }
             
-            self.trip = trip
             self.toggleLike()
         }
     }
@@ -194,9 +205,9 @@ class TripCell:  BaseCell  {
     func toggleLike() {
         UIView.animate(withDuration: 0.5, animations: {
             self.likeButton.transform = CGAffineTransform.identity
-            if (self.trip?.is_liked_by_current_user)! {
+            if self.trip.is_liked_by_current_user {
                 self.likeButton.setImage(UIImage(named: "like-filled"), for: .normal)
-                self.likeButton.tintColor = UIColor.appSecondaryColor()
+                self.likeButton.tintColor = UIColor.callToActionColor()
             } else {
                 self.likeButton.setImage(UIImage(named: "like"), for: .normal)
                 self.likeButton.tintColor = UIColor.gray

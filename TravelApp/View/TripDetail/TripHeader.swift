@@ -27,10 +27,6 @@ class TripHeader: UIView, StoreSubscriber {
             setupThumbnailImage()
             setupProfileImage()
             
-            if let likeCount = trip.trip_likes_count {
-                likeCountLabel.text = "\(likeCount)"
-            }
-            
             if let totalFollowing = user.total_following, let totalFollowers = user.total_followers {
                 userNameSubTitle.text = "\(totalFollowers) Followers, \(totalFollowing) Following"
             }
@@ -39,24 +35,26 @@ class TripHeader: UIView, StoreSubscriber {
             
             if (trip?.is_liked_by_current_user)! {
                 likeButton.setImage(UIImage(named: "like-filled"), for: .normal)
-                likeButton.tintColor = UIColor.appSecondaryColor()
+                likeButton.tintColor = UIColor.callToActionColor()
             }
         }
     }
     
     func hideAll() {
         thumbnailImageView.frame = CGRect(x: 0, y: 0, width: thumbnailImageView.frame.width, height: 50)
-        
+        likeButton.frame = CGRect(x: likeButton.frame.minX, y: 16, width: likeButton.frame.width, height: likeButton.frame.height)
         titleLabel.isHidden = true
         scrollTitleLabel.alpha = 1
         userNameLabel.isHidden = true
         userProfileImageView.isHidden = true
         userNameSubTitle.isHidden = true
         thumbnailImageView.alpha = 0.3
+        postedAtTitleLabel.isHidden = true
     }
     
     func showAll() {
         thumbnailImageView.frame = CGRect(x: 0, y: 0, width: thumbnailImageView.frame.width, height: frame.height)
+        likeButton.frame = CGRect(x: likeButton.frame.minX, y: frame.height - 50, width: likeButton.frame.width, height: likeButton.frame.height)
         titleLabel.isHidden = false
         scrollTitleLabel.alpha = 0
         userNameLabel.isHidden = false
@@ -64,6 +62,7 @@ class TripHeader: UIView, StoreSubscriber {
         userProfileImageView.isHidden = false
         userNameSubTitle.isHidden = false
         thumbnailImageView.alpha = 0.5
+        postedAtTitleLabel.isHidden = false
     }
     
     func newState(state: AppState) {
@@ -82,13 +81,13 @@ class TripHeader: UIView, StoreSubscriber {
     
     func setupThumbnailImage() {
         if let thumbnailImageUrl = trip.thumbnail_image_url {
-            thumbnailImageView.loadImageUsingUrlString(urlString: thumbnailImageUrl)
+            thumbnailImageView.loadImageUsingUrlString(urlString: thumbnailImageUrl, width: Float(frame.width))
         }
     }
     
     func setupProfileImage() {
         if let profileImageURL = trip.user?.profile_pic?.url {
-            userProfileImageView.loadImageUsingUrlString(urlString: profileImageURL)
+            userProfileImageView.loadImageUsingUrlString(urlString: profileImageURL, width: 44)
         }
     }
     
@@ -119,8 +118,8 @@ class TripHeader: UIView, StoreSubscriber {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = ""
-        label.numberOfLines = 1
-        label.font = label.font.withSize(14)
+        label.numberOfLines = 2
+        label.font = label.font.withSize(12)
         label.textColor = UIColor.white
         label.alpha = 0
         label.textAlignment = .center
@@ -177,17 +176,6 @@ class TripHeader: UIView, StoreSubscriber {
         return ub
     }()
     
-    let likeCountLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = ""
-        label.numberOfLines = 1
-        label.font = label.font.withSize(12)
-        label.textColor = UIColor.white
-        label.textAlignment = .center
-        return label
-    }()
-    
     let closeButton: UIButton = {
         let ub = UIButton(type: .system)
         ub.setImage(UIImage(named: "minimize"), for: .normal)
@@ -225,10 +213,10 @@ class TripHeader: UIView, StoreSubscriber {
             self.likeButton.transform = CGAffineTransform.identity
             if (self.trip?.is_liked_by_current_user)! {
                 self.likeButton.setImage(UIImage(named: "like-filled"), for: .normal)
-                self.likeButton.tintColor = UIColor.appSecondaryColor()
+                self.likeButton.tintColor = UIColor.callToActionColor()
             } else {
                 self.likeButton.setImage(UIImage(named: "like"), for: .normal)
-                self.likeButton.tintColor = UIColor.gray
+                self.likeButton.tintColor = UIColor.white
             }
         })
     }
@@ -243,13 +231,12 @@ class TripHeader: UIView, StoreSubscriber {
         addSubview(userNameSubTitle)
         addSubview(scrollTitleLabel)
         addSubview(likeButton)
-        addSubview(likeCountLabel)
         
         thumbnailImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         thumbnailImageView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         thumbnailImageView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
         
-        scrollTitleLabel.topAnchor.constraint(equalTo: thumbnailImageView.topAnchor, constant: 25).isActive = true
+        scrollTitleLabel.centerYAnchor.constraint(equalTo: thumbnailImageView.centerYAnchor, constant: 10).isActive = true
         scrollTitleLabel.leftAnchor.constraint(equalTo: thumbnailImageView.leftAnchor, constant: 50).isActive = true
         scrollTitleLabel.widthAnchor.constraint(equalTo: thumbnailImageView.widthAnchor, constant: -100).isActive = true
         
@@ -281,15 +268,10 @@ class TripHeader: UIView, StoreSubscriber {
         userNameSubTitle.rightAnchor.constraint(equalTo: thumbnailImageView.rightAnchor, constant: -10).isActive = true
         userNameSubTitle.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
-        likeButton.topAnchor.constraint(equalTo: userProfileImageView.topAnchor).isActive = true
+        likeButton.centerYAnchor.constraint(equalTo: userProfileImageView.centerYAnchor).isActive = true
         likeButton.rightAnchor.constraint(equalTo: thumbnailImageView.rightAnchor, constant: -10).isActive = true
         likeButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
         likeButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        
-        likeCountLabel.bottomAnchor.constraint(equalTo: userProfileImageView.bottomAnchor).isActive = true
-        likeCountLabel.centerXAnchor.constraint(equalTo: likeButton.centerXAnchor).isActive = true
-        likeCountLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
-        likeCountLabel.widthAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {

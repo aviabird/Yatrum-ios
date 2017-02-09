@@ -14,7 +14,7 @@ class PlaceCell: BaseCell {
         didSet{
             placeViewBadgeTitleLabel.text = place.name
             placeViewBadgeDateLabel.text = "25 Feb 17' 12:00 pm"
-            placeDescText.text = place.placeDescription
+            placeDescText.text = place.review
             
             placeDescTextHeightConstraint.constant = placeDescText.contentSize.height + 30
             placeDescTextHeightConstraint.isActive = true
@@ -40,7 +40,7 @@ class PlaceCell: BaseCell {
     let streetViewButton: UIButton = {
         let ub = UIButton(type: .system)
         ub.setImage(UIImage(named: "street-view"), for: .normal)
-        ub.tintColor = UIColor.appSecondaryColor()
+        ub.tintColor = UIColor.callToActionColor()
         ub.translatesAutoresizingMaskIntoConstraints = false
         return ub
     }()
@@ -161,7 +161,7 @@ class PlaceCell: BaseCell {
         placeView.addSubview(placeDescText)
         
         placeDescText.topAnchor.constraint(equalTo: placeViewBadge.bottomAnchor, constant: 10).isActive = true
-        placeDescText.widthAnchor.constraint(equalTo: placeViewBadge.widthAnchor, constant: -10).isActive = true
+        placeDescText.widthAnchor.constraint(equalTo: placeViewBadge.widthAnchor).isActive = true
         placeDescText.centerXAnchor.constraint(equalTo: placeViewBadge.centerXAnchor).isActive = true
         placeDescTextHeightConstraint = placeDescText.heightAnchor.constraint(equalToConstant: 10)
         placeDescTextHeightConstraint.constant = 100
@@ -211,7 +211,7 @@ class PlaceCell: BaseCell {
             case 0:
                 placeImageView0.leftAnchor.constraint(equalTo: placeDescText.leftAnchor).isActive = true
                 placeImageView0.topAnchor.constraint(equalTo: placeDescText.bottomAnchor).isActive = true
-                placeImageView0.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
+                placeImageView0.heightAnchor.constraint(equalToConstant: 200).isActive = true
                 
                 if imagesCount == 1 {
                     placeImageView0.rightAnchor.constraint(equalTo: placeDescText.rightAnchor).isActive = true
@@ -219,7 +219,7 @@ class PlaceCell: BaseCell {
                     placeImageView0.widthAnchor.constraint(equalTo: placeDescText.widthAnchor, multiplier: 1/2, constant: -5).isActive = true
                 }
                 
-                placeImageView0.loadImageUsingUrlString(urlString: placeImages[idx].url!)
+                placeImageView0.loadImageUsingUrlString(urlString: placeImages[idx].url!, width: Float(frame.width / 2))
                 
                 break
             case 1:
@@ -228,12 +228,12 @@ class PlaceCell: BaseCell {
                 placeImageView1.topAnchor.constraint(equalTo: placeImageView0.topAnchor).isActive = true
                 
                 if imagesCount == 2 {
-                    placeImageView1.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
+                    placeImageView1.bottomAnchor.constraint(equalTo: placeImageView0.bottomAnchor).isActive = true
                 } else {
                     placeImageView1.heightAnchor.constraint(equalTo: placeImageView0.heightAnchor, multiplier: 1/2, constant: -5).isActive = true
                 }
                 
-                placeImageView1.loadImageUsingUrlString(urlString: placeImages[idx].url!)
+                placeImageView1.loadImageUsingUrlString(urlString: placeImages[idx].url!, width: Float(frame.width / 2))
                 break
             case 2:
                 placeImageView2.widthAnchor.constraint(equalTo: placeImageView1.widthAnchor).isActive = true
@@ -241,7 +241,7 @@ class PlaceCell: BaseCell {
                 placeImageView2.bottomAnchor.constraint(equalTo: placeImageView0.bottomAnchor).isActive = true
                 placeImageView2.heightAnchor.constraint(equalTo: placeImageView0.heightAnchor, multiplier: 1/2, constant: -5).isActive = true
                 
-                placeImageView2.loadImageUsingUrlString(urlString: placeImages[idx].url!)
+                placeImageView2.loadImageUsingUrlString(urlString: placeImages[idx].url!, width: Float(frame.width / 2))
                 break
             default:
                 break

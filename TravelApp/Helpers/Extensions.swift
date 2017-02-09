@@ -14,11 +14,11 @@ extension UIColor {
     }
     
     static func appBaseColor() -> UIColor {
-        return rgb(red: 0, green: 163, blue: 136, alpha: 0.95)
+        return rgb(red: 44, green: 62, blue: 80)
     }
     
-    static func appSecondaryColor() -> UIColor {
-        return rgb(red: 231, green: 76, blue: 60, alpha: 1)
+    static func callToActionColor() -> UIColor {
+        return rgb(red: 231, green: 76, blue: 60)
     }
 }
 
@@ -55,7 +55,16 @@ class CustomImageView: UIImageView {
     
     var imageUrlString: String?
     
-    func loadImageUsingUrlString(urlString: String) {
+    func loadImageUsingUrlString(urlString: String, width: Float) {
+        
+        // Change width of image
+        var urlString = urlString
+        let regex = try! NSRegularExpression(pattern: "upload", options: NSRegularExpression.Options.caseInsensitive)
+        let range = NSMakeRange(0, urlString.characters.count)
+        urlString = regex.stringByReplacingMatches(in: urlString,
+                                                               options: [],
+                                                               range: range,
+                                                               withTemplate: "upload/w_\(Int(width * 1.5))")
         
         imageUrlString = urlString
         
