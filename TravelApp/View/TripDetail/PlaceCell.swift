@@ -13,7 +13,7 @@ class PlaceCell: BaseCell {
     var place: Place! {
         didSet{
             placeViewBadgeTitleLabel.text = place.name
-            placeViewBadgeDateLabel.text = "5 Feb 17' 12:00 pm"
+            placeViewBadgeDateLabel.text = "25 Feb 17' 12:00 pm"
             placeDescText.text = place.placeDescription
             
             placeDescTextHeightConstraint.constant = placeDescText.contentSize.height + 30
@@ -30,13 +30,6 @@ class PlaceCell: BaseCell {
         return view
     }()
     
-    let placeViewSeparator: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(white: 0, alpha: 0.2)
-        return view
-    }()
-    
     let placeViewVerticalSeparator: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -44,9 +37,9 @@ class PlaceCell: BaseCell {
         return view
     }()
     
-    let navMarkerButton: UIButton = {
+    let streetViewButton: UIButton = {
         let ub = UIButton(type: .system)
-        ub.setImage(UIImage(named: "nav-marker"), for: .normal)
+        ub.setImage(UIImage(named: "street-view"), for: .normal)
         ub.tintColor = UIColor.appSecondaryColor()
         ub.translatesAutoresizingMaskIntoConstraints = false
         return ub
@@ -56,11 +49,16 @@ class PlaceCell: BaseCell {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor.rgb(red: 41, green: 128, blue: 185)
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOffset = CGSize(width: 0, height: 5)
-        view.layer.shadowRadius = 10
-        view.layer.shadowOpacity = 0.5
+        view.layer.cornerRadius = 2
         return view
+    }()
+    
+    let navMarkerButton: UIButton = {
+        let ub = UIButton(type: .system)
+        ub.setImage(UIImage(named: "nav-marker"), for: .normal)
+        ub.tintColor = UIColor.white
+        ub.translatesAutoresizingMaskIntoConstraints = false
+        return ub
     }()
     
     let placeViewBadgeDateLabel: UILabel = {
@@ -68,9 +66,9 @@ class PlaceCell: BaseCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Day 1"
         label.numberOfLines = 1
-        label.font = label.font.withSize(8)
+        label.font = label.font.withSize(10)
         label.textColor = UIColor.white
-        label.textAlignment = .right
+        label.textAlignment = .left
         return label
     }()
     
@@ -78,8 +76,8 @@ class PlaceCell: BaseCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = ""
-        label.numberOfLines = 1
-        label.font = label.font.withSize(15)
+        label.numberOfLines = 2
+        label.font = label.font.withSize(12)
         label.textAlignment = .right
         label.textColor = UIColor.white
         return label
@@ -102,20 +100,20 @@ class PlaceCell: BaseCell {
         addPlaceView()
         addPlaceViewBadge()
         addSubViewToPlaceView()
-        addNavMarker()
+        addStreetViewBtn()
     }
     
-    func addNavMarker() {
-        addSubview(navMarkerButton)
+    func addStreetViewBtn() {
+        addSubview(streetViewButton)
         addSubview(placeViewVerticalSeparator)
         
-        navMarkerButton.bottomAnchor.constraint(equalTo: placeViewBadge.bottomAnchor).isActive = true
-        navMarkerButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 3).isActive = true
-        navMarkerButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
-        navMarkerButton.heightAnchor.constraint(equalTo: placeViewBadge.heightAnchor, multiplier: 1.3).isActive = true
+        streetViewButton.bottomAnchor.constraint(equalTo: placeViewBadge.bottomAnchor).isActive = true
+        streetViewButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 0.3).isActive = true
+        streetViewButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
+        streetViewButton.heightAnchor.constraint(equalTo: placeViewBadge.heightAnchor).isActive = true
         
-        placeViewVerticalSeparator.topAnchor.constraint(equalTo: navMarkerButton.bottomAnchor, constant: 5).isActive = true
-        placeViewVerticalSeparator.leftAnchor.constraint(equalTo: leftAnchor, constant: 24).isActive = true
+        placeViewVerticalSeparator.topAnchor.constraint(equalTo: streetViewButton.bottomAnchor, constant: 5).isActive = true
+        placeViewVerticalSeparator.centerXAnchor.constraint(equalTo: streetViewButton.centerXAnchor).isActive = true
         placeViewVerticalSeparator.widthAnchor.constraint(equalToConstant: 2).isActive = true
         placeViewVerticalSeparator.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
@@ -124,20 +122,26 @@ class PlaceCell: BaseCell {
         addSubview(placeViewBadge)
         placeViewBadge.addSubview(placeViewBadgeTitleLabel)
         placeViewBadge.addSubview(placeViewBadgeDateLabel)
+        placeViewBadge.addSubview(navMarkerButton)
         
         placeViewBadge.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
         placeViewBadge.widthAnchor.constraint(equalTo: widthAnchor, constant: -50).isActive = true
-        placeViewBadge.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        placeViewBadge.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
         placeViewBadge.heightAnchor.constraint(equalToConstant: 35).isActive = true
         
-        placeViewBadgeTitleLabel.topAnchor.constraint(equalTo: placeViewBadge.topAnchor, constant: 3).isActive = true
-        placeViewBadgeTitleLabel.widthAnchor.constraint(equalTo: placeViewBadge.widthAnchor).isActive = true
-        placeViewBadgeTitleLabel.rightAnchor.constraint(equalTo: placeViewBadge.rightAnchor, constant: -20).isActive = true
-        placeViewBadgeTitleLabel.heightAnchor.constraint(equalToConstant: 17).isActive = true
+        navMarkerButton.centerYAnchor.constraint(equalTo: placeViewBadge.centerYAnchor).isActive = true
+        navMarkerButton.rightAnchor.constraint(equalTo: placeViewBadge.rightAnchor, constant: -5).isActive = true
+        navMarkerButton.widthAnchor.constraint(equalToConstant: 15).isActive = true
+        navMarkerButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
         
-        placeViewBadgeDateLabel.topAnchor.constraint(equalTo: placeViewBadgeTitleLabel.bottomAnchor).isActive = true
-        placeViewBadgeDateLabel.rightAnchor.constraint(equalTo: placeViewBadge.rightAnchor, constant: -20).isActive = true
-        placeViewBadgeDateLabel.widthAnchor.constraint(equalTo: placeViewBadge.widthAnchor).isActive = true
+        placeViewBadgeTitleLabel.centerYAnchor.constraint(equalTo: placeViewBadge.centerYAnchor).isActive = true
+        placeViewBadgeTitleLabel.widthAnchor.constraint(equalTo: placeViewBadge.widthAnchor, multiplier: 2.5/6).isActive = true
+        placeViewBadgeTitleLabel.rightAnchor.constraint(equalTo: navMarkerButton.leftAnchor, constant: -5).isActive = true
+        placeViewBadgeTitleLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        placeViewBadgeDateLabel.centerYAnchor.constraint(equalTo: placeViewBadge.centerYAnchor).isActive = true
+        placeViewBadgeDateLabel.leftAnchor.constraint(equalTo: placeViewBadge.leftAnchor, constant: 5).isActive = true
+        placeViewBadgeDateLabel.widthAnchor.constraint(equalTo: placeViewBadge.widthAnchor, multiplier: 2.4/6).isActive = true
         placeViewBadgeDateLabel.heightAnchor.constraint(equalToConstant: 10).isActive = true
         
     }
@@ -155,18 +159,12 @@ class PlaceCell: BaseCell {
     
     func addSubViewToPlaceView() {
         placeView.addSubview(placeDescText)
-//        placeView.addSubview(placeViewSeparator)
         
         placeDescText.topAnchor.constraint(equalTo: placeViewBadge.bottomAnchor, constant: 10).isActive = true
-        placeDescText.widthAnchor.constraint(equalTo: placeViewBadge.widthAnchor, constant: -20).isActive = true
-        placeDescText.rightAnchor.constraint(equalTo: placeViewBadge.rightAnchor, constant: -20).isActive = true
+        placeDescText.widthAnchor.constraint(equalTo: placeViewBadge.widthAnchor, constant: -10).isActive = true
+        placeDescText.centerXAnchor.constraint(equalTo: placeViewBadge.centerXAnchor).isActive = true
         placeDescTextHeightConstraint = placeDescText.heightAnchor.constraint(equalToConstant: 10)
         placeDescTextHeightConstraint.constant = 100
-        
-//        placeViewSeparator.topAnchor.constraint(equalTo: placeDescText.bottomAnchor, constant: 10).isActive = true
-//        placeViewSeparator.widthAnchor.constraint(equalTo: placeDescText.widthAnchor).isActive = true
-//        placeViewSeparator.leftAnchor.constraint(equalTo: placeDescText.leftAnchor).isActive = true
-//        placeViewSeparator.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
     }
     

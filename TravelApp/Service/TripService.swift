@@ -34,6 +34,7 @@ class TripService: NSObject {
                         
                         DispatchQueue.main.async {
                             completion(trip)
+                            store.dispatch(UpdateTrips(trips: [trip]))
                         }
                     } else {
                         self.showAlert("Travel App Fetch", message: "Unable to fetch from Server")

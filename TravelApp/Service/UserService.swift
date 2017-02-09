@@ -25,6 +25,7 @@ class UserService: NSObject {
                         
                         DispatchQueue.main.async {
                             completion(user)
+                            store.dispatch(UpdateTripUser(user: user))
                         }
                     } else {
                         self.showAlert("Travel App Fetch", message: "Unable to fetch from Server")

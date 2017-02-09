@@ -19,6 +19,7 @@ class CreateTripController: UIViewController {
         
         view.backgroundColor = UIColor.white
         navigationItem.title = "Create Trip"
+        
     }
     
 }

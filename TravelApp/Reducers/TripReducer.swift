@@ -28,6 +28,16 @@ func tripReducer(state: TripState?, action: Action) -> TripState {
     case let action as SelectTrip:
         state.selectedTripId = action.tripId
         break
+    case let action as UpdateTripUser:
+        let user = action.user
+        
+        state.entities.forEach({ (key: NSNumber, trip: Trip) in
+            if trip.user_id == user.id {
+                trip.user = user
+                state.entities[key] = trip
+            }
+        })
+        break
     default:
         break
     }

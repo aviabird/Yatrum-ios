@@ -24,3 +24,7 @@ struct UpdateTrips: Action {
 struct SelectTrip: Action {
     let tripId: NSNumber
 }
+
+struct UpdateTripUser: Action {
+    let user: User
+}

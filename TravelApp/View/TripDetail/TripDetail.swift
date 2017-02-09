@@ -80,6 +80,8 @@ class TripDetail: NSObject, UICollectionViewDataSource,  UICollectionViewDelegat
         collectionView.leftAnchor.constraint(equalTo: tripView.leftAnchor, constant: 5).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: keyWindow.bottomAnchor).isActive = true
         
+        collectionView.showsVerticalScrollIndicator = false
+        
         collectionView.register(PlaceCell.self, forCellWithReuseIdentifier: cellId)
     }
     
