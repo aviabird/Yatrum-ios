@@ -17,6 +17,9 @@ class SearchDropdownCell: BaseCell {
         return st
     }()
     
+    var selectedSearch: String = ""
+    var searchCtrl: SearchTripViewController!
+    
     
     override func setupViews() {
         
@@ -31,8 +34,7 @@ class SearchDropdownCell: BaseCell {
     }
     
     func selectSearch() {
-        
-        print(searchedLabel.text!)
+        searchCtrl.searchTrips(query: searchedLabel.text!)
     }
     
 }

@@ -63,26 +63,21 @@ class SearchTripViewController: UIViewController, UICollectionViewDataSource,  U
         setupCollectionView()
         setupCollectionViewSearch()
         
-        func filterContentForSearchText(searchText: String) {
-            filteredsearch = tags.filter { tag in
-                return tag.lowercased().contains(searchText.lowercased())
-            }
-        }
-        
         searchBar.rx.value.asDriver().debounce(0.5).drive(onNext: { (val) in
-            filterContentForSearchText(searchText: val!)
-            TripService.sharedInstance.searchTrips(keywords: val!,
-                                                   completion: { (searchedTrips: [Trip]) in
-                                                    self.trips = searchedTrips
-                                                    self.collectionView.reloadData()
-                                                    self.cellectionViewSearch.reloadData()
-            })
-            
+            self.filterContentForSearchText(searchText: val!)
         }).addDisposableTo(disposeBag)
         
         
         fetchTripsFeed()
         
+    }
+    
+    func filterContentForSearchText(searchText: String) {
+        self.filteredsearch = tags.filter { tag in
+            return tag.lowercased().contains(searchText.lowercased())
+        }
+        self.cellectionViewSearch.isHidden = false
+        self.cellectionViewSearch.reloadData()
     }
     
     func fetchTripsFeed() {
@@ -104,10 +99,10 @@ class SearchTripViewController: UIViewController, UICollectionViewDataSource,  U
     }
     
     func setupCollectionView() {
-//        collectionView.translatesAutoresizingMaskIntoConstraints = false
-//        collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor).isActive = true
-//        collectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-//        collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor).isActive = true
+        collectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
     func setupCollectionViewSearch() {
@@ -120,38 +115,55 @@ class SearchTripViewController: UIViewController, UICollectionViewDataSource,  U
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         print(filteredsearch)
-        return filteredsearch.count
-//        return trips?.count ?? 0
+        if collectionView == self.collectionView {
+            return trips?.count ?? 0
+        } else {
+            return filteredsearch.count
+        }
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId2, for: indexPath) as! SearchDropdownCell
-        cell.searchedLabel.text = filteredsearch[indexPath.row]
-        return cell
-        
-        
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SearchTripCell
-//            cell.backgroundColor = UIColor.white
-//            cell.layer.shadowOffset = CGSize(width: 5, height: 5)
-//            cell.trip = trips?[indexPath.item]
-//            return cell
-
+        if collectionView == self.collectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SearchTripCell
+            cell.backgroundColor = UIColor.white
+            cell.layer.shadowOffset = CGSize(width: 5, height: 5)
+            cell.trip = trips?[indexPath.item]
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId2, for: indexPath) as! SearchDropdownCell
+            cell.searchedLabel.text = filteredsearch[indexPath.row]
+            cell.searchCtrl = self
+            return cell
+        }
 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: view.frame.width, height: 30)
-//        return CGSize(width: view.frame.width, height: 250)
-
+        if collectionView == self.collectionView {
+            return CGSize(width: view.frame.width, height: 250)
+        } else {
+            return CGSize(width: view.frame.width, height: 30)
+        }
+    
     }
     
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        print("Hello")
-//    }
-//    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Hello")
+    }
+    
+    func searchTrips(query: String) {
+        cellectionViewSearch.isHidden = true
+        searchBar.text = query
+        
+        TripService.sharedInstance.searchTrips(keywords: query,
+                                               completion: { (searchedTrips: [Trip]) in
+                                                self.trips = searchedTrips
+                                                self.collectionView.reloadData()
+        })
+    }
+    
     
     //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
     //        return 0
