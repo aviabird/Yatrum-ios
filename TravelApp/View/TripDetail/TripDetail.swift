@@ -99,7 +99,7 @@ class TripDetail: NSObject, UICollectionViewDataSource,  UICollectionViewDelegat
         
         let tempTextView = UITextView()
         tempTextView.text = trip?.places[indexPath.item].placeDescription
-        let height = tempTextView.contentSize.height + 400
+        let height = tempTextView.contentSize.height + 500
         
         return CGSize(width: tripView.frame.width, height: height)
     }

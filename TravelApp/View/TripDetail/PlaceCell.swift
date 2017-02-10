@@ -94,6 +94,34 @@ class PlaceCell: BaseCell {
         return textView
     }()
     
+    let placeImageView0: CustomImageView = {
+        let imageView = CustomImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.image = UIImage(named: "")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isUserInteractionEnabled = true
+        return imageView
+    }()
+    
+    let placeImageView1: CustomImageView = {
+        let imageView = CustomImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.image = UIImage(named: "")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    let placeImageView2: CustomImageView = {
+        let imageView = CustomImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.image = UIImage(named: "")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     override func setupViews() {
         super.setupViews()
         
@@ -173,75 +201,55 @@ class PlaceCell: BaseCell {
         let placeImages = place.pictures[0..<(placeImagesCount < 3 ? placeImagesCount : 3)]
         let imagesCount = placeImages.count
         
-        let placeImageView0: CustomImageView = {
-            let imageView = CustomImageView()
-            imageView.contentMode = .scaleAspectFill
-            imageView.clipsToBounds = true
-            imageView.image = UIImage(named: "")
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            return imageView
-        }()
-        
-        let placeImageView1: CustomImageView = {
-            let imageView = CustomImageView()
-            imageView.contentMode = .scaleAspectFill
-            imageView.clipsToBounds = true
-            imageView.image = UIImage(named: "")
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            return imageView
-        }()
-        
-        let placeImageView2: CustomImageView = {
-            let imageView = CustomImageView()
-            imageView.contentMode = .scaleAspectFill
-            imageView.clipsToBounds = true
-            imageView.image = UIImage(named: "")
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            return imageView
-        }()
-        
-        placeView.addSubview(placeImageView0)
-        placeView.addSubview(placeImageView1)
-        placeView.addSubview(placeImageView2)
-        
         for idx in [0, 1, 2] {
             if(idx >= placeImagesCount) { return }
             
             switch idx {
             case 0:
+                placeView.addSubview(placeImageView0)
+                
                 placeImageView0.leftAnchor.constraint(equalTo: placeDescText.leftAnchor).isActive = true
                 placeImageView0.topAnchor.constraint(equalTo: placeDescText.bottomAnchor).isActive = true
                 placeImageView0.heightAnchor.constraint(equalToConstant: 200).isActive = true
+                placeImageView0.rightAnchor.constraint(equalTo: placeDescText.rightAnchor).isActive = true
                 
-                if imagesCount == 1 {
-                    placeImageView0.rightAnchor.constraint(equalTo: placeDescText.rightAnchor).isActive = true
-                } else {
-                    placeImageView0.widthAnchor.constraint(equalTo: placeDescText.widthAnchor, multiplier: 1/2, constant: -5).isActive = true
-                }
+                placeImageView0.loadImageUsingUrlString(urlString: placeImages[idx].url!, width: Float(frame.width))
                 
-                placeImageView0.loadImageUsingUrlString(urlString: placeImages[idx].url!, width: Float(frame.width / 2))
+                let tapGuesture0 = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
+                placeImageView0.addGestureRecognizer(tapGuesture0)
                 
                 break
             case 1:
-                placeImageView1.widthAnchor.constraint(equalTo: placeImageView0.widthAnchor).isActive = true
-                placeImageView1.leftAnchor.constraint(equalTo: placeImageView0.rightAnchor, constant: 5).isActive = true
-                placeImageView1.topAnchor.constraint(equalTo: placeImageView0.topAnchor).isActive = true
+                placeView.addSubview(placeImageView1)
+                
+                placeImageView1.leftAnchor.constraint(equalTo: placeImageView0.leftAnchor).isActive = true
+                placeImageView1.topAnchor.constraint(equalTo: placeImageView0.bottomAnchor, constant: 5).isActive = true
                 
                 if imagesCount == 2 {
-                    placeImageView1.bottomAnchor.constraint(equalTo: placeImageView0.bottomAnchor).isActive = true
+                    placeImageView1.widthAnchor.constraint(equalTo: placeImageView0.widthAnchor).isActive = true
+                    placeImageView1.heightAnchor.constraint(equalTo: placeImageView0.heightAnchor).isActive = true
                 } else {
-                    placeImageView1.heightAnchor.constraint(equalTo: placeImageView0.heightAnchor, multiplier: 1/2, constant: -5).isActive = true
+                    placeImageView1.widthAnchor.constraint(equalTo: placeImageView0.widthAnchor, multiplier: 1/2, constant: -2.5).isActive = true
+                    placeImageView1.heightAnchor.constraint(equalTo: placeImageView0.heightAnchor, multiplier: 1/2).isActive = true
                 }
                 
                 placeImageView1.loadImageUsingUrlString(urlString: placeImages[idx].url!, width: Float(frame.width / 2))
+                
+                let tapGuesture1 = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
+                placeImageView1.addGestureRecognizer(tapGuesture1)
                 break
             case 2:
+                placeView.addSubview(placeImageView2)
+                
+                placeImageView2.topAnchor.constraint(equalTo: placeImageView1.topAnchor).isActive = true
                 placeImageView2.widthAnchor.constraint(equalTo: placeImageView1.widthAnchor).isActive = true
-                placeImageView2.rightAnchor.constraint(equalTo: placeImageView1.rightAnchor).isActive = true
-                placeImageView2.bottomAnchor.constraint(equalTo: placeImageView0.bottomAnchor).isActive = true
-                placeImageView2.heightAnchor.constraint(equalTo: placeImageView0.heightAnchor, multiplier: 1/2, constant: -5).isActive = true
+                placeImageView2.rightAnchor.constraint(equalTo: placeImageView0.rightAnchor).isActive = true
+                placeImageView2.heightAnchor.constraint(equalTo: placeImageView1.heightAnchor).isActive = true
                 
                 placeImageView2.loadImageUsingUrlString(urlString: placeImages[idx].url!, width: Float(frame.width / 2))
+                
+                let tapGuesture2 = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
+                placeImageView2.addGestureRecognizer(tapGuesture2)
                 break
             default:
                 break
@@ -249,5 +257,12 @@ class PlaceCell: BaseCell {
         }
     }
     
+    func imageTapped(_ sender: UITapGestureRecognizer) {
+        print("Tapped")
+    }
+    
+    func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+        sender.view?.removeFromSuperview()
+    }
     
 }
