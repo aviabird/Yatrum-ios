@@ -14,7 +14,7 @@ class FeedCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate,
     lazy var  collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = UIColor.white
+        cv.backgroundColor = UIColor.appBaseColor()
         cv.dataSource = self
         cv.delegate = self
         return cv
@@ -53,6 +53,7 @@ class FeedCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! TripCell
         cell.trip = trips?[indexPath.item]
+        cell.backgroundColor = UIColor.white
         return cell
     }
     

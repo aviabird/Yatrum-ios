@@ -40,7 +40,7 @@ class PlaceCell: BaseCell {
     let streetViewButton: UIButton = {
         let ub = UIButton(type: .system)
         ub.setImage(UIImage(named: "street-view"), for: .normal)
-        ub.tintColor = UIColor.callToActionColor()
+        ub.tintColor = UIColor.appCallToActionColor()
         ub.translatesAutoresizingMaskIntoConstraints = false
         return ub
     }()

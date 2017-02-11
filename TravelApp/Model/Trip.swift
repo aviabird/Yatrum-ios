@@ -14,8 +14,8 @@ class Trip: NSObject{
     var name: String?
     var tripDescription: String?
     var trip_likes_count: NSNumber?
-    var updated_at: NSDate?
-    var created_at: NSDate?
+    var updated_at: String?
+    var created_at: String?
     var is_liked_by_current_user: Bool = false
     var user_id: NSNumber?
     

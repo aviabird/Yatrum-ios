@@ -15,8 +15,8 @@ class Picture: NSObject {
     var url: String?
     var picDescription: String?
     var public_id: String?
-    var created_at: NSDate?
-    var updated_at: NSDate?
+    var created_at: String?
+    var updated_at: String?
     
     init(dictionary: [String: AnyObject]) {
         super.init()

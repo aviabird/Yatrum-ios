@@ -14,8 +14,8 @@ class Place: NSObject {
     var name: String?
     var placeDescription: String?
     var review: String?
-    var created_at: NSDate?
-    var updated_at: NSDate?
+    var created_at: String?
+    var updated_at: String?
     
     var pictures: [Picture] = []
     

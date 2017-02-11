@@ -12,8 +12,8 @@ class City: NSObject {
     var id: NSNumber?
     var name: String?
     var country: String?
-    var created_at: NSDate?
-    var updated_at: NSDate?
+    var created_at: String?
+    var updated_at: String?
     
     var places: [Place] = []
     

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftDate
 
 extension UIColor {
     static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat = 1) -> UIColor {
@@ -17,8 +18,20 @@ extension UIColor {
         return rgb(red: 44, green: 62, blue: 80)
     }
     
-    static func callToActionColor() -> UIColor {
+    static func appCallToActionColor() -> UIColor {
         return rgb(red: 231, green: 76, blue: 60)
+    }
+    
+    static func appMainBGColor() -> UIColor {
+        return rgb(red: 236, green: 240, blue: 241)
+    }
+    
+    static func appLightBlue() -> UIColor {
+        return rgb(red: 52, green: 152, blue: 219)
+    }
+    
+    static func appDarkBlue() -> UIColor {
+        return rgb(red: 41, green: 128, blue: 185)
     }
 }
 
@@ -115,4 +128,25 @@ extension UITextView{
         return 0
     }
     
+}
+
+extension String {
+    func humanizeDate() -> String {
+        //"yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        dateFormatter.locale = Locale.init(identifier: "en_GB")
+        let dateObj = dateFormatter.date(from: self)
+        
+        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm:ss"
+        return dateFormatter.string(from: dateObj!)
+    }
+    
+    func relativeDate() -> String {
+        
+        let date = try! DateInRegion(string: self, format: .custom("MM-dd-yyyy HH:mm:ss"))
+        let (_,relevantTime) = try! date.colloquialSinceNow()
+        
+        return relevantTime!
+    }
 }

@@ -15,21 +15,21 @@ class TripCell:  BaseCell  {
         didSet {
             
             user = trip.user
-            
-            titleLabel.text = trip.name
+            titleLabel.text = user.name
             
             setupThumbnailImage()
             
             setupProfileImage()
             
-            if let userName = user.name, let numberOfLikes = trip.trip_likes_count {
-                
-                let numberFormatter = NumberFormatter()
-                numberFormatter.numberStyle = .decimal
-                
-                let subtitleText = "\(userName) • \(numberFormatter.string(from: numberOfLikes)!) • 2 hour ago"
-                subTitleLabel.text = subtitleText
-            }
+//            if let numberOfLikes = trip.trip_likes_count {
+//                
+//                let numberFormatter = NumberFormatter()
+//                numberFormatter.numberStyle = .decimal
+//                
+//                let subtitleText = "2 hour ago"
+//            }
+            
+            subTitleLabel.text = trip.created_at?.humanizeDate().relativeDate()
             
             // measure Title text
             if let title = trip.name {
@@ -47,20 +47,20 @@ class TripCell:  BaseCell  {
             followButton.addTarget(self, action: #selector(handleFollow), for: .touchUpInside)
             
             if user.is_followed_by_current_user {
-                self.followButton.backgroundColor = UIColor.callToActionColor()
+                self.followButton.backgroundColor = UIColor.appCallToActionColor()
                 self.followButton.setTitle("Following", for: .normal)
                 self.followButton.setTitleColor(UIColor.white, for: .normal)
             } else {
                 self.followButton.backgroundColor = UIColor.white
                 self.followButton.setTitle("Follow", for: .normal)
-                self.followButton.setTitleColor(UIColor.callToActionColor(), for: .normal)
+                self.followButton.setTitleColor(UIColor.appCallToActionColor(), for: .normal)
             }
             
             likeButton.addTarget(self, action: #selector(handleLike), for: .touchUpInside)
             
             if trip.is_liked_by_current_user {
                 likeButton.setImage(UIImage(named: "like-filled"), for: .normal)
-                likeButton.tintColor = UIColor.callToActionColor()
+                likeButton.tintColor = UIColor.appCallToActionColor()
             } else {
                 likeButton.setImage(UIImage(named: "like"), for: .normal)
                 likeButton.tintColor = UIColor.gray
@@ -113,12 +113,6 @@ class TripCell:  BaseCell  {
         return imageView
     }()
     
-    let separatorView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
-        return view
-    }()
-    
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -148,13 +142,13 @@ class TripCell:  BaseCell  {
     let followButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = UIColor.white
-        button.layer.borderColor = UIColor.callToActionColor().cgColor
+        button.layer.borderColor = UIColor.appCallToActionColor().cgColor
         button.layer.borderWidth = 1
         button.setTitle("Follow", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 5
         button.layer.masksToBounds = true
-        button.setTitleColor(UIColor.callToActionColor(), for: .normal)
+        button.setTitleColor(UIColor.appCallToActionColor(), for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 10)
         return button
     }()
@@ -177,13 +171,13 @@ class TripCell:  BaseCell  {
     func toggleFollow() {
         UIView.animate(withDuration: 0.5) {
             if self.user.is_followed_by_current_user {
-                self.followButton.backgroundColor = UIColor.callToActionColor()
+                self.followButton.backgroundColor = UIColor.appCallToActionColor()
                 self.followButton.setTitle("Following", for: .normal)
                 self.followButton.setTitleColor(UIColor.white, for: .normal)
             } else {
                 self.followButton.backgroundColor = UIColor.white
                 self.followButton.setTitle("Follow", for: .normal)
-                self.followButton.setTitleColor(UIColor.callToActionColor(), for: .normal)
+                self.followButton.setTitleColor(UIColor.appCallToActionColor(), for: .normal)
             }
         }
     }
@@ -207,7 +201,7 @@ class TripCell:  BaseCell  {
             self.likeButton.transform = CGAffineTransform.identity
             if self.trip.is_liked_by_current_user {
                 self.likeButton.setImage(UIImage(named: "like-filled"), for: .normal)
-                self.likeButton.tintColor = UIColor.callToActionColor()
+                self.likeButton.tintColor = UIColor.appCallToActionColor()
             } else {
                 self.likeButton.setImage(UIImage(named: "like"), for: .normal)
                 self.likeButton.tintColor = UIColor.gray
@@ -222,18 +216,20 @@ class TripCell:  BaseCell  {
         addSubview(titleLabel)
         addSubview(subTitleLabel)
         addSubview(thumbnailImageView)
-        addSubview(separatorView)
         addSubview(likeButton)
         addSubview(followButton)
         
         setupThumbnailImageViews()
         
-        addConstraintsWithFormat(format: "H:|-16-[v0(44)]", views: userProfileImageView)
-        addConstraintsWithFormat(format: "H:|[v0]|", views: thumbnailImageView)
-        addConstraintsWithFormat(format: "H:|[v0]|", views: separatorView)
+        userProfileImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16).isActive = true
+        userProfileImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
+        userProfileImageView.widthAnchor.constraint(equalToConstant: 44).isActive = true
+        userProfileImageView.heightAnchor.constraint(equalToConstant: 44).isActive = true
         
-        //vertical constrain
-        addConstraintsWithFormat(format: "V:|-16-[v0(44)]-19-[v1]-40-[v2(1)]-16-|", views: userProfileImageView, thumbnailImageView, separatorView)
+        thumbnailImageView.topAnchor.constraint(equalTo: userProfileImageView.bottomAnchor, constant: 16).isActive = true
+        thumbnailImageView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        thumbnailImageView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        thumbnailImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40).isActive = true
         
         //top constraint
         addConstraint(NSLayoutConstraint(item: titleLabel, attribute:  .top, relatedBy: .equal, toItem: userProfileImageView , attribute: .top, multiplier: 1, constant: 0 ))

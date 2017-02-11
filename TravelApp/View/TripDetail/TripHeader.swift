@@ -35,7 +35,7 @@ class TripHeader: UIView, StoreSubscriber {
             
             if (trip?.is_liked_by_current_user)! {
                 likeButton.setImage(UIImage(named: "like-filled"), for: .normal)
-                likeButton.tintColor = UIColor.callToActionColor()
+                likeButton.tintColor = UIColor.appCallToActionColor()
             }
         }
     }
@@ -213,7 +213,7 @@ class TripHeader: UIView, StoreSubscriber {
             self.likeButton.transform = CGAffineTransform.identity
             if (self.trip?.is_liked_by_current_user)! {
                 self.likeButton.setImage(UIImage(named: "like-filled"), for: .normal)
-                self.likeButton.tintColor = UIColor.callToActionColor()
+                self.likeButton.tintColor = UIColor.appCallToActionColor()
             } else {
                 self.likeButton.setImage(UIImage(named: "like"), for: .normal)
                 self.likeButton.tintColor = UIColor.white

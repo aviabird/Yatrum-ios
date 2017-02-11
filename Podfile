@@ -12,6 +12,7 @@ target 'TravelApp' do
   pod 'Moya/RxSwift'
   pod 'ReSwift'
 #  pod 'ReSwiftRouter'
+  pod 'SwiftDate', '~> 4.0'
 
 
   target 'TravelAppTests' do
