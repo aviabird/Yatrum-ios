@@ -53,6 +53,7 @@
 		78CAB9611E33B39B0087F530 /* TravelAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAB9601E33B39B0087F530 /* TravelAppTests.swift */; };
 		78CAB96C1E33B39B0087F530 /* TravelAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAB96B1E33B39B0087F530 /* TravelAppUITests.swift */; };
 		85E49A2B2F82B9CFFBFDED0E /* Pods_TravelApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6BC1A7BA229A0C84477C713 /* Pods_TravelApp.framework */; };
+		C75943561E4DD16C000232D4 /* SearchDropdownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75943551E4DD16C000232D4 /* SearchDropdownCell.swift */; };
 		C783C6841E41DD4400870E9B /* SearchTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C783C6831E41DD4400870E9B /* SearchTripViewController.swift */; };
 		C7E133B81E44818100D0F8D8 /* SearchTripCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E133B71E44818100D0F8D8 /* SearchTripCell.swift */; };
 		C7F9C62C1E433FA600E9B664 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F9C62B1E433FA600E9B664 /* SearchBar.swift */; };
@@ -133,6 +134,7 @@
 		90C2D25E7B38CBE630322CB8 /* Pods-TravelAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TravelAppTests/Pods-TravelAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		BE1D77A28EE3CC48998822AC /* Pods-TravelAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TravelAppTests/Pods-TravelAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C30A16FD43D6C973DF44F884 /* Pods_TravelAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C75943551E4DD16C000232D4 /* SearchDropdownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchDropdownCell.swift; path = View/SearchDropdownCell.swift; sourceTree = "<group>"; };
 		C783C6831E41DD4400870E9B /* SearchTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchTripViewController.swift; path = Controller/SearchTripViewController.swift; sourceTree = "<group>"; };
 		C7E133B71E44818100D0F8D8 /* SearchTripCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchTripCell.swift; path = View/SearchTripCell.swift; sourceTree = "<group>"; };
 		C7F9C62B1E433FA600E9B664 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchBar.swift; path = View/SearchBar.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				781DBE221E3F808C003591DA /* TrendingCell.swift */,
 				C7F9C62B1E433FA600E9B664 /* SearchBar.swift */,
 				C7E133B71E44818100D0F8D8 /* SearchTripCell.swift */,
+				C75943551E4DD16C000232D4 /* SearchDropdownCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -683,6 +686,7 @@
 				781DBE131E3F7F70003591DA /* User.swift in Sources */,
 				78684EC91E4082FC0074B8C2 /* MultiProvider.swift in Sources */,
 				781DBDFD1E3F7E23003591DA /* LoginController.swift in Sources */,
+				C75943561E4DD16C000232D4 /* SearchDropdownCell.swift in Sources */,
 				781DBE151E3F7FD5003591DA /* Picture.swift in Sources */,
 				786FEED51E45E03900B6CD8D /* PlaceCell.swift in Sources */,
 				780ABCCC1E42E24A00043261 /* AppReducer.swift in Sources */,
