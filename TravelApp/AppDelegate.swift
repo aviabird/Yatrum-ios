@@ -28,6 +28,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.rootViewController = UINavigationController(rootViewController: HomeController(collectionViewLayout: layout))
         
+        // Get rid of black bar under navbar
+        UINavigationBar.appearance().barTintColor = UIColor.appBaseColor()
+        UINavigationBar.appearance().backgroundColor = UIColor.appBaseColor()
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        
+        UIApplication.shared.statusBarStyle = .lightContent
+        
+        let statusBarBackgroundView = UIView()
+        statusBarBackgroundView.backgroundColor = UIColor.appBaseColor()
+        
+        window?.addSubview(statusBarBackgroundView)
+        window?.addConstraintsWithFormat(format: "H:|[v0]|", views: statusBarBackgroundView)
+        window?.addConstraintsWithFormat(format: "V:[v0(20)]", views: statusBarBackgroundView)
+        
         return true
     }
 

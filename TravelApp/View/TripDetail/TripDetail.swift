@@ -48,7 +48,6 @@ class TripDetail: NSObject, UICollectionViewDataSource,  UICollectionViewDelegat
         
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.tripView.frame = self.keyWindow.frame
-            UIApplication.shared.statusBarStyle = .lightContent
         }, completion: { (completedAnimation) in
         })
     }
@@ -68,7 +67,6 @@ class TripDetail: NSObject, UICollectionViewDataSource,  UICollectionViewDelegat
             self.tripView.frame = CGRect(x: self.keyWindow.frame.width, y: self.keyWindow.frame.height - 50, width: 0, height: 0)
             self.tripView.alpha = 0
             self.tripHeader.frame = CGRect()
-            UIApplication.shared.statusBarStyle = .default
         }, completion: { (completedAnimation) in
         })
     }

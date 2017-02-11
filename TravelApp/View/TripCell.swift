@@ -15,19 +15,19 @@ class TripCell:  BaseCell  {
         didSet {
             
             user = trip.user
-            titleLabel.text = user.name
+            titleLabel.text = "\(user.name!)"
             
             setupThumbnailImage()
             
             setupProfileImage()
             
-//            if let numberOfLikes = trip.trip_likes_count {
-//                
-//                let numberFormatter = NumberFormatter()
-//                numberFormatter.numberStyle = .decimal
-//                
-//                let subtitleText = "2 hour ago"
-//            }
+            if let numberOfLikes = trip.trip_likes_count {
+                
+                let numberFormatter = NumberFormatter()
+                numberFormatter.numberStyle = .decimal
+                
+                tripStatusLabel.text = "\(numberFormatter.string(from: numberOfLikes)!) Likes"
+            }
             
             subTitleLabel.text = trip.created_at?.humanizeDate().relativeDate()
             
@@ -131,6 +131,22 @@ class TripCell:  BaseCell  {
         return label
     }()
     
+    let tripStatusLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = ""
+        label.numberOfLines = 1
+        label.font = label.font.withSize(12)
+        return label
+    }()
+    
+    let separatorView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.appMainBGColor()
+        return view
+    }()
+    
     let likeButton: UIButton = {
         let ub = UIButton(type: .system)
         ub.setImage(UIImage(named: "like"), for: .normal)
@@ -216,6 +232,8 @@ class TripCell:  BaseCell  {
         addSubview(titleLabel)
         addSubview(subTitleLabel)
         addSubview(thumbnailImageView)
+        addSubview(tripStatusLabel)
+        addSubview(separatorView)
         addSubview(likeButton)
         addSubview(followButton)
         
@@ -229,14 +247,19 @@ class TripCell:  BaseCell  {
         thumbnailImageView.topAnchor.constraint(equalTo: userProfileImageView.bottomAnchor, constant: 16).isActive = true
         thumbnailImageView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         thumbnailImageView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        thumbnailImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40).isActive = true
+        thumbnailImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -80).isActive = true
+        
+        followButton.rightAnchor.constraint(equalTo: thumbnailImageView.rightAnchor, constant: -16).isActive = true
+        followButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        followButton.topAnchor.constraint(equalTo: userProfileImageView.topAnchor, constant: 7).isActive = true
+        followButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
         
         //top constraint
-        addConstraint(NSLayoutConstraint(item: titleLabel, attribute:  .top, relatedBy: .equal, toItem: userProfileImageView , attribute: .top, multiplier: 1, constant: 0 ))
+        titleLabel.topAnchor.constraint(equalTo: userProfileImageView.topAnchor).isActive = true
         // left constraint
-        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .left, relatedBy: .equal, toItem: userProfileImageView, attribute: .right, multiplier: 1, constant: 8))
+        titleLabel.leftAnchor.constraint(equalTo: userProfileImageView.rightAnchor, constant: 8).isActive = true
         //right constraint
-        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .right , relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: -80))
+        titleLabel.rightAnchor.constraint(equalTo: followButton.leftAnchor, constant: -5).isActive = true
         // hight Constraint
         titleLabelHeightConstraint = NSLayoutConstraint(item: titleLabel, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 22)
         addConstraint(titleLabelHeightConstraint!)
@@ -250,15 +273,19 @@ class TripCell:  BaseCell  {
         // hight Constraint
         addConstraint(NSLayoutConstraint(item: subTitleLabel, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 30))
         
-        likeButton.topAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor, constant: 5).isActive = true
+        likeButton.topAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor, constant: 2).isActive = true
         likeButton.leftAnchor.constraint(equalTo: thumbnailImageView.leftAnchor, constant: 16).isActive = true
-        likeButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        likeButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        likeButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
+        likeButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
         
-        followButton.leftAnchor.constraint(equalTo: titleLabel.rightAnchor).isActive = true
-        followButton.rightAnchor.constraint(equalTo: thumbnailImageView.rightAnchor, constant: -16).isActive = true
-        followButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        followButton.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
+        separatorView.topAnchor.constraint(equalTo: likeButton.bottomAnchor, constant: 2).isActive = true
+        separatorView.widthAnchor.constraint(equalTo: thumbnailImageView.widthAnchor).isActive = true
+        separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        
+        tripStatusLabel.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 10).isActive = true
+        tripStatusLabel.leftAnchor.constraint(equalTo: likeButton.leftAnchor).isActive = true
+        tripStatusLabel.widthAnchor.constraint(equalTo: thumbnailImageView.widthAnchor, constant: -32).isActive = true
+        tripStatusLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
         
     }
     

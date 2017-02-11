@@ -65,11 +65,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         // Left Navigation Bar Button
         let searchIcon = UIImage(named: "search_icon")?.withRenderingMode(.alwaysTemplate)
         let searchBarButtonItem = UIBarButtonItem(image: searchIcon, landscapeImagePhone: searchIcon, style: .plain, target: self, action: #selector(handleSearch))
-        searchBarButtonItem.tintColor = UIColor.darkGray
+        searchBarButtonItem.tintColor = UIColor.white
         
-        let navMoreIcon = UIImage(named: "settings")?.withRenderingMode(.alwaysTemplate)
+        let navMoreIcon = UIImage(named: "nav_more_icon")?.withRenderingMode(.alwaysTemplate)
         let moreBarButtonItem = UIBarButtonItem(image: navMoreIcon, landscapeImagePhone: navMoreIcon, style: .plain, target: self, action: #selector(handleMore))
-        moreBarButtonItem.tintColor = UIColor.darkGray
+        moreBarButtonItem.tintColor = UIColor.white
         
         
         navigationItem.leftBarButtonItems = [moreBarButtonItem, searchBarButtonItem]

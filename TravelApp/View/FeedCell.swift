@@ -12,11 +12,14 @@ import ReSwift
 class FeedCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, StoreSubscriber {
     
     lazy var  collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = UIColor.appBaseColor()
+        cv.backgroundColor = UIColor.appMainBGColor()
         cv.dataSource = self
         cv.delegate = self
+        
         return cv
     }()
     
@@ -54,6 +57,10 @@ class FeedCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate,
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! TripCell
         cell.trip = trips?[indexPath.item]
         cell.backgroundColor = UIColor.white
+        cell.layer.shadowOpacity = 0.3
+        cell.layer.shadowRadius = 2
+        cell.layer.shadowOffset = CGSize(width: 0, height: 1)
+        cell.layer.shadowColor = UIColor.darkGray.cgColor
         return cell
     }
     
@@ -62,7 +69,11 @@ class FeedCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 10
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        return UIEdgeInsetsMake(20, 20, 20, 20);
+//    }
 
 }
