@@ -10,7 +10,7 @@ import UIKit
 import ReSwift
 
 class TripHeader: UIView, StoreSubscriber {
-    var tripDetail: TripDetail?
+    var tripDetailCtrl: TripDetailViewController?
     
     var user: User!
     
@@ -190,7 +190,8 @@ class TripHeader: UIView, StoreSubscriber {
     }()
     
     func handleCloseView() {
-        tripDetail?.closeView()
+        statusBarBackgroundView.alpha = 1
+        tripDetailCtrl?.dismiss(animated: true, completion: nil)
     }
     
     func handleLike(firstChange: Bool) {

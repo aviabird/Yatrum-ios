@@ -15,7 +15,7 @@ class TripCell:  BaseCell  {
         didSet {
             
             user = trip.user
-            titleLabel.text = "\(user.name!)"
+            titleLabel.text = user.name
             
             setupThumbnailImage()
             
@@ -29,7 +29,7 @@ class TripCell:  BaseCell  {
                 tripStatusLabel.text = "\(numberFormatter.string(from: numberOfLikes)!) Likes"
             }
             
-            subTitleLabel.text = trip.created_at?.humanizeDate().relativeDate()
+            subTitleLabel.text = trip.created_at?.relativeDate()
             
             // measure Title text
             if let title = trip.name {
@@ -82,9 +82,9 @@ class TripCell:  BaseCell  {
     }
     
     func showTripDetail() {
-        let tripDetail = TripDetail()
+        let tripDetailViewCtrl = TripDetailViewController()
         store.dispatch(SelectTrip(tripId: trip.id!))
-        tripDetail.showTripDetai()
+        SharedData.sharedInstance.homeController?.present(tripDetailViewCtrl, animated: true, completion: nil)
     }
     
     func setupProfileImage() {
@@ -261,17 +261,16 @@ class TripCell:  BaseCell  {
         //right constraint
         titleLabel.rightAnchor.constraint(equalTo: followButton.leftAnchor, constant: -5).isActive = true
         // hight Constraint
-        titleLabelHeightConstraint = NSLayoutConstraint(item: titleLabel, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 22)
-        addConstraint(titleLabelHeightConstraint!)
+        titleLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
         
         //top constraint
-        addConstraint(NSLayoutConstraint(item: subTitleLabel, attribute:  .top, relatedBy: .equal, toItem: titleLabel , attribute: .bottom, multiplier: 1, constant: 0 ))
+        subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
         // left constraint
-        addConstraint(NSLayoutConstraint(item: subTitleLabel, attribute: .left, relatedBy: .equal, toItem: userProfileImageView, attribute: .right, multiplier: 1, constant: 8))
+        subTitleLabel.leftAnchor.constraint(equalTo: userProfileImageView.rightAnchor, constant: 8).isActive = true
         //right constraint
-        addConstraint(NSLayoutConstraint(item: subTitleLabel, attribute: .right , relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: -80))
+        subTitleLabel.rightAnchor.constraint(equalTo: titleLabel.rightAnchor).isActive = true
         // hight Constraint
-        addConstraint(NSLayoutConstraint(item: subTitleLabel, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 30))
+        subTitleLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         likeButton.topAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor, constant: 2).isActive = true
         likeButton.leftAnchor.constraint(equalTo: thumbnailImageView.leftAnchor, constant: 16).isActive = true

@@ -10,6 +10,7 @@ import UIKit
 import ReSwift
 
 var store = Store<AppState>(reducer: AppReducer(), state: nil)
+var statusBarBackgroundView = UIView()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -36,7 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIApplication.shared.statusBarStyle = .lightContent
         
-        let statusBarBackgroundView = UIView()
         statusBarBackgroundView.backgroundColor = UIColor.appBaseColor()
         
         window?.addSubview(statusBarBackgroundView)

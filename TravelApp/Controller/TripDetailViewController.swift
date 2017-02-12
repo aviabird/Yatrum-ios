@@ -1,21 +1,32 @@
 //
-//  TripDetail.swift
+//  TripDetailViewController.swift
 //  TravelApp
 //
-//  Created by rawat on 04/02/17.
+//  Created by Pankaj Rawat on 12/02/17.
 //  Copyright © 2017 Pankaj Rawat. All rights reserved.
 //
 
 import UIKit
 import ReSwift
 
-class TripDetail: NSObject, UICollectionViewDataSource,  UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, StoreSubscriber {
+class TripDetailViewController: UIViewController, UICollectionViewDataSource,  UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, StoreSubscriber {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationController?.isNavigationBarHidden = true
+        
+        UIView.animate(withDuration: 0.2, delay: 0.4, options: .curveEaseIn, animations: {
+            statusBarBackgroundView.alpha = 0
+        }, completion: nil)
+
+        // Do any additional setup after loading the view.
+        loadSubViews()
+    }
     
     var trip: Trip?
     
     var tripView: UIView!
     var tripHeader: TripHeader!
-    var keyWindow = UIApplication.shared.keyWindow!
     
     lazy var  collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -29,54 +40,28 @@ class TripDetail: NSObject, UICollectionViewDataSource,  UICollectionViewDelegat
     
     let cellId = "cellId"
     
+    func loadSubViews() {
+        store.subscribe(self)
+        let height = view.frame.width * 9 / 16
+        let tripHeaderFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: height)
+        tripHeader = TripHeader(frame: tripHeaderFrame)
+        tripHeader.tripDetailCtrl = self
+        view.addSubview(tripHeader)
+        
+        setupCollectionViews()
+    }
+    
     func newState(state: AppState) {
         trip = state.tripState.selectedTrip()
         collectionView.reloadData()
     }
     
-    func showTripDetai() {
-        store.subscribe(self)
-        
-        tripView = UIView(frame: keyWindow.frame)
-        tripView.backgroundColor = UIColor.white
-        
-        tripView.frame = CGRect(x: keyWindow.frame.width - 10, y: keyWindow.frame.height - 50, width: 10, height: 10)
-        
-        keyWindow.addSubview(tripView)
-        
-        addSubViews()
-        
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.tripView.frame = self.keyWindow.frame
-        }, completion: { (completedAnimation) in
-        })
-    }
-    
-    func addSubViews() {
-        let height = keyWindow.frame.width * 9 / 16
-        let tripHeaderFrame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: height)
-        tripHeader = TripHeader(frame: tripHeaderFrame)
-        tripHeader.tripDetail = self
-        tripView.addSubview(tripHeader)
-        
-        setupCollectionViews()
-    }
-    
-    func closeView() {
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.tripView.frame = CGRect(x: self.keyWindow.frame.width, y: self.keyWindow.frame.height - 50, width: 0, height: 0)
-            self.tripView.alpha = 0
-            self.tripHeader.frame = CGRect()
-        }, completion: { (completedAnimation) in
-        })
-    }
-    
     func setupCollectionViews() {
-        tripView.addSubview(collectionView)
+        view.addSubview(collectionView)
         collectionView.topAnchor.constraint(equalTo: tripHeader.bottomAnchor, constant: 5).isActive = true
-        collectionView.leftAnchor.constraint(equalTo: keyWindow.leftAnchor).isActive = true
-        collectionView.rightAnchor.constraint(equalTo: keyWindow.rightAnchor).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: keyWindow.bottomAnchor).isActive = true
+        collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        collectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         collectionView.showsVerticalScrollIndicator = false
         
@@ -99,7 +84,7 @@ class TripDetail: NSObject, UICollectionViewDataSource,  UICollectionViewDelegat
         tempTextView.text = trip?.places[indexPath.item].placeDescription
         let height = tempTextView.contentSize.height + 500
         
-        return CGSize(width: tripView.frame.width, height: height)
+        return CGSize(width: view.frame.width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -110,14 +95,14 @@ class TripDetail: NSObject, UICollectionViewDataSource,  UICollectionViewDelegat
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             switch true {
             case scrollView.contentOffset.y >= 100:
-                self.tripHeader.frame = CGRect(x: 0, y: 0, width: self.keyWindow.frame.width, height: 50)
-                self.collectionView.frame = CGRect(x: 0, y: 50, width: self.keyWindow.frame.width, height: self.keyWindow.frame.height - 50)
+                self.tripHeader.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
+                self.collectionView.frame = CGRect(x: 0, y: 50, width: self.view.frame.width, height: self.view.frame.height - 50)
                 self.tripHeader.hideAll()
                 break
             case scrollView.contentOffset.y <= 1:
-                let height = self.keyWindow.frame.width * 9 / 16
-                self.tripHeader.frame = CGRect(x: 0, y: 0, width: self.keyWindow.frame.width, height: height)
-                self.collectionView.frame = CGRect(x: 0, y: height, width: self.keyWindow.frame.width, height: self.keyWindow.frame.height - height)
+                let height = self.view.frame.width * 9 / 16
+                self.tripHeader.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: height)
+                self.collectionView.frame = CGRect(x: 0, y: height, width: self.view.frame.width, height: self.view.frame.height - height)
                 self.tripHeader.showAll()
                 break
             default:
@@ -126,5 +111,21 @@ class TripDetail: NSObject, UICollectionViewDataSource,  UICollectionViewDelegat
         }, completion: nil)
         
     }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
 }

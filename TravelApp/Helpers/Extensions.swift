@@ -144,9 +144,9 @@ extension String {
     
     func relativeDate() -> String {
         
-        let date = try! DateInRegion(string: self, format: .custom("MM-dd-yyyy HH:mm:ss"))
-        let (_,relevantTime) = try! date.colloquialSinceNow()
+        let date = try! DateInRegion(string: humanizeDate(), format: .custom("MM-dd-yyyy HH:mm:ss"))
+        let relevantTime = try! date.colloquialSinceNow().colloquial
         
-        return relevantTime!
+        return relevantTime
     }
 }
