@@ -22,7 +22,7 @@ class TripHeader: UIView, StoreSubscriber {
             titleLabel.text = trip.name
             scrollTitleLabel.text = trip.name
             userNameLabel.text = user.name
-            postedAtTitleLabel.text = "posted 10 hours ago"
+            postedAtTitleLabel.text = trip.created_at?.relativeDate()
             
             setupThumbnailImage()
             setupProfileImage()

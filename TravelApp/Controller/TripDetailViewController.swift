@@ -14,6 +14,7 @@ class TripDetailViewController: UIViewController, UICollectionViewDataSource,  U
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
+        view.backgroundColor = UIColor.appMainBGColor()
         
         UIView.animate(withDuration: 0.2, delay: 0.4, options: .curveEaseIn, animations: {
             statusBarBackgroundView.alpha = 0
@@ -42,13 +43,17 @@ class TripDetailViewController: UIViewController, UICollectionViewDataSource,  U
     
     func loadSubViews() {
         store.subscribe(self)
+        addTripHeader()
+        setupCollectionViews()
+    }
+    
+    func addTripHeader() {
         let height = view.frame.width * 9 / 16
         let tripHeaderFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: height)
         tripHeader = TripHeader(frame: tripHeaderFrame)
         tripHeader.tripDetailCtrl = self
-        view.addSubview(tripHeader)
         
-        setupCollectionViews()
+        view.addSubview(tripHeader)
     }
     
     func newState(state: AppState) {
@@ -58,9 +63,8 @@ class TripDetailViewController: UIViewController, UICollectionViewDataSource,  U
     
     func setupCollectionViews() {
         view.addSubview(collectionView)
-        collectionView.topAnchor.constraint(equalTo: tripHeader.bottomAnchor, constant: 5).isActive = true
-        collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        collectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        collectionView.topAnchor.constraint(equalTo: tripHeader.bottomAnchor).isActive = true
+        collectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         collectionView.showsVerticalScrollIndicator = false
@@ -81,8 +85,8 @@ class TripDetailViewController: UIViewController, UICollectionViewDataSource,  U
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let tempTextView = UITextView()
-        tempTextView.text = trip?.places[indexPath.item].placeDescription
-        let height = tempTextView.contentSize.height + 500
+        tempTextView.text = trip?.places[indexPath.item].review
+        let height = tempTextView.contentSize.height + 400
         
         return CGSize(width: view.frame.width, height: height)
     }

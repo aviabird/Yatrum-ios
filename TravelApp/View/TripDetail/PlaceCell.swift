@@ -8,18 +8,37 @@
 
 import UIKit
 
-class PlaceCell: BaseCell {
+class PlaceCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    let cellId = "cellId"
+    
+    lazy var  photoCollectionView: UICollectionView = {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
+        if let flowLayout = cv.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.scrollDirection = .horizontal
+            flowLayout.minimumLineSpacing = 0
+        }
+        
+        cv.backgroundColor = UIColor.white
+        cv.dataSource = self
+        cv.delegate = self
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.isPagingEnabled = true
+        
+        return cv
+    }()
     
     var place: Place! {
         didSet{
             placeViewBadgeTitleLabel.text = place.name
-            placeViewBadgeDateLabel.text = "25 Feb 17' 12:00 pm"
+            placeViewBadgeDateLabel.text = place.created_at?.humanizeDate(format: "dd MMM yy hh:mm a")
             placeDescText.text = place.review
             
-            placeDescTextHeightConstraint.constant = placeDescText.contentSize.height + 30
-            placeDescTextHeightConstraint.isActive = true
-            
-            addPlaceImages()
+//            placeDescTextHeightConstraint.constant = placeDescText.contentSize.height + 30
+//            placeDescTextHeightConstraint.isActive = true
         }
     }
     
@@ -94,39 +113,12 @@ class PlaceCell: BaseCell {
         return textView
     }()
     
-    let placeImageView0: CustomImageView = {
-        let imageView = CustomImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.isUserInteractionEnabled = true
-        return imageView
-    }()
-    
-    let placeImageView1: CustomImageView = {
-        let imageView = CustomImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    let placeImageView2: CustomImageView = {
-        let imageView = CustomImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
     override func setupViews() {
         super.setupViews()
         
         addPlaceView()
         addPlaceViewBadge()
+        addPlaceImages()
         addSubViewToPlaceView()
         addStreetViewBtn()
     }
@@ -191,78 +183,53 @@ class PlaceCell: BaseCell {
         placeDescText.topAnchor.constraint(equalTo: placeViewBadge.bottomAnchor, constant: 10).isActive = true
         placeDescText.widthAnchor.constraint(equalTo: placeViewBadge.widthAnchor).isActive = true
         placeDescText.centerXAnchor.constraint(equalTo: placeViewBadge.centerXAnchor).isActive = true
-        placeDescTextHeightConstraint = placeDescText.heightAnchor.constraint(equalToConstant: 10)
-        placeDescTextHeightConstraint.constant = 100
+//        placeDescTextHeightConstraint = placeDescText.heightAnchor.constraint(equalToConstant: 10)
+//        placeDescTextHeightConstraint.constant = 100
+        placeDescText.bottomAnchor.constraint(equalTo: photoCollectionView.topAnchor, constant: -5).isActive = true
         
     }
     
     func addPlaceImages() {
-        let placeImagesCount = place.pictures.count
-        let placeImages = place.pictures[0..<(placeImagesCount < 3 ? placeImagesCount : 3)]
-        let imagesCount = placeImages.count
+        placeView.addSubview(photoCollectionView)
         
-        for idx in [0, 1, 2] {
-            if(idx >= placeImagesCount) { return }
-            
-            switch idx {
-            case 0:
-                placeView.addSubview(placeImageView0)
-                
-                placeImageView0.leftAnchor.constraint(equalTo: placeDescText.leftAnchor).isActive = true
-                placeImageView0.topAnchor.constraint(equalTo: placeDescText.bottomAnchor).isActive = true
-                placeImageView0.heightAnchor.constraint(equalToConstant: 200).isActive = true
-                placeImageView0.rightAnchor.constraint(equalTo: placeDescText.rightAnchor).isActive = true
-                
-                placeImageView0.loadImageUsingUrlString(urlString: placeImages[idx].url!, width: Float(frame.width))
-                
-                let tapGuesture0 = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
-                placeImageView0.addGestureRecognizer(tapGuesture0)
-                
-                break
-            case 1:
-                placeView.addSubview(placeImageView1)
-                
-                placeImageView1.leftAnchor.constraint(equalTo: placeImageView0.leftAnchor).isActive = true
-                placeImageView1.topAnchor.constraint(equalTo: placeImageView0.bottomAnchor, constant: 5).isActive = true
-                
-                if imagesCount == 2 {
-                    placeImageView1.widthAnchor.constraint(equalTo: placeImageView0.widthAnchor).isActive = true
-                    placeImageView1.heightAnchor.constraint(equalTo: placeImageView0.heightAnchor).isActive = true
-                } else {
-                    placeImageView1.widthAnchor.constraint(equalTo: placeImageView0.widthAnchor, multiplier: 1/2, constant: -2.5).isActive = true
-                    placeImageView1.heightAnchor.constraint(equalTo: placeImageView0.heightAnchor, multiplier: 1/2).isActive = true
-                }
-                
-                placeImageView1.loadImageUsingUrlString(urlString: placeImages[idx].url!, width: Float(frame.width / 2))
-                
-                let tapGuesture1 = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
-                placeImageView1.addGestureRecognizer(tapGuesture1)
-                break
-            case 2:
-                placeView.addSubview(placeImageView2)
-                
-                placeImageView2.topAnchor.constraint(equalTo: placeImageView1.topAnchor).isActive = true
-                placeImageView2.widthAnchor.constraint(equalTo: placeImageView1.widthAnchor).isActive = true
-                placeImageView2.rightAnchor.constraint(equalTo: placeImageView0.rightAnchor).isActive = true
-                placeImageView2.heightAnchor.constraint(equalTo: placeImageView1.heightAnchor).isActive = true
-                
-                placeImageView2.loadImageUsingUrlString(urlString: placeImages[idx].url!, width: Float(frame.width / 2))
-                
-                let tapGuesture2 = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
-                placeImageView2.addGestureRecognizer(tapGuesture2)
-                break
-            default:
-                break
-            }
-        }
+        photoCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        
+        photoCollectionView.rightAnchor.constraint(equalTo: placeViewBadge.rightAnchor).isActive = true
+        photoCollectionView.widthAnchor.constraint(equalTo: placeViewBadge.widthAnchor).isActive = true
+        photoCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        photoCollectionView.heightAnchor.constraint(equalToConstant: 210).isActive = true
     }
     
-    func imageTapped(_ sender: UITapGestureRecognizer) {
-        print("Tapped")
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return place.pictures.count
     }
     
-    func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
-        sender.view?.removeFromSuperview()
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
+        cell.layer.shadowOpacity = 0.3
+        cell.layer.shadowRadius = 2
+        cell.layer.shadowOffset = CGSize(width: 0, height: 1)
+        cell.layer.shadowColor = UIColor.darkGray.cgColor
+        
+        let placeImage = CustomImageView()
+        placeImage.loadImageUsingUrlString(urlString: place.pictures[indexPath.item].url!, width: Float(frame.width))
+        placeImage.translatesAutoresizingMaskIntoConstraints = false
+        cell.addSubview(placeImage)
+        placeImage.topAnchor.constraint(equalTo: cell.topAnchor).isActive = true
+        placeImage.leftAnchor.constraint(equalTo: cell.leftAnchor).isActive = true
+        placeImage.heightAnchor.constraint(equalTo: cell.heightAnchor).isActive = true
+        placeImage.widthAnchor.constraint(equalTo: cell.widthAnchor).isActive = true
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = placeDescText.frame.width
+        return CGSize(width: width, height: 200)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
     
 }

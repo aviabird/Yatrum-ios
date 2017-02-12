@@ -131,14 +131,14 @@ extension UITextView{
 }
 
 extension String {
-    func humanizeDate() -> String {
+    func humanizeDate(format: String = "MM-dd-yyyy HH:mm:ss") -> String {
         //"yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         dateFormatter.locale = Locale.init(identifier: "en_GB")
         let dateObj = dateFormatter.date(from: self)
         
-        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm:ss"
+        dateFormatter.dateFormat = format
         return dateFormatter.string(from: dateObj!)
     }
     

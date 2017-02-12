@@ -20,6 +20,8 @@ class FeedCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate,
         cv.dataSource = self
         cv.delegate = self
         
+        cv.showsVerticalScrollIndicator = false
+        
         return cv
     }()
     
