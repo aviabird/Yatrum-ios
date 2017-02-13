@@ -15,6 +15,7 @@ class SearchTripCell: BaseCell {
             print(trip!)
             
             userNameLabel.text = trip?.user?.name
+            durationLabel.text = trip?.created_at?.relativeDate()
             setupThumbnailImage()
             setupProfileImage()
         }
@@ -25,8 +26,17 @@ class SearchTripCell: BaseCell {
         if let thumbnailImageUrl = trip?.thumbnail_image_url {
             thumbnailImageView.loadImageUsingUrlString(urlString: thumbnailImageUrl, width: Float(thumbnailImageView.frame.width))
         }
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(showTripDetail))
+        thumbnailImageView.isUserInteractionEnabled = true
+        thumbnailImageView.addGestureRecognizer(tapGestureRecognizer)
     }
     
+    func showTripDetail() {
+        let tripDetailViewCtrl = TripDetailViewController()
+        store.dispatch(SelectTrip(tripId: (trip?.id!)!))
+        SharedData.sharedInstance.homeController?.present(tripDetailViewCtrl, animated: true, completion: nil)
+    }
+
     func setupProfileImage() {
         if let profileImageURL = trip?.user?.profile_pic?.url {
             userProfileImageView.loadImageUsingUrlString(urlString: profileImageURL, width: Float(userProfileImageView.frame.width))
@@ -61,6 +71,7 @@ class SearchTripCell: BaseCell {
         ub.setImage(UIImage(named: "like"), for: .normal)
         ub.tintColor = UIColor.gray
         ub.translatesAutoresizingMaskIntoConstraints = false
+//        ub.backgroundColor = UIColor.red
         return ub
     }()
     
@@ -70,7 +81,7 @@ class SearchTripCell: BaseCell {
         label.text = ""
         label.numberOfLines = 1
         label.font = label.font.withSize(12)
-        label.backgroundColor = UIColor.green
+//        label.backgroundColor = UIColor.green
         return label
     }()
 
@@ -80,7 +91,7 @@ class SearchTripCell: BaseCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = ""
         label.numberOfLines = 1
-        label.backgroundColor = UIColor.yellow
+//        label.backgroundColor = UIColor.yellow
         label.font = label.font.withSize(10)
         return label
     }()

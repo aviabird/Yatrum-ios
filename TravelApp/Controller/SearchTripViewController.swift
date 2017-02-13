@@ -26,6 +26,8 @@ class SearchTripViewController: UIViewController, UICollectionViewDataSource,  U
         cv.backgroundColor = UIColor.rgb(red: 100, green: 100, blue: 100, alpha: 0.2)
         cv.dataSource = self
         cv.delegate = self
+
+    
         return cv
     }()
     
