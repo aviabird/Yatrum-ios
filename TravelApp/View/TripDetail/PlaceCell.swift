@@ -14,7 +14,7 @@ class PlaceCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate
     
     lazy var  photoCollectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 5, right: 0)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         if let flowLayout = cv.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -37,9 +37,14 @@ class PlaceCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate
             placeViewBadgeDateLabel.text = place.created_at?.humanizeDate(format: "dd MMM yy hh:mm a")
             placeDescText.text = place.review
             
-//            placeDescTextHeightConstraint.constant = placeDescText.contentSize.height + 30
-//            placeDescTextHeightConstraint.isActive = true
+            placeDescTextHeightConstraint.constant = placeDescText.contentSize.height + 30
+            placeDescTextHeightConstraint.isActive = true
         }
+    }
+    
+    override func didMoveToSuperview() {
+        placeDescTextHeightConstraint.constant = placeDescText.contentSize.height + 30
+        placeDescTextHeightConstraint.isActive = true
     }
     
     let placeView: UIView = {
@@ -110,6 +115,7 @@ class PlaceCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate
         textView.backgroundColor = UIColor(white: 0, alpha: 0)
         textView.isEditable = false
         textView.textAlignment = .justified
+        textView.isScrollEnabled = false
         return textView
     }()
     
@@ -183,9 +189,9 @@ class PlaceCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate
         placeDescText.topAnchor.constraint(equalTo: placeViewBadge.bottomAnchor, constant: 10).isActive = true
         placeDescText.widthAnchor.constraint(equalTo: placeViewBadge.widthAnchor).isActive = true
         placeDescText.centerXAnchor.constraint(equalTo: placeViewBadge.centerXAnchor).isActive = true
-//        placeDescTextHeightConstraint = placeDescText.heightAnchor.constraint(equalToConstant: 10)
-//        placeDescTextHeightConstraint.constant = 100
-        placeDescText.bottomAnchor.constraint(equalTo: photoCollectionView.topAnchor, constant: -5).isActive = true
+        placeDescTextHeightConstraint = placeDescText.heightAnchor.constraint(equalToConstant: 10)
+        placeDescTextHeightConstraint.constant = 100
+//        placeDescText.bottomAnchor.constraint(equalTo: photoCollectionView.topAnchor, constant: -5).isActive = true
         
     }
     
@@ -217,8 +223,8 @@ class PlaceCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate
         cell.addSubview(placeImage)
         placeImage.topAnchor.constraint(equalTo: cell.topAnchor).isActive = true
         placeImage.leftAnchor.constraint(equalTo: cell.leftAnchor).isActive = true
-        placeImage.heightAnchor.constraint(equalTo: cell.heightAnchor).isActive = true
-        placeImage.widthAnchor.constraint(equalTo: cell.widthAnchor).isActive = true
+        placeImage.rightAnchor.constraint(equalTo: cell.rightAnchor).isActive = true
+        placeImage.bottomAnchor.constraint(equalTo: cell.bottomAnchor).isActive = true
         
         return cell
     }

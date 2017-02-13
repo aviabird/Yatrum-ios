@@ -84,9 +84,8 @@ class TripDetailViewController: UIViewController, UICollectionViewDataSource,  U
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let tempTextView = UITextView()
-        tempTextView.text = trip?.places[indexPath.item].review
-        let height = tempTextView.contentSize.height + 400
+        let text = trip?.places[indexPath.item].review
+        let height = CGFloat((text?.characters.count)! / 50 + 350)
         
         return CGSize(width: view.frame.width, height: height)
     }
