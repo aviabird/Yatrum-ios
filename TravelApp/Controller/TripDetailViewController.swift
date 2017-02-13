@@ -85,9 +85,14 @@ class TripDetailViewController: UIViewController, UICollectionViewDataSource,  U
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let text = trip?.places[indexPath.item].review
-        let height = CGFloat((text?.characters.count)! / 50 + 350)
         
-        return CGSize(width: view.frame.width, height: height)
+        let approxWidth = view.frame.width - 60
+        let size = CGSize(width: approxWidth, height: 1000)
+        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 12)]
+        
+        let estimatedFrame = NSString(string: text!).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+        
+        return CGSize(width: view.frame.width, height: estimatedFrame.height + 300)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

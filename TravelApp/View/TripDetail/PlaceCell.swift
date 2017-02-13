@@ -36,15 +36,7 @@ class PlaceCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate
             placeViewBadgeTitleLabel.text = place.name
             placeViewBadgeDateLabel.text = place.created_at?.humanizeDate(format: "dd MMM yy hh:mm a")
             placeDescText.text = place.review
-            
-            placeDescTextHeightConstraint.constant = placeDescText.contentSize.height + 30
-            placeDescTextHeightConstraint.isActive = true
         }
-    }
-    
-    override func didMoveToSuperview() {
-        placeDescTextHeightConstraint.constant = placeDescText.contentSize.height + 30
-        placeDescTextHeightConstraint.isActive = true
     }
     
     let placeView: UIView = {
@@ -112,10 +104,11 @@ class PlaceCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.text = "Amazing View of eiffel tower."
         textView.textColor = UIColor.gray
-        textView.backgroundColor = UIColor(white: 0, alpha: 0)
+        textView.backgroundColor = UIColor.white
         textView.isEditable = false
         textView.textAlignment = .justified
         textView.isScrollEnabled = false
+        textView.font = .systemFont(ofSize: 12)
         return textView
     }()
     
@@ -189,9 +182,7 @@ class PlaceCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate
         placeDescText.topAnchor.constraint(equalTo: placeViewBadge.bottomAnchor, constant: 10).isActive = true
         placeDescText.widthAnchor.constraint(equalTo: placeViewBadge.widthAnchor).isActive = true
         placeDescText.centerXAnchor.constraint(equalTo: placeViewBadge.centerXAnchor).isActive = true
-        placeDescTextHeightConstraint = placeDescText.heightAnchor.constraint(equalToConstant: 10)
-        placeDescTextHeightConstraint.constant = 100
-//        placeDescText.bottomAnchor.constraint(equalTo: photoCollectionView.topAnchor, constant: -5).isActive = true
+        placeDescText.bottomAnchor.constraint(equalTo: photoCollectionView.topAnchor, constant: -5).isActive = true
         
     }
     
