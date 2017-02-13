@@ -15,26 +15,6 @@ class SearchTripCell: BaseCell {
             print(trip!)
             
             userNameLabel.text = trip?.user?.name
-//            durationLabel.text = "Today"
-//            print(trip?.created_at)
-            if let date = trip?.created_at {
-                print(date)
-//                print("1")
-//                let dateFormatter = DateFormatter()
-//                print("11")
-//                dateFormatter.dateFormat = "yyyy-MM-dd"
-//                print("111")
-//                let dateString = dateFormatter.string(from: date as Date)
-//                print("1111")
-//                durationLabel.text = dateString
-//                print("11111")
-//                let dateFormatter = DateFormatter()
-//                dateFormatter.dateStyle = .long
-//                dateFormatter.timeStyle = .long
-//                let newString = dateFormatter.string(from: date as Date)
-//                print(newString)
-                
-            }
             setupThumbnailImage()
             setupProfileImage()
         }
@@ -76,6 +56,13 @@ class SearchTripCell: BaseCell {
         return imageView
     }()
     
+    let likeButton: UIButton = {
+        let ub = UIButton(type: .system)
+        ub.setImage(UIImage(named: "like"), for: .normal)
+        ub.tintColor = UIColor.gray
+        ub.translatesAutoresizingMaskIntoConstraints = false
+        return ub
+    }()
     
     let userNameLabel: UILabel = {
         let label = UILabel()
@@ -83,7 +70,7 @@ class SearchTripCell: BaseCell {
         label.text = ""
         label.numberOfLines = 1
         label.font = label.font.withSize(12)
-//        label.backgroundColor = UIColor.green
+        label.backgroundColor = UIColor.green
         return label
     }()
 
@@ -93,7 +80,7 @@ class SearchTripCell: BaseCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = ""
         label.numberOfLines = 1
-//        label.backgroundColor = UIColor.yellow
+        label.backgroundColor = UIColor.yellow
         label.font = label.font.withSize(10)
         return label
     }()
@@ -105,6 +92,7 @@ class SearchTripCell: BaseCell {
         addSubview(userProfileImageView)
         addSubview(userNameLabel)
         addSubview(durationLabel)
+        addSubview(likeButton)
         
         
         thumbnailImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
@@ -120,18 +108,19 @@ class SearchTripCell: BaseCell {
         
         userNameLabel.topAnchor.constraint(equalTo: userProfileImageView.topAnchor).isActive = true
         userNameLabel.leftAnchor.constraint(equalTo: userProfileImageView.rightAnchor, constant: 10).isActive = true
-        userNameLabel.rightAnchor.constraint(equalTo: thumbnailImageView.rightAnchor, constant: -10).isActive = true
+        userNameLabel.rightAnchor.constraint(equalTo: likeButton.leftAnchor, constant: -10).isActive = true
         userNameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        
 
         durationLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 4).isActive = true
         durationLabel.leftAnchor.constraint(equalTo: userProfileImageView.rightAnchor, constant: 10).isActive = true
-        durationLabel.rightAnchor.constraint(equalTo: thumbnailImageView.rightAnchor, constant: -10).isActive = true
+        durationLabel.rightAnchor.constraint(equalTo: likeButton.leftAnchor, constant: -10).isActive = true
         durationLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
-        
-        
-        
+        likeButton.topAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor, constant: 10).isActive = true
+        likeButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
+        likeButton.rightAnchor.constraint(equalTo: thumbnailImageView.rightAnchor, constant: -10).isActive = true
+        likeButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+                        
         
     }
     

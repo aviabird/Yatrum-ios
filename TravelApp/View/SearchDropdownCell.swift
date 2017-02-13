@@ -13,7 +13,10 @@ class SearchDropdownCell: BaseCell {
     var searchedLabel : UILabel = {
         let st = UILabel()
         st.translatesAutoresizingMaskIntoConstraints = false
+        st.font = UIFont.preferredFont(forTextStyle: .footnote)
         st.backgroundColor = UIColor.white
+        st.textColor = UIColor.brown
+        st.textAlignment = .center
         return st
     }()
     

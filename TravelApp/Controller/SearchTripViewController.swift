@@ -134,6 +134,10 @@ class SearchTripViewController: UIViewController, UICollectionViewDataSource,  U
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId2, for: indexPath) as! SearchDropdownCell
             cell.searchedLabel.text = filteredsearch[indexPath.row]
             cell.searchCtrl = self
+            cell.layer.shadowOpacity = 0.3
+            cell.layer.shadowRadius = 2
+            cell.layer.shadowOffset = CGSize(width: 0, height: 1)
+            cell.layer.shadowColor = UIColor.darkGray.cgColor
             return cell
         }
 
@@ -150,7 +154,7 @@ class SearchTripViewController: UIViewController, UICollectionViewDataSource,  U
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Hello")
+//        present(TripDetailViewController, animated: true, completion: nil)
     }
     
     func searchTrips(query: String) {
