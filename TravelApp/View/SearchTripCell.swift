@@ -16,6 +16,7 @@ class SearchTripCell: BaseCell {
             
             userNameLabel.text = trip?.user?.name
             durationLabel.text = trip?.created_at?.relativeDate()
+            tripNameLabel.text = trip?.name
             setupThumbnailImage()
             setupProfileImage()
         }
@@ -49,7 +50,8 @@ class SearchTripCell: BaseCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
         imageView.image = UIImage(named: "")
-//        imageView.backgroundColor = UIColor.red
+        imageView.backgroundColor = UIColor.black
+        imageView.alpha = 0.5
         return imageView
     }()
     
@@ -80,22 +82,35 @@ class SearchTripCell: BaseCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = ""
         label.numberOfLines = 1
-        label.font = label.font.withSize(12)
+        label.font = label.font.withSize(14)
+        label.textColor = UIColor.white
 //        label.backgroundColor = UIColor.green
         return label
     }()
-
-    
+            
     let durationLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = ""
         label.numberOfLines = 1
+        label.textColor = UIColor.white
 //        label.backgroundColor = UIColor.yellow
         label.font = label.font.withSize(10)
         return label
     }()
-
+    
+    let tripNameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = ""
+        label.font = label.font.withSize(25)
+        label.numberOfLines = 2
+        label.textColor = UIColor.white
+        label.textAlignment = .center
+//                label.backgroundColor = UIColor.green
+        return label
+    }()
+    
     
     override func setupViews() {
         
@@ -104,11 +119,11 @@ class SearchTripCell: BaseCell {
         addSubview(userNameLabel)
         addSubview(durationLabel)
         addSubview(likeButton)
-        
+        addSubview(tripNameLabel)
         
         thumbnailImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         thumbnailImageView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
-        thumbnailImageView.heightAnchor.constraint(equalToConstant: 186).isActive = true
+        thumbnailImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -64).isActive = true
         
         
         userProfileImageView.topAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor, constant: 10).isActive = true
@@ -131,7 +146,11 @@ class SearchTripCell: BaseCell {
         likeButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
         likeButton.rightAnchor.constraint(equalTo: thumbnailImageView.rightAnchor, constant: -10).isActive = true
         likeButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
-                        
+        
+        tripNameLabel.widthAnchor.constraint(equalTo: thumbnailImageView.widthAnchor, constant: -20).isActive = true
+        tripNameLabel.centerYAnchor.constraint(equalTo: thumbnailImageView.centerYAnchor).isActive = true
+        tripNameLabel.centerXAnchor.constraint(equalTo: thumbnailImageView.centerXAnchor).isActive = true
+        tripNameLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
     }
     
