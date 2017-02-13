@@ -23,9 +23,12 @@ class SearchTripViewController: UIViewController, UICollectionViewDataSource,  U
     lazy var  collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: CGRect.init(), collectionViewLayout: layout)
-        cv.backgroundColor = UIColor.rgb(red: 100, green: 100, blue: 100, alpha: 0.2)
+        cv.backgroundColor = UIColor.appMainBGColor()
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         cv.dataSource = self
         cv.delegate = self
+
+    
         return cv
     }()
     
@@ -33,7 +36,7 @@ class SearchTripViewController: UIViewController, UICollectionViewDataSource,  U
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: CGRect.init(), collectionViewLayout: layout)
         //        cv.backgroundColor = UIColor.rgb(red: 100, green: 100, blue: 100, alpha: 0.2)
-        cv.backgroundColor = UIColor.white
+        cv.backgroundColor = UIColor.appMainBGColor()
         cv.dataSource = self
         cv.delegate = self
         return cv
@@ -51,6 +54,8 @@ class SearchTripViewController: UIViewController, UICollectionViewDataSource,  U
         
         view.backgroundColor = UIColor.white
         navigationItem.title = "Search Trip"
+//        navigationBar.barStyle = UIBarStyle.Black
+
         
         collectionView.register(SearchTripCell.self, forCellWithReuseIdentifier: cellId)
         cellectionViewSearch.register(SearchDropdownCell.self, forCellWithReuseIdentifier: cellId2)
@@ -102,6 +107,7 @@ class SearchTripViewController: UIViewController, UICollectionViewDataSource,  U
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor).isActive = true
         collectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
@@ -126,9 +132,13 @@ class SearchTripViewController: UIViewController, UICollectionViewDataSource,  U
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SearchTripCell
-            cell.backgroundColor = UIColor.white
+            cell.backgroundColor = UIColor.black
             cell.layer.shadowOffset = CGSize(width: 5, height: 5)
             cell.trip = trips?[indexPath.item]
+            cell.layer.shadowOpacity = 0.5
+            cell.layer.shadowRadius = 3
+            cell.layer.shadowOffset = CGSize(width: 0, height: 2)
+            cell.layer.shadowColor = UIColor.black.cgColor
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId2, for: indexPath) as! SearchDropdownCell
@@ -142,15 +152,18 @@ class SearchTripViewController: UIViewController, UICollectionViewDataSource,  U
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if collectionView == self.collectionView {
-            return CGSize(width: view.frame.width, height: 250)
+            return CGSize(width: view.frame.width - 20, height: 150)
         } else {
             return CGSize(width: view.frame.width, height: 30)
-        }
+        }    
+    }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Hello")
+//        present(TripDetailViewController, animated: true, completion: nil)
     }
     
     func searchTrips(query: String) {
