@@ -132,7 +132,7 @@ class SearchTripViewController: UIViewController, UICollectionViewDataSource,  U
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SearchTripCell
-            cell.backgroundColor = UIColor.appBaseColor()
+            cell.backgroundColor = UIColor.black
             cell.layer.shadowOffset = CGSize(width: 5, height: 5)
             cell.trip = trips?[indexPath.item]
             cell.layer.shadowOpacity = 0.5
@@ -152,11 +152,10 @@ class SearchTripViewController: UIViewController, UICollectionViewDataSource,  U
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if collectionView == self.collectionView {
-            return CGSize(width: view.frame.width - 20, height: 200)
+            return CGSize(width: view.frame.width - 20, height: 150)
         } else {
             return CGSize(width: view.frame.width, height: 30)
-        }
-    
+        }    
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

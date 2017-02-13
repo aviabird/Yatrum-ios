@@ -123,10 +123,10 @@ class SearchTripCell: BaseCell {
         
         thumbnailImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         thumbnailImageView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
-        thumbnailImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -64).isActive = true
+        thumbnailImageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
         
-        userProfileImageView.topAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor, constant: 10).isActive = true
+        userProfileImageView.bottomAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor, constant: -10).isActive = true
         userProfileImageView.widthAnchor.constraint(equalToConstant: 44).isActive = true
         userProfileImageView.leftAnchor.constraint(equalTo: thumbnailImageView.leftAnchor, constant: 10).isActive = true
         userProfileImageView.heightAnchor.constraint(equalToConstant: 44).isActive = true
@@ -142,7 +142,7 @@ class SearchTripCell: BaseCell {
         durationLabel.rightAnchor.constraint(equalTo: likeButton.leftAnchor, constant: -10).isActive = true
         durationLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
-        likeButton.topAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor, constant: 10).isActive = true
+        likeButton.bottomAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor, constant: -10).isActive = true
         likeButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
         likeButton.rightAnchor.constraint(equalTo: thumbnailImageView.rightAnchor, constant: -10).isActive = true
         likeButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
