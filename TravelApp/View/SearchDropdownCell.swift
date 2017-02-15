@@ -13,13 +13,13 @@ class SearchDropdownCell: BaseCell {
     var searchedLabel : UILabel = {
         let st = UILabel()
         st.translatesAutoresizingMaskIntoConstraints = false
-        st.backgroundColor = UIColor.white
+        st.font = UIFont.preferredFont(forTextStyle: .footnote)
+        st.textColor = UIColor.brown
         return st
     }()
     
     var selectedSearch: String = ""
     var searchCtrl: SearchTripViewController!
-    
     
     override func setupViews() {
         
@@ -29,7 +29,8 @@ class SearchDropdownCell: BaseCell {
         
         addSubview(searchedLabel)
         searchedLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        searchedLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+        searchedLabel.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -70).isActive = true
+        searchedLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         searchedLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
