@@ -8,36 +8,28 @@
 
 import UIKit
 
-class UserProfileController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
-    private let cellId  = "cellId"
-    
-    lazy var  collectionView: UICollectionView = {
-//        let layout = UICollectionViewFlowLayout()
-        let cv = UICollectionView()
-//        frame: CGRect.init(), collectionViewLayout: layout)
-        cv.backgroundColor = UIColor.rgb(red: 100, green: 100, blue: 100, alpha: 0.2)
-        cv.dataSource = self
-        cv.delegate = self
-        return cv
-    }()
+class UserProfileController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        collectionView.register(UserTripCell.self, forCellWithReuseIdentifier: cellId)
-        view.addSubview(collectionView)
-        
+
+        // Do any additional setup after loading the view.
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-        return cell
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
     }
+    */
 
 }
-

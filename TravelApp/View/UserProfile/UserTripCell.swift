@@ -20,8 +20,6 @@ class UserTripCell: UICollectionViewCell {
     }
     
     func setupViews() {
-        backgroundColor = UIColor.red
+        backgroundColor = UIColor.blue
     }
-    
-    
 }
