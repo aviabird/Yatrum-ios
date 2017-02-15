@@ -34,7 +34,7 @@ class PlaceCell: BaseCell, UICollectionViewDataSource,  UICollectionViewDelegate
     var place: Place! {
         didSet{
             placeViewBadgeTitleLabel.text = place.name
-            placeViewBadgeDateLabel.text = place.created_at?.humanizeDate(format: "dd MMM yy hh:mm a")
+            placeViewBadgeDateLabel.text = place.visited_date?.humanizeDate(format: "dd MMM yy hh:mm a")
             placeDescText.text = place.review
         }
     }
