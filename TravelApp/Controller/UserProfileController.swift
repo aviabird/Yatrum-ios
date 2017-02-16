@@ -8,36 +8,28 @@
 
 import UIKit
 
-class UserProfileController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class UserProfileController: UIViewController {
     
-    private let cellId  = "cellId"
-    
-    lazy var  collectionView: UICollectionView = {
-        //        let layout = UICollectionViewFlowLayout()
-        let cv = UICollectionView()
-        //        frame: CGRect.init(), collectionViewLayout: layout)
-        cv.backgroundColor = UIColor.rgb(red: 100, green: 100, blue: 100, alpha: 0.2)
-        cv.dataSource = self
-        cv.delegate = self
+    lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let cv = UICollectionView(frame: CGRect.init(), collectionViewLayout: layout)
+        cv.backgroundColor = UIColor.white
+        cv.translatesAutoresizingMaskIntoConstraints = false
         return cv
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.register(UserTripCell.self, forCellWithReuseIdentifier: cellId)
+        setupCollectionView()
         view.addSubview(collectionView)
+    }
+    
+    private func setupCollectionView() {
         
+        collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        collectionView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 10).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10).isActive = true
     }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-        return cell
-    }
-    
 }
 

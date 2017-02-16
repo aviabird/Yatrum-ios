@@ -46,7 +46,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
         collectionView?.register(TrendingCell.self, forCellWithReuseIdentifier: trendingCellId)
-        collectionView?.register(UserTripCell.self, forCellWithReuseIdentifier: userProfile)
+        collectionView?.register(UserProfileCell.self, forCellWithReuseIdentifier: userProfile)
         
         collectionView?.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 50, 0)
