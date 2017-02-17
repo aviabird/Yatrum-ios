@@ -150,3 +150,27 @@ extension String {
         return relevantTime
     }
 }
+
+extension CreateTripController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func handleSelectTripImage() {
+        let picker = UIImagePickerController()
+        
+        picker.delegate = self
+        
+        present(picker, animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        if let imagePicked = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+            self.tripEditForm.thumbnailImageView.image = imagePicked
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+}

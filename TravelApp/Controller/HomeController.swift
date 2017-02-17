@@ -82,7 +82,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     func publishTrip() {
         let createTripController = CreateTripController()
-        navigationController?.pushViewController(createTripController, animated: true)
+        present(createTripController, animated: true, completion: nil)
     }
     
     func handleSearch() {
