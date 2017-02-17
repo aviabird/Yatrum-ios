@@ -9,6 +9,7 @@
 import UIKit
 
 class UserTripCell: UICollectionViewCell {
+    
     let thumbnailImageView: UIImageView = {
         let ti = UIImageView()
         ti.contentMode = .scaleAspectFill

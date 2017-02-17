@@ -381,10 +381,10 @@
 		C74566C31E5301DD00FE85F2 /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
+				C73DDD6F1E55B94500CC1FCC /* UserProfileCell.swift */,
 				C74566C41E53215B00FE85F2 /* UserTripCell.swift */,
 				C73DDD6B1E55A23D00CC1FCC /* UserMenuBar.swift */,
 				C73DDD6D1E55A28B00CC1FCC /* UserProfileHeader.swift */,
-				C73DDD6F1E55B94500CC1FCC /* UserProfileCell.swift */,
 			);
 			name = UserProfile;
 			sourceTree = "<group>";

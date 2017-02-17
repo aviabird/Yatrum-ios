@@ -12,6 +12,20 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
     
     let cell = "cellId"
     
+    var user: User!
+    
+    var trips: [Trip]?
+    
+    func fetchUserTripsFeed() {
+        TripService.sharedInstance.fetchTripsFeed { (trips: [Trip]) in
+            DispatchQueue.main.async {
+                self.trips = trips
+                self.collectionView.reloadData()
+            }
+        }
+    }
+
+    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: CGRect.init(), collectionViewLayout: layout)
@@ -36,11 +50,13 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
     
     override func setupViews() {
         
+//        user = SharedData.sharedInstance.getCurrentUser()
+        
+        fetchUserTripsFeed()
         collectionView.register(UserTripCell.self, forCellWithReuseIdentifier: cell)
         setupProfileHeader()        
         setupMenuBar()
         setupCollectionView()
-
         
     }
     
@@ -68,7 +84,7 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return trips?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
