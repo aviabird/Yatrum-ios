@@ -30,6 +30,9 @@ class UserMenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegateF
         collectionView.register(UserMenuCell.self, forCellWithReuseIdentifier: cell)
         setupCollectionView()
         
+        let selectedIndexPath = NSIndexPath(item: 0, section: 0) as IndexPath
+        collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: [])
+        setupHorizontalBar()
     }
     
     func setupCollectionView() {
@@ -37,6 +40,21 @@ class UserMenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegateF
         addConstraintsWithFormat(format:  "H:|[v0]|", views: collectionView)
         addConstraintsWithFormat(format: "V:|[v0]|", views: collectionView)
         
+    }
+    
+    var horizontalBarLeftAnchor: NSLayoutConstraint?
+    
+    func setupHorizontalBar() {
+        let horizontalBarView = UIView()
+        horizontalBarView.backgroundColor = UIColor.orange
+        horizontalBarView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(horizontalBarView)
+        
+        horizontalBarLeftAnchor = horizontalBarView.leftAnchor.constraint(equalTo: self.leftAnchor)
+        horizontalBarLeftAnchor?.isActive = true
+        horizontalBarView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/4).isActive = true
+        horizontalBarView.heightAnchor.constraint(equalToConstant: 2).isActive = true
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -70,11 +88,35 @@ class UserMenuCell: BaseCell {
         labelView.textColor = UIColor.darkGray
         labelView.font = labelView.font.withSize(12)
         labelView.text = "Hello"
-//        labelView.backgroundColor = UIColor.black
+//        labelView.backgroundColor = UIColor.b
         labelView.textAlignment = .center
         labelView.translatesAutoresizingMaskIntoConstraints = false
         return labelView
     }()
+    
+    override var isHighlighted: Bool {
+        didSet {
+            updateViewOnSelectedAndHighlight(status: isHighlighted)
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            updateViewOnSelectedAndHighlight(status: isSelected)
+        }
+    }
+    
+    func updateViewOnSelectedAndHighlight(status: Bool) {
+        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            if status {
+                self.labelView.tintColor = UIColor.appCallToActionColor()
+                self.labelView.textColor = UIColor.appCallToActionColor()
+            } else {
+                self.labelView.tintColor = UIColor.darkGray
+                self.labelView.textColor = UIColor.darkGray
+            }
+        }, completion: nil)
+    }
     
     override func setupViews() {
         super.setupViews()
@@ -82,12 +124,11 @@ class UserMenuCell: BaseCell {
         
         addSubview(labelView)
         
+        
         labelView.heightAnchor.constraint(equalToConstant: 30).isActive = true
         labelView.widthAnchor.constraint(equalTo: widthAnchor, constant: 2).isActive = true
         labelView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         labelView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        
-        
         
     }
 }
