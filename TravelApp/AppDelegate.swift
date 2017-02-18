@@ -8,6 +8,7 @@
 
 import UIKit
 import ReSwift
+import GooglePlaces
 
 var store = Store<AppState>(reducer: AppReducer(), state: nil)
 var statusBarBackgroundView = UIView()
@@ -44,6 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.addSubview(statusBarBackgroundView)
         window?.addConstraintsWithFormat(format: "H:|[v0]|", views: statusBarBackgroundView)
         window?.addConstraintsWithFormat(format: "V:[v0(20)]", views: statusBarBackgroundView)
+        
+        GMSPlacesClient.provideAPIKey("AIzaSyD8mpPsFUp8wtKW2pZCqYAgqVGPaB-NXCw")
         
         return true
     }

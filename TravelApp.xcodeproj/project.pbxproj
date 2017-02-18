@@ -40,6 +40,7 @@
 		7830442F1E40C98300AA05FD /* TripState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7830442E1E40C98300AA05FD /* TripState.swift */; };
 		783044311E40CB6400AA05FD /* AuthenticationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783044301E40CB6400AA05FD /* AuthenticationState.swift */; };
 		783044331E40D43200AA05FD /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783044321E40D43200AA05FD /* AppState.swift */; };
+		78340B051E587595002E45BF /* PlacePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78340B041E587595002E45BF /* PlacePicker.swift */; };
 		78684EC71E4082EB0074B8C2 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78684EC61E4082EB0074B8C2 /* UserService.swift */; };
 		78684EC91E4082FC0074B8C2 /* MultiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78684EC81E4082FC0074B8C2 /* MultiProvider.swift */; };
 		78684ECB1E4083090074B8C2 /* UserApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78684ECA1E4083090074B8C2 /* UserApi.swift */; };
@@ -115,6 +116,7 @@
 		7830442E1E40C98300AA05FD /* TripState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripState.swift; path = State/TripState.swift; sourceTree = "<group>"; };
 		783044301E40CB6400AA05FD /* AuthenticationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationState.swift; path = State/AuthenticationState.swift; sourceTree = "<group>"; };
 		783044321E40D43200AA05FD /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppState.swift; path = State/AppState.swift; sourceTree = "<group>"; };
+		78340B041E587595002E45BF /* PlacePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlacePicker.swift; path = Helpers/PlacePicker.swift; sourceTree = "<group>"; };
 		78684EC61E4082EB0074B8C2 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserService.swift; path = Service/UserService.swift; sourceTree = "<group>"; };
 		78684EC81E4082FC0074B8C2 /* MultiProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiProvider.swift; path = Provider/MultiProvider.swift; sourceTree = "<group>"; };
 		78684ECA1E4083090074B8C2 /* UserApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserApi.swift; path = Provider/UserApi.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 			children = (
 				781DBE021E3F7EB9003591DA /* Extensions.swift */,
 				78684ECC1E4083220074B8C2 /* Providers.swift */,
+				78340B041E587595002E45BF /* PlacePicker.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -681,6 +684,7 @@
 				781DBE011E3F7E78003591DA /* CreateTripController.swift in Sources */,
 				781DBE271E3F80A9003591DA /* AuthService.swift in Sources */,
 				C7F9C62C1E433FA600E9B664 /* SearchBar.swift in Sources */,
+				78340B051E587595002E45BF /* PlacePicker.swift in Sources */,
 				78684EC71E4082EB0074B8C2 /* UserService.swift in Sources */,
 				781DBE1B1E3F8066003591DA /* SettingCell.swift in Sources */,
 				78684ECD1E4083220074B8C2 /* Providers.swift in Sources */,

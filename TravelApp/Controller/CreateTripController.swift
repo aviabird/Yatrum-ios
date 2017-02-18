@@ -23,6 +23,7 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
     
     var tripView: UIView!
     var tripEditForm: TripEdit!
+    var selectedPlaceEditCell: PlaceEditCell?
     
     lazy var  collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -34,14 +35,33 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
         return cv
     }()
     
+    lazy var datePickerView: UIDatePicker = {
+        let dp = UIDatePicker()
+        dp.backgroundColor = UIColor.appMainBGColor()
+        dp.translatesAutoresizingMaskIntoConstraints = false
+        dp.addTarget(self, action: #selector(handleDateSelection), for: .valueChanged)
+        dp.isHidden = true
+        return dp
+    }()
+    
+    func handleDateSelection(sender:UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.medium
+        dateFormatter.timeStyle = DateFormatter.Style.short
+        selectedPlaceEditCell?.placeViewBadgeDateLabel.text = dateFormatter.string(from: sender.date)
+        sender.isHidden = true
+        collectionView.reloadData()
+    }
+    
     let cellId = "cellId"
     
     func loadSubViews() {
         trip.user = SharedData.sharedInstance.getCurrentUser()!
-        trip.places = [Place()]
+        trip.places = [Place(), Place()]
         
         addTripEditForm()
         setupCollectionViews()
+        addDatePickerView()
     }
     
     func addTripEditForm() {
@@ -67,6 +87,15 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
         collectionView.register(PlaceEditCell.self, forCellWithReuseIdentifier: cellId)
     }
     
+    func addDatePickerView() {
+        view.addSubview(datePickerView)
+        
+        datePickerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        datePickerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        datePickerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        datePickerView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return trip.places.count 
     }
@@ -74,6 +103,7 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! PlaceEditCell
         cell.place = trip.places[indexPath.item]
+        cell.createTripCtrl = self
         return cell
     }
     
