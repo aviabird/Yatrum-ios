@@ -38,15 +38,20 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
     
     func loadSubViews() {
         trip.user = SharedData.sharedInstance.getCurrentUser()!
+        trip.places = [Place()]
         
         addTripEditForm()
-//        setupCollectionViews()
+        setupCollectionViews()
     }
     
     func addTripEditForm() {
         let tripHeaderFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: 150)
         tripEditForm = TripEdit(frame: tripHeaderFrame)
         tripEditForm.createTripCtrl = self
+        tripEditForm.layer.shadowOpacity = 0.5
+        tripEditForm.layer.shadowRadius = 3
+        tripEditForm.layer.shadowOffset = CGSize(width: 0, height: 2)
+        tripEditForm.layer.shadowColor = UIColor.black.cgColor
         
         view.addSubview(tripEditForm)
     }
@@ -59,7 +64,7 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
         
         collectionView.showsVerticalScrollIndicator = false
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(PlaceEditCell.self, forCellWithReuseIdentifier: cellId)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -67,7 +72,7 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! PlaceCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! PlaceEditCell
         cell.place = trip.places[indexPath.item]
         return cell
     }
@@ -80,7 +85,7 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
         let size = CGSize(width: approxWidth, height: 1000)
         let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 12)]
         
-        let estimatedFrame = NSString(string: text!).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+        let estimatedFrame = NSString(string: text).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
         
         return CGSize(width: view.frame.width, height: estimatedFrame.height + 300)
     }

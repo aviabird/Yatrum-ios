@@ -44,6 +44,7 @@
 		78684EC91E4082FC0074B8C2 /* MultiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78684EC81E4082FC0074B8C2 /* MultiProvider.swift */; };
 		78684ECB1E4083090074B8C2 /* UserApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78684ECA1E4083090074B8C2 /* UserApi.swift */; };
 		78684ECD1E4083220074B8C2 /* Providers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78684ECC1E4083220074B8C2 /* Providers.swift */; };
+		786932971E5841DB00C8589A /* PlaceEditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786932961E5841DB00C8589A /* PlaceEditCell.swift */; };
 		786FEED51E45E03900B6CD8D /* PlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786FEED41E45E03900B6CD8D /* PlaceCell.swift */; };
 		78CAB94C1E33B39A0087F530 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAB94B1E33B39A0087F530 /* AppDelegate.swift */; };
 		78CAB9511E33B39A0087F530 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78CAB94F1E33B39A0087F530 /* Main.storyboard */; };
@@ -118,6 +119,7 @@
 		78684EC81E4082FC0074B8C2 /* MultiProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiProvider.swift; path = Provider/MultiProvider.swift; sourceTree = "<group>"; };
 		78684ECA1E4083090074B8C2 /* UserApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserApi.swift; path = Provider/UserApi.swift; sourceTree = "<group>"; };
 		78684ECC1E4083220074B8C2 /* Providers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Providers.swift; path = Helpers/Providers.swift; sourceTree = "<group>"; };
+		786932961E5841DB00C8589A /* PlaceEditCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaceEditCell.swift; path = View/TripCreate/PlaceEditCell.swift; sourceTree = "<group>"; };
 		786FEED41E45E03900B6CD8D /* PlaceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaceCell.swift; path = View/TripDetail/PlaceCell.swift; sourceTree = "<group>"; };
 		78CAB9481E33B39A0087F530 /* TravelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78CAB94B1E33B39A0087F530 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 			isa = PBXGroup;
 			children = (
 				78EC1D8A1E56D1EC00FAFC56 /* TripEdit.swift */,
+				786932961E5841DB00C8589A /* PlaceEditCell.swift */,
 			);
 			name = TripCreate;
 			sourceTree = "<group>";
@@ -681,6 +684,7 @@
 				78684EC71E4082EB0074B8C2 /* UserService.swift in Sources */,
 				781DBE1B1E3F8066003591DA /* SettingCell.swift in Sources */,
 				78684ECD1E4083220074B8C2 /* Providers.swift in Sources */,
+				786932971E5841DB00C8589A /* PlaceEditCell.swift in Sources */,
 				783044311E40CB6400AA05FD /* AuthenticationState.swift in Sources */,
 				781DBE251E3F80A0003591DA /* TripService.swift in Sources */,
 				78CAB94C1E33B39A0087F530 /* AppDelegate.swift in Sources */,
