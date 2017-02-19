@@ -35,21 +35,43 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
         return cv
     }()
     
-    lazy var datePickerView: UIDatePicker = {
+    lazy var datePickerView: UIView = {
+        let dpv = UIView()
+        dpv.backgroundColor = UIColor.appMainBGColor()
+        dpv.translatesAutoresizingMaskIntoConstraints = false
+        return dpv
+    }()
+    
+    lazy var datePicker: UIDatePicker = {
         let dp = UIDatePicker()
         dp.backgroundColor = UIColor.appMainBGColor()
         dp.translatesAutoresizingMaskIntoConstraints = false
         dp.addTarget(self, action: #selector(handleDateSelection), for: .valueChanged)
-        dp.isHidden = true
         return dp
     }()
+    
+    lazy var datePickerDoneButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = UIColor.appMainBGColor()
+        button.setTitle("Done", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(UIColor.appLightBlue(), for: .normal)
+        button.addTarget(self, action: #selector(handleDoneAddingDate), for: .touchUpInside)
+        button.isUserInteractionEnabled = true
+        return button
+    }()
+    
+    func handleDoneAddingDate() {
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.datePickerView.frame = CGRect(x: 0, y:  (self.view.frame.height), width: (self.view.frame.width), height: 200)
+        }, completion: nil)
+    }
     
     func handleDateSelection(sender:UIDatePicker) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.medium
         dateFormatter.timeStyle = DateFormatter.Style.short
         selectedPlaceEditCell?.placeViewBadgeDateLabel.text = dateFormatter.string(from: sender.date)
-        sender.isHidden = true
         collectionView.reloadData()
     }
     
@@ -89,11 +111,23 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
     
     func addDatePickerView() {
         view.addSubview(datePickerView)
+        datePickerView.addSubview(datePickerDoneButton)
+        datePickerView.addSubview(datePicker)
         
-        datePickerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        datePickerView.topAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         datePickerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         datePickerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         datePickerView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        
+        datePickerDoneButton.topAnchor.constraint(equalTo: datePickerView.topAnchor, constant: 2).isActive = true
+        datePickerDoneButton.rightAnchor.constraint(equalTo: datePickerView.rightAnchor, constant: -2).isActive = true
+        datePickerDoneButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        datePickerDoneButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        datePicker.topAnchor.constraint(equalTo: datePickerDoneButton.bottomAnchor).isActive = true
+        datePicker.widthAnchor.constraint(equalTo: datePickerView.widthAnchor).isActive = true
+        datePicker.bottomAnchor.constraint(equalTo: datePickerView.bottomAnchor).isActive = true
+        datePicker.leftAnchor.constraint(equalTo: datePickerView.leftAnchor).isActive = true
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

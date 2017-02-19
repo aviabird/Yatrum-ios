@@ -46,8 +46,11 @@ class PlaceEditCell: BaseCell {
     
     func handleDatePickerSelection() {
         createTripCtrl.selectedPlaceEditCell = self
-        createTripCtrl.datePickerView.isHidden = false
-        print("click")
+        
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.createTripCtrl.datePickerView.frame = CGRect(x: 0, y:  (self.window?.frame.height)! - 200, width: (self.window?.frame.width)!, height: 200)
+            self.createTripCtrl.collectionView.scrollToItem(at: self.createTripCtrl.collectionView.indexPath(for: self)!, at: .top, animated: true)
+        }, completion: nil)
     }
     
     lazy var placeViewBadgeTitleLabel: UILabel = {
