@@ -173,9 +173,8 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
                 self.tripEditForm.hideAll()
                 break
             case scrollView.contentOffset.y <= 1:
-                let height = self.view.frame.width * 9 / 16
-                self.tripEditForm.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: height)
-                self.collectionView.frame = CGRect(x: 0, y: height, width: self.view.frame.width, height: self.view.frame.height - height)
+                self.tripEditForm.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 150)
+                self.collectionView.frame = CGRect(x: 0, y: 150, width: self.view.frame.width, height: self.view.frame.height - 150)
                 self.tripEditForm.showAll()
                 break
             default:

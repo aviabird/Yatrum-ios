@@ -24,14 +24,12 @@ class TripEdit: UIView {
     func hideAll() {
         thumbnailImageView.frame = CGRect(x: 0, y: 0, width: thumbnailImageView.frame.width, height: 60)
         titleTextField.frame.origin.y = 25
-        titleTextField.contentScaleFactor = 0.5
         tripPhotoUploadButton.isHidden = true
     }
     
     func showAll() {
         thumbnailImageView.frame = CGRect(x: 0, y: 0, width: thumbnailImageView.frame.width, height: frame.height)
         titleTextField.frame.origin.y = frame.height / 2
-        titleTextField.contentScaleFactor = 1
         tripPhotoUploadButton.isHidden = false
     }
     
