@@ -22,10 +22,17 @@ class TripEdit: UIView {
     var trip: Trip!
     
     func hideAll() {
-        
+        thumbnailImageView.frame = CGRect(x: 0, y: 0, width: thumbnailImageView.frame.width, height: 60)
+        titleTextField.frame.origin.y = 25
+        titleTextField.contentScaleFactor = 0.5
+        tripPhotoUploadButton.isHidden = true
     }
     
     func showAll() {
+        thumbnailImageView.frame = CGRect(x: 0, y: 0, width: thumbnailImageView.frame.width, height: frame.height)
+        titleTextField.frame.origin.y = frame.height / 2
+        titleTextField.contentScaleFactor = 1
+        tripPhotoUploadButton.isHidden = false
     }
     
     var thumbnailImageView: CustomImageView = {
@@ -127,7 +134,7 @@ class TripEdit: UIView {
     func addPublishBtn() {
         addSubview(publishButton)
         
-        publishButton.topAnchor.constraint(equalTo: topAnchor, constant: 25).isActive = true
+        publishButton.topAnchor.constraint(equalTo: topAnchor, constant: 22).isActive = true
         publishButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -5).isActive = true
         publishButton.widthAnchor.constraint(equalToConstant: 70).isActive = true
         publishButton.heightAnchor.constraint(equalToConstant: 30).isActive = true

@@ -10,20 +10,25 @@ import UIKit
 
 class CreateTripController: UIViewController, UICollectionViewDataSource,  UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.backgroundColor = UIColor.appMainBGColor()
-        
-        // Do any additional setup after loading the view.
-        loadSubViews()
-    }
-    
     var trip = Trip()
     
     var tripView: UIView!
     var tripEditForm: TripEdit!
     var selectedPlaceEditCell: PlaceEditCell?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = UIColor.appMainBGColor()
+        view.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(dismissKeyboard)))
+        
+        // Do any additional setup after loading the view.
+        loadSubViews()
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
     
     lazy var  collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -46,7 +51,6 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
         let dp = UIDatePicker()
         dp.backgroundColor = UIColor.appMainBGColor()
         dp.translatesAutoresizingMaskIntoConstraints = false
-        dp.addTarget(self, action: #selector(handleDateSelection), for: .valueChanged)
         return dp
     }()
     
@@ -62,9 +66,11 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
     }()
     
     func handleDoneAddingDate() {
+        handleDateSelection(sender: self.datePicker)
+        
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.datePickerView.frame = CGRect(x: 0, y:  (self.view.frame.height), width: (self.view.frame.width), height: 200)
-        }, completion: nil)
+        })
     }
     
     func handleDateSelection(sender:UIDatePicker) {
@@ -162,8 +168,8 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             switch true {
             case scrollView.contentOffset.y >= 100:
-                self.tripEditForm.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
-                self.collectionView.frame = CGRect(x: 0, y: 50, width: self.view.frame.width, height: self.view.frame.height - 50)
+                self.tripEditForm.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 60)
+                self.collectionView.frame = CGRect(x: 0, y: 60, width: self.view.frame.width, height: self.view.frame.height - 60)
                 self.tripEditForm.hideAll()
                 break
             case scrollView.contentOffset.y <= 1:

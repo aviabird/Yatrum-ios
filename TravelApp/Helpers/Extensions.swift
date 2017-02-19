@@ -168,6 +168,7 @@ extension CreateTripController: UIImagePickerControllerDelegate, UINavigationCon
         
         if let imagePicked = info["UIImagePickerControllerOriginalImage"] as? UIImage {
             self.tripEditForm.thumbnailImageView.image = imagePicked
+            statusBarBackgroundView.alpha = 0
         }
         
         dismiss(animated: true, completion: nil)
