@@ -33,6 +33,8 @@ class UserMenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegateF
         let selectedIndexPath = NSIndexPath(item: 0, section: 0) as IndexPath
         collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: [])
         setupHorizontalBar()
+        
+        
     }
     
     func setupCollectionView() {
@@ -55,6 +57,20 @@ class UserMenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegateF
         horizontalBarView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/4).isActive = true
         horizontalBarView.heightAnchor.constraint(equalToConstant: 2).isActive = true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.item)
+        let x = CGFloat(indexPath.item) * frame.width / 4
+        horizontalBarLeftAnchor?.constant = x
+        
+        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: { 
+            self.layoutIfNeeded()
+        }, completion: nil)
+        
+        UIView.animate(withDuration: 0.75) { 
+            self.layoutIfNeeded()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
