@@ -22,8 +22,7 @@ class Trip: NSObject{
     var user: User?
     var places: [Place] = []
     
-    init(dictionary: [String: AnyObject]) {
-        super.init()
+    func setValuesByJson(dictionary: [String: AnyObject]) {
         
         setValuesForKeys(dictionary)
         
@@ -31,7 +30,9 @@ class Trip: NSObject{
         
         if let placesArray = dictionary["places"] {
             for placeDict in placesArray as! [[String: AnyObject]] {
-                places.append(Place(dictionary: placeDict))
+                let place = Place()
+                place.setValuesByJson(dictionary: placeDict)
+                places.append(place)
             }
         }
     }

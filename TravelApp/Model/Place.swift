@@ -13,16 +13,14 @@ class Place: NSObject {
     var id: NSNumber?
     var name: String?
     var placeDescription: String?
-    var review: String?
+    var review: String = ""
     var created_at: String?
     var updated_at: String?
     var visited_date: String?
     
     var pictures: [Picture] = []
     
-    init(dictionary: [String: AnyObject]) {
-        super.init()
-        
+    func setValuesByJson(dictionary: [String: AnyObject]) {
         setValuesForKeys(dictionary)
         
         if let picturesArray = dictionary["pictures"] {

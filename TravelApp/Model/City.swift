@@ -24,7 +24,9 @@ class City: NSObject {
         
         if let placesArray = dictionary["places"] {
             for placeDict in placesArray as! [[String: AnyObject]] {
-                places.append(Place(dictionary: placeDict))
+                let place = Place()
+                place.setValuesByJson(dictionary: placeDict)
+                places.append(place)
             }
         }
         

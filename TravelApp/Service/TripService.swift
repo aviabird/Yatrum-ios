@@ -34,7 +34,8 @@ class TripService: NSObject {
                 do {
                     if let json = try response.mapJSON() as? [String: AnyObject] {
                         
-                        let trip = Trip(dictionary: json)
+                        let trip = Trip()
+                        trip.setValuesByJson(dictionary: json)
                         
                         DispatchQueue.main.async {
                             completion(trip)
@@ -66,7 +67,8 @@ class TripService: NSObject {
                         var trips = [Trip]()
                         
                         for dictionary in json {
-                            let trip = Trip(dictionary: dictionary)
+                            let trip = Trip()
+                            trip.setValuesByJson(dictionary: dictionary)
                             trips.append(trip)
                         }
                         
@@ -104,7 +106,8 @@ class TripService: NSObject {
                         
                         if tripsArray != nil {
                             for dictionary in tripsArray as! [[String: AnyObject]] {
-                                let trip = Trip(dictionary: dictionary)
+                                let trip = Trip()
+                                trip.setValuesByJson(dictionary: dictionary)
                                 trips.append(trip)
                             }
                         }

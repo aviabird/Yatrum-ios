@@ -13,6 +13,7 @@ target 'TravelApp' do
   pod 'ReSwift'
 #  pod 'ReSwiftRouter'
   pod 'SwiftDate', '~> 4.0'
+  pod 'GooglePlaces'
 
 
   target 'TravelAppTests' do
