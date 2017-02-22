@@ -16,14 +16,14 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
     
     var trips: [Trip]?
     
-    func fetchUserTripsFeed() {
-        TripService.sharedInstance.fetchTripsFeed { (trips: [Trip]) in
-            DispatchQueue.main.async {
-                self.trips = trips
-                self.collectionView.reloadData()
-            }
-        }
-    }
+//    func fetchUserTripsFeed() {
+//        TripService.sharedInstance.fetchTripsFeed { (trips: [Trip]) in
+//            DispatchQueue.main.async {
+//                self.trips = trips
+//                self.collectionView.reloadData()
+//            }
+//        }
+//    }
 
     
     lazy var collectionView: UICollectionView = {
@@ -52,16 +52,32 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
         
 //        user = SharedData.sharedInstance.getCurrentUser()
         
-        fetchUserTripsFeed()
-        collectionView.register(UserTripCell.self, forCellWithReuseIdentifier: cell)
+//        fetchUserTripsFeed()
+        
         setupProfileHeader()        
         setupMenuBar()
         setupCollectionView()
         
     }
     
+//    func scrollToMenuIndex(menuIndex: Int) {
+//        let indexPath = NSIndexPath(item: menuIndex, section: 0)
+//        collectionView.scrollToItem(at: indexPath as IndexPath, at: .init(rawValue: 0), animated: true)
+//    }
+//    
     private func setupCollectionView() {
+        
+        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.scrollDirection = .horizontal
+            flowLayout.minimumLineSpacing = 0
+            
+        }
+        collectionView.isPagingEnabled = true
+        
+        
         addSubview(collectionView)
+//        collectionView.register(UserTripCell.self, forCellWithReuseIdentifier: cell)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cell)
         collectionView.topAnchor.constraint(equalTo: menubar.bottomAnchor).isActive = true
         collectionView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
@@ -83,21 +99,41 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
         menubar.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        menubar.horizontalBarLeftAnchor?.constant = scrollView.contentOffset.x / 4
+//    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return trips?.count ?? 0
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cell, for: indexPath) as! UserTripCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cell, for: indexPath)
+        let colors: [UIColor] = [.blue, .yellow, .red,.green]
+        cell.backgroundColor = colors[indexPath.item]
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: frame.width, height: 200)
+        return CGSize(width: frame.width, height: frame.height)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
-    }
+    
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return trips?.count ?? 0
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cell, for: indexPath) as! UserTripCell
+//        return cell
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: frame.width, height: 200)
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return 5
+//    }
 
 }

@@ -24,6 +24,8 @@ class UserMenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegateF
         return cv
     }()
     
+    var userProfileCell = UserProfileCell()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -71,6 +73,8 @@ class UserMenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegateF
         UIView.animate(withDuration: 0.75) { 
             self.layoutIfNeeded()
         }
+//        userProfileCell.scrollToMenuIndex(menuIndex: indexPath.item)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
