@@ -16,14 +16,14 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
     
     var trips: [Trip]?
     
-//    func fetchUserTripsFeed() {
-//        TripService.sharedInstance.fetchTripsFeed { (trips: [Trip]) in
-//            DispatchQueue.main.async {
-//                self.trips = trips
-//                self.collectionView.reloadData()
-//            }
-//        }
-//    }
+    func fetchUserTripsFeed() {
+        TripService.sharedInstance.fetchTripsFeed { (trips: [Trip]) in
+            DispatchQueue.main.async {
+                self.trips = trips
+                self.collectionView.reloadData()
+            }
+        }
+    }
 
     
     lazy var collectionView: UICollectionView = {
@@ -36,8 +36,9 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
         return cv
     }()
     
-    let menubar: UserMenuBar = {
+    lazy var menubar: UserMenuBar = {
         let mb = UserMenuBar()
+        mb.userProfileCell = self
         mb.translatesAutoresizingMaskIntoConstraints = false
         return mb
     }()
@@ -60,11 +61,10 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
         
     }
     
-//    func scrollToMenuIndex(menuIndex: Int) {
-//        let indexPath = NSIndexPath(item: menuIndex, section: 0)
-//        collectionView.scrollToItem(at: indexPath as IndexPath, at: .init(rawValue: 0), animated: true)
-//    }
-//    
+    func scrollToMenuIndex(menuIndex: IndexPath) {
+        collectionView.scrollToItem(at: menuIndex, at: [], animated: true)
+    }
+    
     private func setupCollectionView() {
         
         if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -99,9 +99,9 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
         menubar.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        menubar.horizontalBarLeftAnchor?.constant = scrollView.contentOffset.x / 4
-//    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        menubar.horizontalBarLeftAnchor?.constant = scrollView.contentOffset.x / 4
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
