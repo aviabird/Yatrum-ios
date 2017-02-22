@@ -10,19 +10,45 @@ import UIKit
 
 class UserTripCell: UICollectionViewCell {
     
-    let thumbnailImageView: UIImageView = {
-        let ti = UIImageView()
+    var user: User!
+    
+    var trip: Trip! {
+        didSet {
+            
+            user = trip.user
+            userNameLabel.text = user.name
+            durationLabel.text = trip.created_at?.relativeDate()
+            
+            setupThumbnailImage()
+            
+            setupUserProfileImageView()
+
+            likeButton.addTarget(self, action: #selector(handleLike), for: .touchUpInside)
+            
+            if trip.is_liked_by_current_user {
+                likeButton.setImage(UIImage(named: "like-filled"), for: .normal)
+                likeButton.tintColor = UIColor.appCallToActionColor()
+            } else {
+                likeButton.setImage(UIImage(named: "like"), for: .normal)
+                likeButton.tintColor = UIColor.gray
+            }
+            
+        }
+        
+    }
+
+    let thumbnailImageView: CustomImageView = {
+        let ti = CustomImageView()
         ti.contentMode = .scaleAspectFill
         ti.clipsToBounds = true
         ti.image = UIImage(named: "")
         ti.translatesAutoresizingMaskIntoConstraints = false
-        ti.alpha = 0.5
-        ti.backgroundColor = UIColor.blue
+//        ti.backgroundColor = UIColor.blue
         return ti
     }()
     
-    let userProfileImageView: UIImageView = {
-        let ui = UIImageView()
+    let userProfileImageView: CustomImageView = {
+        let ui = CustomImageView()
         ui.image = UIImage(named: "")
         ui.contentMode = .scaleAspectFill
         ui.clipsToBounds = true
@@ -31,7 +57,7 @@ class UserTripCell: UICollectionViewCell {
         ui.layer.borderWidth = 2
         ui.layer.borderColor = UIColor.white.cgColor
         ui.translatesAutoresizingMaskIntoConstraints = false
-        ui.backgroundColor = UIColor.red
+//        ui.backgroundColor = UIColor.red
         return ui
     }()
     
@@ -41,8 +67,8 @@ class UserTripCell: UICollectionViewCell {
         label.text = ""
         label.numberOfLines = 1
         label.font = label.font.withSize(15)
-        label.textColor = UIColor.white
-        label.backgroundColor = UIColor.green
+        label.textColor = UIColor.black
+//        label.backgroundColor = UIColor.green
         return label
     }()
     
@@ -52,8 +78,8 @@ class UserTripCell: UICollectionViewCell {
         label.text = ""
         label.numberOfLines = 1
         label.font = label.font.withSize(12)
-        label.textColor = UIColor.white
-        label.backgroundColor = UIColor.yellow
+        label.textColor = UIColor.black
+//        label.backgroundColor = UIColor.yellow
         return label
     }()
     
@@ -62,7 +88,7 @@ class UserTripCell: UICollectionViewCell {
         ub.setImage(UIImage(named: "like"), for: .normal)
         ub.tintColor = UIColor.white
         ub.translatesAutoresizingMaskIntoConstraints = false
-        ub.backgroundColor = UIColor.red
+//        ub.backgroundColor = UIColor.red
         return ub
     }()
     
@@ -74,15 +100,15 @@ class UserTripCell: UICollectionViewCell {
     }
     
     func setupViews() {
-        
+
         addSubview(thumbnailImageView)
         addSubview(userProfileImageView)
         addSubview(likeButton)
         addSubview(userNameLabel)
         addSubview(durationLabel)
         
-        setupThumbnailImage()
-        setupUserProfileImageView()
+//        setupThumbnailImage()
+//        setupUserProfileImageView()
         setupLikeButton()
         setupUserNameLabel()
         setupDurationLabel()
@@ -90,10 +116,52 @@ class UserTripCell: UICollectionViewCell {
         
     }
     
+    func showTripDetail() {
+        let tripDetailViewCtrl = TripDetailViewController()
+        store.dispatch(SelectTrip(tripId: trip.id!))
+        SharedData.sharedInstance.homeController?.present(tripDetailViewCtrl, animated: true, completion: nil)
+    }
+    
+    
+    func handleLike(firstChange: Bool) {
+        trip.is_liked_by_current_user = !trip.is_liked_by_current_user
+        self.likeButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        toggleLike()
+        
+        TripService.sharedInstance.likeTrip(tripId: (trip.id)!) { (trip: Trip) in
+            guard trip.is_liked_by_current_user != self.trip.is_liked_by_current_user else {
+                return
+            }
+            
+            self.toggleLike()
+        }
+    }
+    
+    func toggleLike() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.likeButton.transform = CGAffineTransform.identity
+            if self.trip.is_liked_by_current_user {
+                self.likeButton.setImage(UIImage(named: "like-filled"), for: .normal)
+                self.likeButton.tintColor = UIColor.appCallToActionColor()
+            } else {
+                self.likeButton.setImage(UIImage(named: "like"), for: .normal)
+                self.likeButton.tintColor = UIColor.gray
+            }
+        })
+    }
+    
     func setupThumbnailImage() {
         thumbnailImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         thumbnailImageView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         thumbnailImageView.heightAnchor.constraint(equalToConstant: 140).isActive = true
+        
+        if let thumbnailImageUrl = trip.thumbnail_image_url {
+            thumbnailImageView.loadImageUsingUrlString(urlString: thumbnailImageUrl, width: Float(frame.width))
+        }
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(showTripDetail))
+        thumbnailImageView.isUserInteractionEnabled = true
+        thumbnailImageView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     func setupUserProfileImageView() {
@@ -101,7 +169,13 @@ class UserTripCell: UICollectionViewCell {
         userProfileImageView.leftAnchor.constraint(equalTo: thumbnailImageView.leftAnchor, constant: 8).isActive = true
         userProfileImageView.widthAnchor.constraint(equalToConstant: 44).isActive = true
         userProfileImageView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        
+        if let profileImageURL = user.profile_pic?.url {
+            userProfileImageView.loadImageUsingUrlString(urlString: profileImageURL, width: 44)
+        }
     }
+    
+    
     
     func setupUserNameLabel() {
         userNameLabel.topAnchor.constraint(equalTo: userProfileImageView.topAnchor).isActive = true

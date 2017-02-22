@@ -12,19 +12,9 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
     
     let cell = "cellId"
     
+    let userFeed = "userFeed"
+    
     var user: User!
-    
-    var trips: [Trip]?
-    
-    func fetchUserTripsFeed() {
-        TripService.sharedInstance.fetchTripsFeed { (trips: [Trip]) in
-            DispatchQueue.main.async {
-                self.trips = trips
-                self.collectionView.reloadData()
-            }
-        }
-    }
-
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -76,8 +66,9 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
         
         
         addSubview(collectionView)
-//        collectionView.register(UserTripCell.self, forCellWithReuseIdentifier: cell)
+        
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cell)
+        collectionView.register(UserFeed.self,forCellWithReuseIdentifier: userFeed)
         collectionView.topAnchor.constraint(equalTo: menubar.bottomAnchor).isActive = true
         collectionView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
@@ -103,37 +94,43 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
         menubar.horizontalBarLeftAnchor?.constant = scrollView.contentOffset.x / 4
     }
     
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let index = targetContentOffset.pointee.x / frame.width
+        let indexPath = NSIndexPath(item: Int(index), section: 0)
+        menubar.collectionView.selectItem(at: indexPath as IndexPath, animated: true, scrollPosition: [])
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cell, for: indexPath)
-        let colors: [UIColor] = [.blue, .yellow, .red,.green]
-        cell.backgroundColor = colors[indexPath.item]
+        
+        var identifier: String = ""
+        
+        switch indexPath.item {
+        case 0:
+            identifier = userFeed
+        default:
+            identifier = userFeed
+        }
+        if indexPath.item == 0 {
+            identifier = userFeed
+        }
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
+        cell.backgroundColor = UIColor.white
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: frame.width, height: frame.height)
     }
-    
-    
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return trips?.count ?? 0
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cell, for: indexPath) as! UserTripCell
-//        return cell
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: frame.width, height: 200)
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 5
-//    }
 
 }
+
+
+
+
+

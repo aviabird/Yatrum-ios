@@ -63,16 +63,16 @@ class UserMenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegateF
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.item)
-        let x = CGFloat(indexPath.item) * frame.width / 4
-        horizontalBarLeftAnchor?.constant = x
-        
-        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: { 
-            self.layoutIfNeeded()
-        }, completion: nil)
-        
-        UIView.animate(withDuration: 0.75) { 
-            self.layoutIfNeeded()
-        }
+//        let x = CGFloat(indexPath.item) * frame.width / 4
+//        horizontalBarLeftAnchor?.constant = x
+//        
+//        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: { 
+//            self.layoutIfNeeded()
+//        }, completion: nil)
+//        
+//        UIView.animate(withDuration: 0.75) { 
+//            self.layoutIfNeeded()
+//        }
         userProfileCell.scrollToMenuIndex(menuIndex: indexPath)
         
     }

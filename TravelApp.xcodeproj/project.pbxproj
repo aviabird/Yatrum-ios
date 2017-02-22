@@ -58,6 +58,8 @@
 		C73DDD701E55B94500CC1FCC /* UserProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73DDD6F1E55B94500CC1FCC /* UserProfileCell.swift */; };
 		C74566C21E5301AD00FE85F2 /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74566C11E5301AD00FE85F2 /* UserProfileController.swift */; };
 		C74566C51E53215B00FE85F2 /* UserTripCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74566C41E53215B00FE85F2 /* UserTripCell.swift */; };
+		C74581D51E5D810200F29787 /* UserFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74581D41E5D810200F29787 /* UserFeed.swift */; };
+		C74581DB1E5D9EFF00F29787 /* Followers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74581DA1E5D9EFF00F29787 /* Followers.swift */; };
 		C75943561E4DD16C000232D4 /* SearchDropdownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75943551E4DD16C000232D4 /* SearchDropdownCell.swift */; };
 		C783C6841E41DD4400870E9B /* SearchTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C783C6831E41DD4400870E9B /* SearchTripViewController.swift */; };
 		C7E133B81E44818100D0F8D8 /* SearchTripCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E133B71E44818100D0F8D8 /* SearchTripCell.swift */; };
@@ -144,6 +146,8 @@
 		C73DDD6F1E55B94500CC1FCC /* UserProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfileCell.swift; path = View/UserProfile/UserProfileCell.swift; sourceTree = "<group>"; };
 		C74566C11E5301AD00FE85F2 /* UserProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfileController.swift; path = Controller/UserProfileController.swift; sourceTree = "<group>"; };
 		C74566C41E53215B00FE85F2 /* UserTripCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserTripCell.swift; path = View/UserProfile/UserTripCell.swift; sourceTree = "<group>"; };
+		C74581D41E5D810200F29787 /* UserFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserFeed.swift; path = View/UserProfile/UserFeed.swift; sourceTree = "<group>"; };
+		C74581DA1E5D9EFF00F29787 /* Followers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Followers.swift; path = View/UserProfile/Followers.swift; sourceTree = "<group>"; };
 		C75943551E4DD16C000232D4 /* SearchDropdownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchDropdownCell.swift; path = View/SearchDropdownCell.swift; sourceTree = "<group>"; };
 		C783C6831E41DD4400870E9B /* SearchTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchTripViewController.swift; path = Controller/SearchTripViewController.swift; sourceTree = "<group>"; };
 		C7E133B71E44818100D0F8D8 /* SearchTripCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchTripCell.swift; path = View/SearchTripCell.swift; sourceTree = "<group>"; };
@@ -382,6 +386,8 @@
 			isa = PBXGroup;
 			children = (
 				C73DDD6F1E55B94500CC1FCC /* UserProfileCell.swift */,
+				C74581D41E5D810200F29787 /* UserFeed.swift */,
+				C74581DA1E5D9EFF00F29787 /* Followers.swift */,
 				C74566C41E53215B00FE85F2 /* UserTripCell.swift */,
 				C73DDD6B1E55A23D00CC1FCC /* UserMenuBar.swift */,
 				C73DDD6D1E55A28B00CC1FCC /* UserProfileHeader.swift */,
@@ -719,8 +725,10 @@
 				781DBE191E3F8057003591DA /* TripCell.swift in Sources */,
 				780ABCD31E4310CE00043261 /* TripEffect.swift in Sources */,
 				781DBE211E3F8084003591DA /* FeedCell.swift in Sources */,
+				C74581D51E5D810200F29787 /* UserFeed.swift in Sources */,
 				C74566C21E5301AD00FE85F2 /* UserProfileController.swift in Sources */,
 				781DBE1D1E3F806F003591DA /* BaseCell.swift in Sources */,
+				C74581DB1E5D9EFF00F29787 /* Followers.swift in Sources */,
 				780ABCC51E424D3400043261 /* TripActions.swift in Sources */,
 				781DBE091E3F7F19003591DA /* SharedData.swift in Sources */,
 				78F561201E5047AE005724E7 /* TripDetailViewController.swift in Sources */,
