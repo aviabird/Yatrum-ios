@@ -37,7 +37,7 @@ class User: NSObject {
     override func setValue(_ value: Any?, forKey key: String) {
         let _key = key
         
-        if (["profile_pic", "cover_photo"].contains(_key)) {
+        if (["profile_pic", "cover_photo", "website_url", "blog_url", "facebook_url", "twitter_url", "instagram_url"].contains(_key)) {
             return
         }
         

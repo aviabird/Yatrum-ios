@@ -23,6 +23,10 @@ class TripService: NSObject {
         fetchFeedForUrlString(urlTargetType: TripApi.trendingTrips, completion: completion)
     }
     
+    func fetchUserTripsFeed(userId: NSNumber, completion: @escaping ([Trip]) -> () ) {
+        fetchFeedForUrlString(urlTargetType: TripApi.userTrips(userId), completion: completion)
+    }
+    
     func likeTrip(tripId: NSNumber, completion: @escaping (Trip) -> () ) {
         provider.request(MultiTarget(TripApi.likeTrip(tripId))) { result in
             switch result {

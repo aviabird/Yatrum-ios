@@ -15,6 +15,7 @@ public enum TripApi {
     case trip(NSNumber)
     case likeTrip(NSNumber)
     case search(String)
+    case userTrips(NSNumber)
 }
 
 extension TripApi: TargetType {
@@ -31,6 +32,8 @@ extension TripApi: TargetType {
             return "trips/like"
         case .search:
             return "/trips/search"
+        case .userTrips(let id):
+            return "users/\(id)/trips"
         }
     }
     public var method: Moya.Method {
