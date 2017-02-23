@@ -17,6 +17,7 @@ class Picture: NSObject {
     var public_id: String?
     var created_at: String?
     var updated_at: String?
+    var user_id: NSNumber?
     
     init(dictionary: [String: AnyObject]) {
         super.init()
