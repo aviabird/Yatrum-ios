@@ -498,7 +498,7 @@
 				TargetAttributes = {
 					78CAB9471E33B39A0087F530 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = QQ7G2P38XY;
+						DevelopmentTeam = VS8YZS88BS;
 						ProvisioningStyle = Automatic;
 					};
 					78CAB95B1E33B39B0087F530 = {
@@ -905,10 +905,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = QQ7G2P38XY;
+				DEVELOPMENT_TEAM = VS8YZS88BS;
 				INFOPLIST_FILE = TravelApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = aviabird.TravelApp;
+				PRODUCT_BUNDLE_IDENTIFIER = aviabird.yatrum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -921,10 +921,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = QQ7G2P38XY;
+				DEVELOPMENT_TEAM = VS8YZS88BS;
 				INFOPLIST_FILE = TravelApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = aviabird.TravelApp;
+				PRODUCT_BUNDLE_IDENTIFIER = aviabird.yatrum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
