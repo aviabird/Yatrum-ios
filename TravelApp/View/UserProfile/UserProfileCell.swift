@@ -18,6 +18,8 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
     
     let followingFeed = "followingFeed"
     
+    let mediaFeed = "mediaFeed"
+    
     var user: User!
     
     lazy var collectionView: UICollectionView = {
@@ -74,6 +76,8 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cell)
         collectionView.register(UserFeed.self,forCellWithReuseIdentifier: userFeed)
         collectionView.register(Followers.self, forCellWithReuseIdentifier: followerFeed)
+        collectionView.register(Followers.self, forCellWithReuseIdentifier: followingFeed)
+        collectionView.register(Media.self, forCellWithReuseIdentifier: mediaFeed)
         
         collectionView.topAnchor.constraint(equalTo: menubar.bottomAnchor).isActive = true
         collectionView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
@@ -120,9 +124,9 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
         case 1:
             identifier = followerFeed
         case 2:
-            identifier = followerFeed
+            identifier = followingFeed
         case 3:
-            identifier = followerFeed
+            identifier = mediaFeed
         default:
             identifier = userFeed
         }
