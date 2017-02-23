@@ -84,6 +84,17 @@ class FollowerCell: BaseCell {
         return label
     }()
     
+    let userFollowersLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = ""
+        label.numberOfLines = 1
+        label.font = label.font.withSize(15)
+        label.textColor = UIColor.black
+        label.backgroundColor = UIColor.green
+        return label
+    }()
+    
     let followerBtn: UIButton = {
         let ub = UIButton(type: .system)
         ub.setImage(UIImage(named: "like"), for: .normal)
@@ -97,6 +108,7 @@ class FollowerCell: BaseCell {
         setupUserProfileImageView()
         setupFollowerBtn()
         setupUserNameLabel()
+        setUserFollowersLabel()
         
     }
     
@@ -104,7 +116,7 @@ class FollowerCell: BaseCell {
         addSubview(userProfileImageView)
         userProfileImageView.topAnchor.constraint(equalTo: topAnchor, constant: 5).isActive = true
         userProfileImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 5).isActive = true
-        userProfileImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
+        userProfileImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4).isActive = true
 //        userProfileImageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
         userProfileImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
         
@@ -115,7 +127,7 @@ class FollowerCell: BaseCell {
         userNameLabel.topAnchor.constraint(equalTo: userProfileImageView.topAnchor).isActive = true
         userNameLabel.leftAnchor.constraint(equalTo: userProfileImageView.rightAnchor, constant: 10).isActive = true
         userNameLabel.rightAnchor.constraint(equalTo: followerBtn.leftAnchor , constant: -10).isActive = true
-        userNameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        userNameLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
     }
     
     func setupFollowerBtn() {
@@ -126,6 +138,15 @@ class FollowerCell: BaseCell {
 //        followerBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
         followerBtn.widthAnchor.constraint(equalToConstant: 50).isActive = true
     }
+    
+    func setUserFollowersLabel() {
+        addSubview(userFollowersLabel)
+        userFollowersLabel.bottomAnchor.constraint(equalTo: userProfileImageView.bottomAnchor).isActive = true
+        userFollowersLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
+        userFollowersLabel.leftAnchor.constraint(equalTo: userProfileImageView.rightAnchor, constant: 10).isActive = true
+        userFollowersLabel.rightAnchor.constraint(equalTo: followerBtn.leftAnchor , constant: -10).isActive = true
+    }
+    
     
 }
 
