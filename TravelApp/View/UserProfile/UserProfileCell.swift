@@ -14,6 +14,10 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
     
     let userFeed = "userFeed"
     
+    let followerFeed = "followerFeed"
+    
+    let followingFeed = "followingFeed"
+    
     var user: User!
     
     lazy var collectionView: UICollectionView = {
@@ -69,6 +73,8 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
         
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cell)
         collectionView.register(UserFeed.self,forCellWithReuseIdentifier: userFeed)
+        collectionView.register(Followers.self, forCellWithReuseIdentifier: followerFeed)
+        
         collectionView.topAnchor.constraint(equalTo: menubar.bottomAnchor).isActive = true
         collectionView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
@@ -111,6 +117,12 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
         switch indexPath.item {
         case 0:
             identifier = userFeed
+        case 1:
+            identifier = followerFeed
+        case 2:
+            identifier = followerFeed
+        case 3:
+            identifier = followerFeed
         default:
             identifier = userFeed
         }
