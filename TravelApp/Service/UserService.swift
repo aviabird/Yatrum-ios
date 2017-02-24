@@ -42,6 +42,35 @@ class UserService: NSObject {
         }
     }
     
+    func getUser(userId: NSNumber, completion: @escaping (User) -> () ) {
+        provider.request(MultiTarget(UserApi.getUser(userId))) { result in
+            switch result {
+            case let .success(response):
+                do {
+                    if let json = try response.mapJSON() as? [String: AnyObject] {
+                        
+                        let user = User(dictionary: json)
+                        
+                        DispatchQueue.main.async {
+                            completion(user)
+                            store.dispatch(UpdateTripUser(user: user))
+                        }
+                    } else {
+                        self.showAlert("Travel App Fetch", message: "Unable to fetch from Server")
+                    }
+                } catch {
+                    self.showAlert("Travel App Fetch", message: "Unable to fetch from Server")
+                }
+            case let .failure(error):
+                guard let error = error as? CustomStringConvertible else {
+                    break
+                }
+                self.showAlert("Travel App Fetch", message: error.description)
+            }
+        }
+    }
+
+    
     fileprivate func showAlert(_ title: String, message: String) {
         //        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         //        let ok = UIAlertAction(title: "OK", style: .default, handler: nil)

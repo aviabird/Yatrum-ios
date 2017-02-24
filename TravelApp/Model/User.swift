@@ -32,6 +32,10 @@ class User: NSObject {
         if let profilePicDict = dictionary["profile_pic"] as! [String: AnyObject]? {
             profile_pic = ProfilePic(dictionary: profilePicDict)
         }
+        
+        if let coverPhotoDict = dictionary["cover_photo"] as! [String: AnyObject]? {
+            cover_photo = CoverPic(dictionary: coverPhotoDict)
+        }
     }
     
     override func setValue(_ value: Any?, forKey key: String) {

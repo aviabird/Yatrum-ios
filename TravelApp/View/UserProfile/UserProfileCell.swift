@@ -20,7 +20,16 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
     
     let mediaFeed = "mediaFeed"
     
-    var user: User!
+    var user: User? {
+        didSet {
+            print("******\(user?.email)")
+            setupThumbnailImage()
+            setupProfileImage()
+            profileHeader.userNameLabel.text = user?.name
+            
+            
+        }
+    }
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -45,16 +54,37 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
         return ph
     }()
     
+    func fetchUserDetails() {
+        UserService.sharedInstance.getUser(userId: 4) { (user) in
+            self.user = user
+            self.collectionView.reloadData()
+        }
+    }
+    
     override func setupViews() {
         
 //        user = SharedData.sharedInstance.getCurrentUser()
         
 //        fetchUserTripsFeed()
+        fetchUserDetails()
+//        print("******\(user?.email)")
         
         setupProfileHeader()        
         setupMenuBar()
         setupCollectionView()
         
+    }
+    
+    func setupThumbnailImage() {
+        if let thumbnailImageUrl = user?.cover_photo?.url {
+            self.profileHeader.thumbnailImageView.loadImageUsingUrlString(urlString: thumbnailImageUrl, width: Float(frame.width))
+        }
+    }
+    
+    func setupProfileImage() {
+        if let profileImageURL = user?.profile_pic?.url {
+            self.profileHeader.userProfileImageView.loadImageUsingUrlString(urlString: profileImageURL, width: 44)
+        }
     }
     
     func scrollToMenuIndex(menuIndex: IndexPath) {
