@@ -17,7 +17,6 @@ class UserProfileHeader: UIView {
         imageView.image = UIImage(named: "")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.alpha = 0.5
-        imageView.backgroundColor = UIColor.brown
         return imageView
     }()
     
@@ -31,7 +30,7 @@ class UserProfileHeader: UIView {
         imageView.layer.borderWidth = 2
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.backgroundColor = UIColor.red
+//        imageView.backgroundColor = UIColor.red
         return imageView
     }()
     
@@ -41,24 +40,28 @@ class UserProfileHeader: UIView {
         label.text = ""
         label.numberOfLines = 1
         label.font = label.font.withSize(15)
+        label.textAlignment = .center
         label.textColor = UIColor.white
-        label.backgroundColor = UIColor.green
+//        label.backgroundColor = UIColor.green
         return label
     }()
     
     let userNameSubTitle: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = ""
+        label.text = "Developer Pune"
         label.numberOfLines = 1
         label.font = label.font.withSize(12)
         label.textColor = UIColor.white
-        label.backgroundColor = UIColor.gray
+        label.textAlignment = .center
+//        label.backgroundColor = UIColor.gray
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        backgroundColor = UIColor.appBaseColor()
         
         setupViews()
         

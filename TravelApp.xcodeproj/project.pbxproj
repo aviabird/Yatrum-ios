@@ -56,6 +56,8 @@
 		78EC1D8B1E56D1ED00FAFC56 /* TripEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EC1D8A1E56D1EC00FAFC56 /* TripEdit.swift */; };
 		78F561201E5047AE005724E7 /* TripDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F5611F1E5047AE005724E7 /* TripDetailViewController.swift */; };
 		85E49A2B2F82B9CFFBFDED0E /* Pods_TravelApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6BC1A7BA229A0C84477C713 /* Pods_TravelApp.framework */; };
+		C7411E701E5F09FD00B2711F /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7411E6F1E5F09FD00B2711F /* Media.swift */; };
+		C7411E721E5F10A400B2711F /* Following.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7411E711E5F10A400B2711F /* Following.swift */; };
 		C75943561E4DD16C000232D4 /* SearchDropdownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75943551E4DD16C000232D4 /* SearchDropdownCell.swift */; };
 		C76704F51E5DB692004461F6 /* Followers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76704EF1E5DB692004461F6 /* Followers.swift */; };
 		C76704F61E5DB692004461F6 /* UserFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76704F01E5DB692004461F6 /* UserFeed.swift */; };
@@ -146,6 +148,8 @@
 		90C2D25E7B38CBE630322CB8 /* Pods-TravelAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TravelAppTests/Pods-TravelAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		BE1D77A28EE3CC48998822AC /* Pods-TravelAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TravelAppTests/Pods-TravelAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C30A16FD43D6C973DF44F884 /* Pods_TravelAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7411E6F1E5F09FD00B2711F /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Media.swift; path = View/UserProfile/Media.swift; sourceTree = "<group>"; };
+		C7411E711E5F10A400B2711F /* Following.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Following.swift; path = View/UserProfile/Following.swift; sourceTree = "<group>"; };
 		C75943551E4DD16C000232D4 /* SearchDropdownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchDropdownCell.swift; path = View/SearchDropdownCell.swift; sourceTree = "<group>"; };
 		C76704EF1E5DB692004461F6 /* Followers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Followers.swift; path = View/UserProfile/Followers.swift; sourceTree = "<group>"; };
 		C76704F01E5DB692004461F6 /* UserFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserFeed.swift; path = View/UserProfile/UserFeed.swift; sourceTree = "<group>"; };
@@ -405,6 +409,8 @@
 				C76704F21E5DB692004461F6 /* UserProfileCell.swift */,
 				C76704F31E5DB692004461F6 /* UserProfileHeader.swift */,
 				C76704F41E5DB692004461F6 /* UserTripCell.swift */,
+				C7411E6F1E5F09FD00B2711F /* Media.swift */,
+				C7411E711E5F10A400B2711F /* Following.swift */,
 			);
 			name = UserProfile;
 			sourceTree = "<group>";
@@ -717,6 +723,7 @@
 				78684EC71E4082EB0074B8C2 /* UserService.swift in Sources */,
 				781DBE1B1E3F8066003591DA /* SettingCell.swift in Sources */,
 				78684ECD1E4083220074B8C2 /* Providers.swift in Sources */,
+				C7411E701E5F09FD00B2711F /* Media.swift in Sources */,
 				786932971E5841DB00C8589A /* PlaceEditCell.swift in Sources */,
 				C76704F71E5DB692004461F6 /* UserMenuBar.swift in Sources */,
 				C76704F51E5DB692004461F6 /* Followers.swift in Sources */,
@@ -745,6 +752,7 @@
 				781DBE211E3F8084003591DA /* FeedCell.swift in Sources */,
 				781DBE1D1E3F806F003591DA /* BaseCell.swift in Sources */,
 				780ABCC51E424D3400043261 /* TripActions.swift in Sources */,
+				C7411E721E5F10A400B2711F /* Following.swift in Sources */,
 				781DBE091E3F7F19003591DA /* SharedData.swift in Sources */,
 				78F561201E5047AE005724E7 /* TripDetailViewController.swift in Sources */,
 				C783C6841E41DD4400870E9B /* SearchTripViewController.swift in Sources */,

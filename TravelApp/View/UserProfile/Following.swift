@@ -1,14 +1,14 @@
 //
-//  Followers.swift
+//  Following.swift
 //  TravelApp
 //
-//  Created by Nitesh on 22/02/17.
+//  Created by Nitesh on 23/02/17.
 //  Copyright © 2017 Pankaj Rawat. All rights reserved.
 //
 
 import UIKit
 
-class Followers: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class Following: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     let cellId = "CellId"
     
@@ -29,7 +29,7 @@ class Followers: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate,
     
     private func setupCollectionView() {
         addSubview(collectionView)
-        collectionView.register(FollowerCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(FollowingCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 100).isActive = true
         collectionView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -100).isActive = true
@@ -40,8 +40,8 @@ class Followers: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! FollowerCell
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! FollowingCell
         cell.backgroundColor = UIColor.white
         return cell
     }
@@ -57,7 +57,7 @@ class Followers: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate,
     
 }
 
-class FollowerCell: BaseCell {
+class FollowingCell: BaseCell {
     
     let userProfileImageView: CustomImageView = {
         let ui = CustomImageView()
@@ -69,7 +69,7 @@ class FollowerCell: BaseCell {
         ui.layer.borderWidth = 2
         ui.layer.borderColor = UIColor.white.cgColor
         ui.translatesAutoresizingMaskIntoConstraints = false
-                ui.backgroundColor = UIColor.red
+        ui.backgroundColor = UIColor.red
         return ui
     }()
     
@@ -80,7 +80,7 @@ class FollowerCell: BaseCell {
         label.numberOfLines = 1
         label.font = label.font.withSize(15)
         label.textColor = UIColor.black
-                label.backgroundColor = UIColor.green
+        label.backgroundColor = UIColor.green
         return label
     }()
     
@@ -100,7 +100,7 @@ class FollowerCell: BaseCell {
         ub.setImage(UIImage(named: "like"), for: .normal)
         ub.tintColor = UIColor.white
         ub.translatesAutoresizingMaskIntoConstraints = false
-                ub.backgroundColor = UIColor.red
+        ub.backgroundColor = UIColor.red
         return ub
     }()
     
@@ -117,7 +117,7 @@ class FollowerCell: BaseCell {
         userProfileImageView.topAnchor.constraint(equalTo: topAnchor, constant: 5).isActive = true
         userProfileImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 5).isActive = true
         userProfileImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4).isActive = true
-//        userProfileImageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        //        userProfileImageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
         userProfileImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
         
     }
@@ -135,7 +135,7 @@ class FollowerCell: BaseCell {
         followerBtn.topAnchor.constraint(equalTo: userProfileImageView.topAnchor).isActive = true
         followerBtn.rightAnchor.constraint(equalTo: rightAnchor, constant: -5).isActive = true
         followerBtn.bottomAnchor.constraint(equalTo: userProfileImageView.bottomAnchor).isActive = true
-//        followerBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        //        followerBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
         followerBtn.widthAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
@@ -149,8 +149,4 @@ class FollowerCell: BaseCell {
     
     
 }
-
-
-
-
 

@@ -14,7 +14,22 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
     
     let userFeed = "userFeed"
     
-    var user: User!
+    let followerFeed = "followerFeed"
+    
+    let followingFeed = "followingFeed"
+    
+    let mediaFeed = "mediaFeed"
+    
+    var user: User? {
+        didSet {
+            print("******\(user?.email)")
+            setupThumbnailImage()
+            setupProfileImage()
+            profileHeader.userNameLabel.text = user?.name
+            
+            
+        }
+    }
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -39,16 +54,37 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
         return ph
     }()
     
+    func fetchUserDetails() {
+        UserService.sharedInstance.getUser(userId: 4) { (user) in
+            self.user = user
+            self.collectionView.reloadData()
+        }
+    }
+    
     override func setupViews() {
         
 //        user = SharedData.sharedInstance.getCurrentUser()
         
 //        fetchUserTripsFeed()
+        fetchUserDetails()
+//        print("******\(user?.email)")
         
         setupProfileHeader()        
         setupMenuBar()
         setupCollectionView()
         
+    }
+    
+    func setupThumbnailImage() {
+        if let thumbnailImageUrl = user?.cover_photo?.url {
+            self.profileHeader.thumbnailImageView.loadImageUsingUrlString(urlString: thumbnailImageUrl, width: Float(frame.width))
+        }
+    }
+    
+    func setupProfileImage() {
+        if let profileImageURL = user?.profile_pic?.url {
+            self.profileHeader.userProfileImageView.loadImageUsingUrlString(urlString: profileImageURL, width: 44)
+        }
     }
     
     func scrollToMenuIndex(menuIndex: IndexPath) {
@@ -69,6 +105,10 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
         
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cell)
         collectionView.register(UserFeed.self,forCellWithReuseIdentifier: userFeed)
+        collectionView.register(Followers.self, forCellWithReuseIdentifier: followerFeed)
+        collectionView.register(Followers.self, forCellWithReuseIdentifier: followingFeed)
+        collectionView.register(Media.self, forCellWithReuseIdentifier: mediaFeed)
+        
         collectionView.topAnchor.constraint(equalTo: menubar.bottomAnchor).isActive = true
         collectionView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
@@ -111,6 +151,12 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
         switch indexPath.item {
         case 0:
             identifier = userFeed
+        case 1:
+            identifier = followerFeed
+        case 2:
+            identifier = followingFeed
+        case 3:
+            identifier = mediaFeed
         default:
             identifier = userFeed
         }
