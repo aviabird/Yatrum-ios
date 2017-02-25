@@ -15,7 +15,6 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
     override var shouldAutorotate: Bool { return false }
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return UIInterfaceOrientationMask.portrait }
     
-    var sharedData = SharedData()
     var homeController: HomeController?
     var authService = AuthService.sharedInstance
     

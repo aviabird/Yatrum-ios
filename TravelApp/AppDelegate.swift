@@ -13,6 +13,7 @@ import Google
 import GoogleSignIn
 
 var store = Store<AppState>(reducer: AppReducer(), state: nil)
+var sharedData = SharedData.sharedInstance
 var statusBarBackgroundView = UIView()
 
 @UIApplicationMain
@@ -58,6 +59,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
         
         GIDSignIn.sharedInstance().delegate = self
+        
+        AuthService.sharedInstance.auth_user { _ in }
         
         return true
     }

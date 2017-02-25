@@ -10,7 +10,6 @@ import UIKit
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var sharedData = SharedData.sharedInstance
     var trips: [Trip]?
     let cellId = "cellId"
     let trendingCellId = "trendingCellId"
@@ -26,7 +25,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         setUpNavBarButtons()
         
-        if sharedData.getToken() == "" {
+        if SharedData.sharedInstance.getToken() == "" {
             perform(#selector(handleLogout), with: nil, afterDelay: 0)
         }
         

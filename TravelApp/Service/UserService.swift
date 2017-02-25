@@ -12,7 +12,6 @@ import Moya
 class UserService: NSObject {
     
     static let sharedInstance = UserService()
-    static var sharedData = SharedData()
 
     func followUser(followedId: NSNumber, completion: @escaping (User) -> () ) {
         provider.request(MultiTarget(UserApi.followUser(followedId))) { result in

@@ -55,7 +55,7 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
     }()
     
     func fetchUserDetails() {
-        UserService.sharedInstance.getUser(userId: 4) { (user) in
+        UserService.sharedInstance.getUser(userId: sharedData.currentUser.id!) { (user) in
             self.user = user
             self.collectionView.reloadData()
         }

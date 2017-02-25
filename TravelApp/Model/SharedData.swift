@@ -15,8 +15,8 @@ class SharedData: NSObject {
 //    var API_URL: String = "https://yatrum-api.herokuapp.com"
     var token: String = ""
     static let sharedInstance = SharedData()
-    var currentUser: User?
-    var homeController: HomeController?
+    var currentUser: User!
+    var homeController: HomeController!
     
     func getToken() -> String {
         if token == "" {
@@ -37,16 +37,6 @@ class SharedData: NSObject {
         token = ""
         currentUser = nil
         UserDefaults.standard.removeObject(forKey: "Token")
-    }
-    
-    func getCurrentUser() -> User? {
-        let user = currentUser
-        
-        if (user != nil) {
-            return user!
-        } else {
-            return AuthService.sharedInstance.auth_user()
-        }
     }
     
     func SetCurrentUser(user: User) {

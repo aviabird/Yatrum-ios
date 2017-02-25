@@ -12,8 +12,7 @@ import Moya
 class TripService: NSObject {
 
     static let sharedInstance = TripService()
-    static var sharedData = SharedData()
-    let baseUrl = TripService.sharedData.API_URL
+    let baseUrl = sharedData.API_URL
     
     func fetchTripsFeed(completion: @escaping ([Trip]) -> () ) {
         fetchFeedForUrlString(urlTargetType: TripApi.trips, completion: completion)
