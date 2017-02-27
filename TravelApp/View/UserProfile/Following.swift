@@ -22,8 +22,13 @@ class Following: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate,
         return cv
     }()
     
+    func fetchUserFollowings() {
+        
+   
+    }
     
     override func setupViews() {
+        fetchUserFollowings()
         setupCollectionView()
     }
     

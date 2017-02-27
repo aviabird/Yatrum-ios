@@ -22,7 +22,6 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
     
     var user: User? {
         didSet {
-            print("******\(user?.email)")
             setupThumbnailImage()
             setupProfileImage()
             profileHeader.userNameLabel.text = user?.name

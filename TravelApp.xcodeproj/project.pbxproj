@@ -418,13 +418,13 @@
 			isa = PBXGroup;
 			children = (
 				C76704EF1E5DB692004461F6 /* Followers.swift */,
+				C7411E711E5F10A400B2711F /* Following.swift */,
 				C76704F01E5DB692004461F6 /* UserFeed.swift */,
 				C76704F11E5DB692004461F6 /* UserMenuBar.swift */,
 				C76704F21E5DB692004461F6 /* UserProfileCell.swift */,
 				C76704F31E5DB692004461F6 /* UserProfileHeader.swift */,
 				C76704F41E5DB692004461F6 /* UserTripCell.swift */,
 				C7411E6F1E5F09FD00B2711F /* Media.swift */,
-				C7411E711E5F10A400B2711F /* Following.swift */,
 			);
 			name = UserProfile;
 			sourceTree = "<group>";

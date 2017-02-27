@@ -15,6 +15,8 @@ public enum UserApi {
     case auth_user
     case followUser(NSNumber)
     case getUser(NSNumber)
+    case userFollowing(NSNumber)
+    case userFollowers(NSNumber)
 }
 
 extension UserApi: TargetType {
@@ -31,6 +33,10 @@ extension UserApi: TargetType {
             return "/add_to_user_following_list"
         case .getUser:
             return "users/user_id"
+        case .userFollowing:
+            return "/user_following"
+        case .userFollowers:
+            return "/user_followers"
         }
     }
     public var method: Moya.Method {
@@ -47,8 +53,12 @@ extension UserApi: TargetType {
             return ["user": ["email": email, "password": password, "password_confirmation": confirmPassword]]
         case .followUser(let followedId):
             return ["followed_id": followedId]
-        case .getUser(let user_id):
-            return ["user_id": user_id]
+        case .getUser(let userId):
+            return ["user_id": userId]
+        case .userFollowing(let userId):
+            return ["user_id": userId]
+        case .userFollowers(let userId):
+            return ["user_id": userId]
         default:
             return nil
         }

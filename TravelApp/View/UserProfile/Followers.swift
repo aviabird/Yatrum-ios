@@ -22,8 +22,21 @@ class Followers: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate,
         return cv
     }()
     
+    var users = [User]()
     
+    func fetchUserFollowers() {
+        
+        UserService.sharedInstance.fetchUserFollowers(userId: 4) { (users: [User]) in
+            
+            DispatchQueue.main.async {
+                self.users = users
+                self.collectionView.reloadData()
+            }
+        }
+    }
+            
     override func setupViews() {
+        fetchUserFollowers()
         setupCollectionView()
     }
     
@@ -36,13 +49,14 @@ class Followers: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return users.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! FollowerCell
         cell.backgroundColor = UIColor.white
+        cell.user = users[indexPath.item]
         return cell
     }
     
@@ -59,6 +73,17 @@ class Followers: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate,
 
 class FollowerCell: BaseCell {
     
+    var user: User! {
+        didSet {
+            userNameLabel.text = user.name
+            if let profileImageURL = user.profile_pic?.url {
+                userProfileImageView.loadImageUsingUrlString(urlString: profileImageURL, width: 44)
+            }
+        }
+    }
+    
+    
+    
     let userProfileImageView: CustomImageView = {
         let ui = CustomImageView()
         ui.image = UIImage(named: "")
@@ -69,7 +94,7 @@ class FollowerCell: BaseCell {
         ui.layer.borderWidth = 2
         ui.layer.borderColor = UIColor.white.cgColor
         ui.translatesAutoresizingMaskIntoConstraints = false
-                ui.backgroundColor = UIColor.red
+//                ui.backgroundColor = UIColor.red
         return ui
     }()
     
@@ -80,7 +105,7 @@ class FollowerCell: BaseCell {
         label.numberOfLines = 1
         label.font = label.font.withSize(15)
         label.textColor = UIColor.black
-                label.backgroundColor = UIColor.green
+//                label.backgroundColor = UIColor.green
         return label
     }()
     
@@ -91,7 +116,7 @@ class FollowerCell: BaseCell {
         label.numberOfLines = 1
         label.font = label.font.withSize(15)
         label.textColor = UIColor.black
-        label.backgroundColor = UIColor.green
+//        label.backgroundColor = UIColor.green
         return label
     }()
     
@@ -100,7 +125,7 @@ class FollowerCell: BaseCell {
         ub.setImage(UIImage(named: "like"), for: .normal)
         ub.tintColor = UIColor.white
         ub.translatesAutoresizingMaskIntoConstraints = false
-                ub.backgroundColor = UIColor.red
+//                ub.backgroundColor = UIColor.red
         return ub
     }()
     
