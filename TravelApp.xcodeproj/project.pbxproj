@@ -57,6 +57,7 @@
 		78CE6FE51E6174FA00BFB0F5 /* UserReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CE6FE41E6174FA00BFB0F5 /* UserReducer.swift */; };
 		78CE6FE71E61751F00BFB0F5 /* UserActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CE6FE61E61751F00BFB0F5 /* UserActions.swift */; };
 		78CE6FE91E61753200BFB0F5 /* UserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CE6FE81E61753200BFB0F5 /* UserState.swift */; };
+		78E782641E61D9AA00A81156 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 78E782631E61D9AA00A81156 /* GoogleService-Info.plist */; };
 		78EC1D8B1E56D1ED00FAFC56 /* TripEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EC1D8A1E56D1EC00FAFC56 /* TripEdit.swift */; };
 		78F561201E5047AE005724E7 /* TripDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F5611F1E5047AE005724E7 /* TripDetailViewController.swift */; };
 		85E49A2B2F82B9CFFBFDED0E /* Pods_TravelApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6BC1A7BA229A0C84477C713 /* Pods_TravelApp.framework */; };
@@ -152,6 +153,7 @@
 		78CE6FE41E6174FA00BFB0F5 /* UserReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserReducer.swift; path = Reducers/UserReducer.swift; sourceTree = "<group>"; };
 		78CE6FE61E61751F00BFB0F5 /* UserActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserActions.swift; path = Actions/UserActions.swift; sourceTree = "<group>"; };
 		78CE6FE81E61753200BFB0F5 /* UserState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserState.swift; path = State/UserState.swift; sourceTree = "<group>"; };
+		78E782631E61D9AA00A81156 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		78EC1D8A1E56D1EC00FAFC56 /* TripEdit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripEdit.swift; path = View/TripCreate/TripEdit.swift; sourceTree = "<group>"; };
 		78F5611F1E5047AE005724E7 /* TripDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripDetailViewController.swift; path = Controller/TripDetailViewController.swift; sourceTree = "<group>"; };
 		90C2D25E7B38CBE630322CB8 /* Pods-TravelAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TravelAppTests/Pods-TravelAppTests.release.xcconfig"; sourceTree = "<group>"; };
