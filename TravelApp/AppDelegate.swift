@@ -53,13 +53,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         GMSPlacesClient.provideAPIKey("AIzaSyD8mpPsFUp8wtKW2pZCqYAgqVGPaB-NXCw")
         
-        // Initialize sign-in
-        var configureError: NSError?
-        GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError)")
-        
-        GIDSignIn.sharedInstance().delegate = self
-        
         AuthService.sharedInstance.auth_user { _ in }
         
         // Initialize sign-in

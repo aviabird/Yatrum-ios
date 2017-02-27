@@ -53,7 +53,6 @@
 		78CAB9561E33B39A0087F530 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78CAB9541E33B39A0087F530 /* LaunchScreen.storyboard */; };
 		78CAB9611E33B39B0087F530 /* TravelAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAB9601E33B39B0087F530 /* TravelAppTests.swift */; };
 		78CAB96C1E33B39B0087F530 /* TravelAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAB96B1E33B39B0087F530 /* TravelAppUITests.swift */; };
-		78E782641E61D9AA00A81156 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 78E782631E61D9AA00A81156 /* GoogleService-Info.plist */; };
 		78CE6FE51E6174FA00BFB0F5 /* UserReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CE6FE41E6174FA00BFB0F5 /* UserReducer.swift */; };
 		78CE6FE71E61751F00BFB0F5 /* UserActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CE6FE61E61751F00BFB0F5 /* UserActions.swift */; };
 		78CE6FE91E61753200BFB0F5 /* UserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CE6FE81E61753200BFB0F5 /* UserState.swift */; };
@@ -149,7 +148,6 @@
 		78CAB9671E33B39B0087F530 /* TravelAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TravelAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		78CAB96B1E33B39B0087F530 /* TravelAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelAppUITests.swift; sourceTree = "<group>"; };
 		78CAB96D1E33B39B0087F530 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		78E782631E61D9AA00A81156 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		78CE6FE41E6174FA00BFB0F5 /* UserReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserReducer.swift; path = Reducers/UserReducer.swift; sourceTree = "<group>"; };
 		78CE6FE61E61751F00BFB0F5 /* UserActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserActions.swift; path = Actions/UserActions.swift; sourceTree = "<group>"; };
 		78CE6FE81E61753200BFB0F5 /* UserState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserState.swift; path = State/UserState.swift; sourceTree = "<group>"; };
