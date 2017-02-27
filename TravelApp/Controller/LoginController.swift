@@ -42,7 +42,11 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
         return button
     }()
     
-    let GoogleSignInButton = GIDSignInButton()
+    let GoogleSignInButton: GIDSignInButton = {
+        let GB = GIDSignInButton()
+        GB.translatesAutoresizingMaskIntoConstraints = false
+        return GB
+    }()
     
     func handleLoginRegister() {
         if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
@@ -334,7 +338,6 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
     }
     
     func setupGooggleSignInButton() {
-        GoogleSignInButton.translatesAutoresizingMaskIntoConstraints = false
         GoogleSignInButton.topAnchor.constraint(equalTo: loginRegisterButton.bottomAnchor, constant: 10).isActive = true
         GoogleSignInButton.leftAnchor.constraint(equalTo: loginRegisterButton.leftAnchor).isActive = true
         GoogleSignInButton.widthAnchor.constraint(equalTo: loginRegisterButton.widthAnchor).isActive = true
