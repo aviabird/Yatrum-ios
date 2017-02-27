@@ -26,7 +26,7 @@ class Following: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate,
     
     func fetchUserFollowings() {
         
-        UserService.sharedInstance.fetchUserFollowings (userId: 4) { (users: [User]) in
+        UserService.sharedInstance.fetchUserFollowings (userId: sharedData.currentUser.id!) { (users: [User]) in
             
             DispatchQueue.main.async {
                 self.users = users
