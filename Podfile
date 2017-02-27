@@ -14,6 +14,8 @@ target 'TravelApp' do
 #  pod 'ReSwiftRouter'
   pod 'SwiftDate', '~> 4.0'
   pod 'GooglePlaces'
+  pod 'Google/SignIn'
+  pod 'Google/Analytics'
 
 
   target 'TravelAppTests' do

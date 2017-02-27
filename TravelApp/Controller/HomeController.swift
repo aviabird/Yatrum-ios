@@ -56,6 +56,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     func handleLogout() {
         sharedData.clearAll()
+        GIDSignIn.sharedInstance().signOut()
         let loginController = LoginController()
         loginController.homeController = self
         present(loginController, animated: true, completion: nil)

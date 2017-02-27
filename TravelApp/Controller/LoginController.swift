@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import Google
+import GoogleSignIn
 
-class LoginController: UIViewController {
+class LoginController: UIViewController, GIDSignInUIDelegate {
     
     override var shouldAutorotate: Bool { return false }
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return UIInterfaceOrientationMask.portrait }
@@ -40,12 +42,37 @@ class LoginController: UIViewController {
         return button
     }()
     
+    let GoogleSignInButton = GIDSignInButton()
+    
     func handleLoginRegister() {
         if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
             handleLogin()
         } else {
             handleRegister()
         }
+    }
+    
+    func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!,
+                withError error: NSError!) {
+        if (error == nil) {
+            print("here")
+            // Perform any operations on signed in user here.
+//            let userId = user.userID                  // For client-side use only!
+//            let idToken = user.authentication.idToken // Safe to send to the server
+//            let fullName = user.profile.name
+//            let givenName = user.profile.givenName
+//            let familyName = user.profile.familyName
+//            let email = user.profile.email
+            // ...
+        } else {
+            print("\(error.localizedDescription)")
+        }
+    }
+    
+    func signIn(signIn: GIDSignIn!, didDisconnectWithUser user:GIDGoogleUser!,
+                withError error: NSError!) {
+        // Perform any operations when the user disconnects from app here.
+        homeController?.handleLogout()
     }
     
     // For creating alerts
@@ -184,6 +211,9 @@ class LoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().signInSilently()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 
@@ -195,11 +225,13 @@ class LoginController: UIViewController {
         view.addSubview(loginRegisterButton)
         view.addSubview(profileImageView)
         view.addSubview(loginRegisterSegmentedControl)
+        view.addSubview(GoogleSignInButton)
         
         setupInputsContainerView()
         setupLoginRegisterButton()
         setupProfileImageView()
         setupLoginRegisterSegmentedControl()
+        setupGooggleSignInButton()
     }
     
     func keyboardWillShow(notification: NSNotification) {
@@ -301,5 +333,11 @@ class LoginController: UIViewController {
         loginRegisterButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
+    func setupGooggleSignInButton() {
+        GoogleSignInButton.translatesAutoresizingMaskIntoConstraints = false
+        GoogleSignInButton.topAnchor.constraint(equalTo: loginRegisterButton.bottomAnchor, constant: 10).isActive = true
+        GoogleSignInButton.leftAnchor.constraint(equalTo: loginRegisterButton.leftAnchor).isActive = true
+        GoogleSignInButton.widthAnchor.constraint(equalTo: loginRegisterButton.widthAnchor).isActive = true
+        GoogleSignInButton.heightAnchor.constraint(equalTo: loginRegisterButton.heightAnchor).isActive = true
+    }
 }
