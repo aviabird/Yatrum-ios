@@ -101,6 +101,40 @@ class UserService: NSObject {
             }
         }
     }
+    
+    func fetchUserFollowings(userId: NSNumber, completion: @escaping ([User]) -> () ) {
+        provider.request(MultiTarget(UserApi.userFollowing(userId))) { result in
+            switch result {
+            case let .success(response):
+                do {
+                    if let json = try response.mapJSON() as? [[String: AnyObject]] {
+                        
+                        var users = [User]()
+                        
+                        
+                        for dictionary in json {
+                            let user = User(dictionary: dictionary)
+                            users.append(user)
+                        }
+                        
+                        DispatchQueue.main.async {
+                            completion(users)
+                        }
+                    } else {
+                        self.showAlert("User Following Fetch", message: "Unable to fetch from Server")
+                    }
+                } catch {
+                    self.showAlert("User Following Fetch", message: "Unable to fetch from Server")
+                }
+            case let .failure(error):
+                guard let error = error as? CustomStringConvertible else {
+                    break
+                }
+                self.showAlert("Travel App Fetch", message: error.description)
+            }
+        }
+    }
+
 
 
     

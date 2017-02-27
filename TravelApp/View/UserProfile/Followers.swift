@@ -79,6 +79,9 @@ class FollowerCell: BaseCell {
             if let profileImageURL = user.profile_pic?.url {
                 userProfileImageView.loadImageUsingUrlString(urlString: profileImageURL, width: 44)
             }
+            if let totalFollowing = user.total_following, let totalFollowers = user.total_followers {
+                userFollowersLabel.text = "\(totalFollowers) Followers, \(totalFollowing) Following"
+            }
         }
     }
     
@@ -114,7 +117,7 @@ class FollowerCell: BaseCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = ""
         label.numberOfLines = 1
-        label.font = label.font.withSize(15)
+        label.font = label.font.withSize(12)
         label.textColor = UIColor.black
 //        label.backgroundColor = UIColor.green
         return label

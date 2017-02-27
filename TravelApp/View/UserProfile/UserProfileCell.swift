@@ -105,7 +105,7 @@ class UserProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cell)
         collectionView.register(UserFeed.self,forCellWithReuseIdentifier: userFeed)
         collectionView.register(Followers.self, forCellWithReuseIdentifier: followerFeed)
-        collectionView.register(Followers.self, forCellWithReuseIdentifier: followingFeed)
+        collectionView.register(Following.self, forCellWithReuseIdentifier: followingFeed)
         collectionView.register(Media.self, forCellWithReuseIdentifier: mediaFeed)
         
         collectionView.topAnchor.constraint(equalTo: menubar.bottomAnchor).isActive = true
