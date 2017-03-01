@@ -140,21 +140,24 @@ class UserService: NSObject {
             switch result {
             case let .success(response):
                 do {
-                    if let json = try response.mapJSON() as? AnyObject {
+                    
+                    if let json = try response.mapJSON() as? [String : AnyObject] {
                         
-                        print(json)
                         
-//                        var users = [User]()
-//                        
-//                        
-//                        for dictionary in json {
-//                            let user = User(dictionary: dictionary)
-//                            users.append(user)
-//                        }
-//                        
-//                        DispatchQueue.main.async {
-//                            completion(users)
-//                        }
+                        
+//                        let userMedia = json[0]["user_pictures"]
+                        var pictures = [Picture]()
+                        
+                        for dictionary in (json["user_pictures"] as? [[String : AnyObject]])! {
+                            let picture = Picture(dictionary: dictionary)
+                            pictures.append(picture)
+                            
+                        }
+                        
+                        DispatchQueue.main.async {
+                            completion(pictures)
+                        }
+
                     } else {
                         self.showAlert("User Following Fetch", message: "Unable to fetch from Server")
                     }
