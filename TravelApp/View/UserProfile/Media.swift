@@ -22,8 +22,24 @@ class Media: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         return cv
     }()
     
+    func fetchUserMedia() {
+        
+        UserService.sharedInstance.fetchUserMediaImages(userId: sharedData.currentUser.id!) { (<#[Picture]#>) in
+            <#code#>
+        }
+            
+//            DispatchQueue.main.async {
+//                self.users = users
+//                self.collectionView.reloadData()
+//            }
+    }
+
+    
+    
+    
     
     override func setupViews() {
+        fetchUserMedia()
         setupCollectionView()
     }
     
