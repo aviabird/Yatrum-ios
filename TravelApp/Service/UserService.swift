@@ -134,6 +134,45 @@ class UserService: NSObject {
             }
         }
     }
+    
+    func fetchUserMediaImages(userId: NSNumber, completion: @escaping ([Picture]) -> () ) {
+        provider.request(MultiTarget(UserApi.getUserMediaImage(userId))) { result in
+            switch result {
+            case let .success(response):
+                do {
+                    
+                    if let json = try response.mapJSON() as? [String : AnyObject] {
+                        
+                        
+                        
+//                        let userMedia = json[0]["user_pictures"]
+                        var pictures = [Picture]()
+                        
+                        for dictionary in (json["user_pictures"] as? [[String : AnyObject]])! {
+                            let picture = Picture(dictionary: dictionary)
+                            pictures.append(picture)
+                            
+                        }
+                        
+                        DispatchQueue.main.async {
+                            completion(pictures)
+                        }
+
+                    } else {
+                        self.showAlert("User Following Fetch", message: "Unable to fetch from Server")
+                    }
+                } catch {
+                    self.showAlert("User Following Fetch", message: "Unable to fetch from Server")
+                }
+            case let .failure(error):
+                guard let error = error as? CustomStringConvertible else {
+                    break
+                }
+                self.showAlert("Travel App Fetch", message: error.description)
+            }
+        }
+    }
+
 
 
 

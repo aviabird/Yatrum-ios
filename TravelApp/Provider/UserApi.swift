@@ -17,6 +17,7 @@ public enum UserApi {
     case getUser(NSNumber)
     case userFollowing(NSNumber)
     case userFollowers(NSNumber)
+    case getUserMediaImage(NSNumber)
 }
 
 extension UserApi: TargetType {
@@ -37,6 +38,8 @@ extension UserApi: TargetType {
             return "/user_following"
         case .userFollowers:
             return "/user_followers"
+        case .getUserMediaImage:
+            return "/user_pictures"
         }
     }
     public var method: Moya.Method {
@@ -58,6 +61,8 @@ extension UserApi: TargetType {
         case .userFollowing(let userId):
             return ["user_id": userId]
         case .userFollowers(let userId):
+            return ["user_id": userId]
+        case .getUserMediaImage(let userId):
             return ["user_id": userId]
         default:
             return nil
