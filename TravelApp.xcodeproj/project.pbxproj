@@ -70,6 +70,7 @@
 		C76704F91E5DB692004461F6 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76704F31E5DB692004461F6 /* UserProfileHeader.swift */; };
 		C76704FA1E5DB692004461F6 /* UserTripCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76704F41E5DB692004461F6 /* UserTripCell.swift */; };
 		C783C6841E41DD4400870E9B /* SearchTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C783C6831E41DD4400870E9B /* SearchTripViewController.swift */; };
+		C7DD79AB1E690F8C003BE92F /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DD79AA1E690F8C003BE92F /* NotificationCell.swift */; };
 		C7E133B81E44818100D0F8D8 /* SearchTripCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E133B71E44818100D0F8D8 /* SearchTripCell.swift */; };
 		C7F9C62C1E433FA600E9B664 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F9C62B1E433FA600E9B664 /* SearchBar.swift */; };
 		C872CCCA74F945B8C43595C1 /* Pods_TravelAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30A16FD43D6C973DF44F884 /* Pods_TravelAppTests.framework */; };
@@ -167,6 +168,7 @@
 		C76704F31E5DB692004461F6 /* UserProfileHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfileHeader.swift; path = View/UserProfile/UserProfileHeader.swift; sourceTree = "<group>"; };
 		C76704F41E5DB692004461F6 /* UserTripCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserTripCell.swift; path = View/UserProfile/UserTripCell.swift; sourceTree = "<group>"; };
 		C783C6831E41DD4400870E9B /* SearchTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchTripViewController.swift; path = Controller/SearchTripViewController.swift; sourceTree = "<group>"; };
+		C7DD79AA1E690F8C003BE92F /* NotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationCell.swift; path = View/NotificationCell.swift; sourceTree = "<group>"; };
 		C7E133B71E44818100D0F8D8 /* SearchTripCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchTripCell.swift; path = View/SearchTripCell.swift; sourceTree = "<group>"; };
 		C7F9C62B1E433FA600E9B664 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchBar.swift; path = View/SearchBar.swift; sourceTree = "<group>"; };
 		E3FB5D723B4B0B2413325BD7 /* Pods_TravelAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -233,6 +235,7 @@
 				C7F9C62B1E433FA600E9B664 /* SearchBar.swift */,
 				C7E133B71E44818100D0F8D8 /* SearchTripCell.swift */,
 				C75943551E4DD16C000232D4 /* SearchDropdownCell.swift */,
+				C7DD79AA1E690F8C003BE92F /* NotificationCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -773,6 +776,7 @@
 				780ABCC51E424D3400043261 /* TripActions.swift in Sources */,
 				C7411E721E5F10A400B2711F /* Following.swift in Sources */,
 				781DBE091E3F7F19003591DA /* SharedData.swift in Sources */,
+				C7DD79AB1E690F8C003BE92F /* NotificationCell.swift in Sources */,
 				78F561201E5047AE005724E7 /* TripDetailViewController.swift in Sources */,
 				C783C6841E41DD4400870E9B /* SearchTripViewController.swift in Sources */,
 				783044331E40D43200AA05FD /* AppState.swift in Sources */,
