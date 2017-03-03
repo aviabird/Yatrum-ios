@@ -228,13 +228,13 @@ class LoginController: UIViewController {
         view.addSubview(loginRegisterButton)
         view.addSubview(profileImageView)
         view.addSubview(loginRegisterSegmentedControl)
-        view.addSubview(GoogleSignInButton)
+//        view.addSubview(GoogleSignInButton)
         
         setupInputsContainerView()
         setupLoginRegisterButton()
         setupProfileImageView()
         setupLoginRegisterSegmentedControl()
-        setupGooggleSignInButton()
+//        setupGooggleSignInButton()
     }
     
     func keyboardWillShow(notification: NSNotification) {
