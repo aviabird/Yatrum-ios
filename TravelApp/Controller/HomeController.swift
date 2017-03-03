@@ -78,10 +78,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         navigationItem.leftBarButtonItems = [moreBarButtonItem, searchBarButtonItem]
         
-        // Left Navigation Bar Button
-        let addIcon = UIImage(named: "plus-filled")?.withRenderingMode(.alwaysTemplate)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: addIcon, style: .plain, target: self, action: #selector(publishTrip))
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.appCallToActionColor()
+        // right Navigation Bar Button
+//        let addIcon = UIImage(named: "plus-filled")?.withRenderingMode(.alwaysTemplate)
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(image: addIcon, style: .plain, target: self, action: #selector(publishTrip))
+//        navigationItem.rightBarButtonItem?.tintColor = UIColor.appCallToActionColor()
     }
     
     func publishTrip() {
