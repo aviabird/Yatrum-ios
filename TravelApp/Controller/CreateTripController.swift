@@ -11,6 +11,10 @@ import UIKit
 class CreateTripController: UIViewController, UICollectionViewDataSource,  UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var trip = Trip()
+    var tripCreate = [String: AnyObject]()
+    var placeCreate = [[String: AnyObject]]()
+    var pictureCreate = [[String: AnyObject]]()
+    var place = Place()
     
     var tripView: UIView!
     var tripEditForm: TripEdit!
@@ -24,6 +28,17 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
         
         // Do any additional setup after loading the view.
         loadSubViews()
+        
+        
+        
+        if let date = selectedPlaceEditCell?.placeViewBadgeDateLabel.text {
+            print(date)
+        }
+        
+        if let place = selectedPlaceEditCell?.placeViewBadgeTitleLabel.text {
+            print(place)
+        }
+        
     }
     
     func dismissKeyboard() {
@@ -85,12 +100,49 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
     
     func loadSubViews() {
         trip.user = SharedData.sharedInstance.currentUser
-        trip.places = [Place(), Place()]
+        placeCreate = [[:], [:], [:]]
+        pictureCreate = [[:], [:], [:]]
         
         addTripEditForm()
         setupCollectionViews()
         addDatePickerView()
+        creatingTrip()
+
     }
+    
+    func creatingTrip() {
+        tripCreate["name"] = "pune trip" as AnyObject?
+        tripCreate["description"] = "This was amazing trek and for bike lovers i'll recommend" as AnyObject?
+        tripCreate["tag_list"] = ["Solo   Travel","Arts   and   culture","Camping"] as AnyObject?
+        
+        var tripPlaces = [String: AnyObject]()
+        var tripPictures = [String: AnyObject]()
+        
+        var newPlaces = [[String: AnyObject]]()
+
+        for var place in placeCreate {
+            place["name"] = "place name " as AnyObject?
+            place["description"] = "This place is super nice" as AnyObject?
+
+            var newPictures = [[String: AnyObject]]()
+            for var picture in pictureCreate {
+                picture["url"] = "pic url" as AnyObject?
+                picture["description"] = "pic desc" as AnyObject?
+                tripPictures.update(other: picture)
+                newPictures.append(tripPictures)
+            }
+            place["pictures"] = newPictures as AnyObject?
+            tripPlaces.update(other: place)
+            newPlaces.append(tripPlaces)
+            
+        }
+        tripCreate["places"] = newPlaces as AnyObject?
+
+        TripService.sharedInstance.tripCreate(trip: tripCreate as NSDictionary) { (trip) in
+            print("+++++++++++++++\(trip)")
+        }
+    }
+    
     
     func addTripEditForm() {
         let tripHeaderFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: 150)

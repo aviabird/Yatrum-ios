@@ -70,6 +70,7 @@
 		C76704F91E5DB692004461F6 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76704F31E5DB692004461F6 /* UserProfileHeader.swift */; };
 		C76704FA1E5DB692004461F6 /* UserTripCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76704F41E5DB692004461F6 /* UserTripCell.swift */; };
 		C783C6841E41DD4400870E9B /* SearchTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C783C6831E41DD4400870E9B /* SearchTripViewController.swift */; };
+		C7AAE46E1E6EBC18002FB646 /* TripCreateTagsDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AAE46D1E6EBC18002FB646 /* TripCreateTagsDropDown.swift */; };
 		C7DD79AB1E690F8C003BE92F /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DD79AA1E690F8C003BE92F /* NotificationCell.swift */; };
 		C7E133B81E44818100D0F8D8 /* SearchTripCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E133B71E44818100D0F8D8 /* SearchTripCell.swift */; };
 		C7F9C62C1E433FA600E9B664 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F9C62B1E433FA600E9B664 /* SearchBar.swift */; };
@@ -168,6 +169,7 @@
 		C76704F31E5DB692004461F6 /* UserProfileHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfileHeader.swift; path = View/UserProfile/UserProfileHeader.swift; sourceTree = "<group>"; };
 		C76704F41E5DB692004461F6 /* UserTripCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserTripCell.swift; path = View/UserProfile/UserTripCell.swift; sourceTree = "<group>"; };
 		C783C6831E41DD4400870E9B /* SearchTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchTripViewController.swift; path = Controller/SearchTripViewController.swift; sourceTree = "<group>"; };
+		C7AAE46D1E6EBC18002FB646 /* TripCreateTagsDropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripCreateTagsDropDown.swift; path = View/TripCreate/TripCreateTagsDropDown.swift; sourceTree = "<group>"; };
 		C7DD79AA1E690F8C003BE92F /* NotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationCell.swift; path = View/NotificationCell.swift; sourceTree = "<group>"; };
 		C7E133B71E44818100D0F8D8 /* SearchTripCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchTripCell.swift; path = View/SearchTripCell.swift; sourceTree = "<group>"; };
 		C7F9C62B1E433FA600E9B664 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchBar.swift; path = View/SearchBar.swift; sourceTree = "<group>"; };
@@ -413,6 +415,7 @@
 			children = (
 				78EC1D8A1E56D1EC00FAFC56 /* TripEdit.swift */,
 				786932961E5841DB00C8589A /* PlaceEditCell.swift */,
+				C7AAE46D1E6EBC18002FB646 /* TripCreateTagsDropDown.swift */,
 			);
 			name = TripCreate;
 			sourceTree = "<group>";
@@ -521,7 +524,6 @@
 				TargetAttributes = {
 					78CAB9471E33B39A0087F530 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = QQ7G2P38XY;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -771,6 +773,7 @@
 				781DBE191E3F8057003591DA /* TripCell.swift in Sources */,
 				78CE6FE71E61751F00BFB0F5 /* UserActions.swift in Sources */,
 				780ABCD31E4310CE00043261 /* TripEffect.swift in Sources */,
+				C7AAE46E1E6EBC18002FB646 /* TripCreateTagsDropDown.swift in Sources */,
 				781DBE211E3F8084003591DA /* FeedCell.swift in Sources */,
 				781DBE1D1E3F806F003591DA /* BaseCell.swift in Sources */,
 				780ABCC51E424D3400043261 /* TripActions.swift in Sources */,
@@ -937,7 +940,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = QQ7G2P38XY;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TravelApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.aviabird.yatrum;
@@ -956,7 +959,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = QQ7G2P38XY;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TravelApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.aviabird.yatrum;

@@ -54,9 +54,30 @@ class TripEdit: UIView {
         return tf
     }()
     
+    let descTextField: UITextField = {
+        let tf = UITextField()
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        tf.textColor = UIColor.white
+        tf.attributedPlaceholder =  NSAttributedString(string: "Description here Here",
+                                                       attributes: [NSForegroundColorAttributeName: UIColor.white])
+        tf.tintColor = UIColor.appCallToActionColor()
+        tf.textAlignment = .center
+        return tf
+    }()
+    
     let publishButton: UIButton = {
         let ub = UIButton(type: .system)
         ub.setTitle("Publish", for: .normal)
+        ub.tintColor = UIColor.white
+        ub.backgroundColor = UIColor.appCallToActionColor()
+        ub.translatesAutoresizingMaskIntoConstraints = false
+        ub.layer.cornerRadius = 2
+        return ub
+    }()
+    
+    let tagsButton: UIButton = {
+        let ub = UIButton(type: .system)
+        ub.setTitle("Tags", for: .normal)
         ub.tintColor = UIColor.white
         ub.backgroundColor = UIColor.appCallToActionColor()
         ub.translatesAutoresizingMaskIntoConstraints = false
@@ -101,6 +122,31 @@ class TripEdit: UIView {
         addPublishBtn()
         addTitleView()
         addTripPhotoUploadButton()
+        addDescView()
+        addtagsBtn()
+        
+        publishButton.addTarget(self, action: #selector(addIntoTrip), for: .touchUpInside)
+    }
+    
+    func handleFollow() {
+//        user.is_followed_by_current_user = !user.is_followed_by_current_user
+        
+//        toggleFollow()
+        
+//        UserService.sharedInstance.followUser(followedId: (user.id)!) { (user: User) in
+//            
+//            guard user.is_followed_by_current_user != self.user.is_followed_by_current_user else {
+//                return
+//            }
+//            
+//            self.toggleFollow()
+//        }
+    }
+    
+    func addIntoTrip() {
+        
+        
+        
     }
     
     func addThumbnailImage() {
@@ -129,6 +175,15 @@ class TripEdit: UIView {
         titleTextField.heightAnchor.constraint(equalToConstant: 25).isActive = true
     }
     
+    func addDescView()  {
+        addSubview(descTextField)
+        descTextField.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 5).isActive = true
+        descTextField.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+//        descTextField.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        descTextField.widthAnchor.constraint(equalTo: widthAnchor, constant: -30).isActive = true
+        descTextField.heightAnchor.constraint(equalToConstant: 35).isActive = true
+    }
+    
     func addPublishBtn() {
         addSubview(publishButton)
         
@@ -136,6 +191,15 @@ class TripEdit: UIView {
         publishButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -5).isActive = true
         publishButton.widthAnchor.constraint(equalToConstant: 70).isActive = true
         publishButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    }
+    
+    func addtagsBtn() {
+        addSubview(tagsButton)
+        
+        tagsButton.topAnchor.constraint(equalTo: descTextField.bottomAnchor).isActive = true
+        tagsButton.leftAnchor.constraint(equalTo: leftAnchor, constant: -5).isActive = true
+        tagsButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        tagsButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     func addTripPhotoUploadButton() {

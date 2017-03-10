@@ -129,6 +129,43 @@ class TripService: NSObject {
         }
     }
     
+    
+    func tripCreate(trip: NSDictionary, completion: @escaping (Trip) -> ()) {
+        provider.request(MultiTarget(TripApi.createTrip(trip))) { result in
+            switch result {
+            case let .success(response):
+                do {
+                    let data = response.data
+                    
+                    let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as AnyObject
+                    
+                    DispatchQueue.main.async {
+//                        completion(trip)
+//                        store.dispatch(UpdateTrips(trips: [trip]))
+                    }
+                    
+                    if let error = ((jsonResult["error"] as? NSArray)) {
+                        print(error)
+                       
+                    }else {
+                        self.showAlert("Travel App Fetch", message: "Unable to fetch from Server")
+                       
+                    }
+                } catch {
+                    self.showAlert("Travel App Fetch", message: "Unable to fetch from Server")
+                    
+                }
+            case let .failure(error):
+                guard let error = error as? CustomStringConvertible else {
+                    break
+                }
+                self.showAlert("Authentication Error", message: error.description)
+            }
+        }
+    }
+
+    
+    
     fileprivate func showAlert(_ title: String, message: String) {
 //        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
 //        let ok = UIAlertAction(title: "OK", style: .default, handler: nil)

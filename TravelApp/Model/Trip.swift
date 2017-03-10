@@ -19,6 +19,7 @@ class Trip: NSObject{
     var is_liked_by_current_user: Bool = false
     var user_id: NSNumber?
     var view_count: NSNumber?
+    var tag_list: [String]?
     
     var user: User?
     var places: [Place] = []
