@@ -123,7 +123,7 @@ class TripEdit: UIView {
         addTitleView()
         addTripPhotoUploadButton()
         addDescView()
-        addtagsBtn()
+//        addtagsBtn()
         
         publishButton.addTarget(self, action: #selector(addIntoTrip), for: .touchUpInside)
     }
@@ -146,21 +146,16 @@ class TripEdit: UIView {
     
     func addIntoTrip() {
         
-        if titleTextField.text == "" {
+        if titleTextField.text == "" && descTextField.text == ""{
             titleTextField.shake()
+            descTextField.shake()
         } else {
             
             print(titleTextField.text!)
-        }
-        
-        if descTextField.text == "" {
-            descTextField.shake()
-        } else {
             print(descTextField.text!)
+            createTripCtrl.creatingTrip()
+            createTripCtrl.publishingTrip()
         }
-        
-        createTripCtrl.creatingTrip()
-        
         
         return
     }

@@ -127,7 +127,7 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
             
         }
         tripCreate["places"] = newPlaces as AnyObject?
-        publishingTrip()
+//        publishingTrip()
 
     }
     
