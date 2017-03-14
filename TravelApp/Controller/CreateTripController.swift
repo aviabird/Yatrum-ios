@@ -29,16 +29,6 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
         // Do any additional setup after loading the view.
         loadSubViews()
         
-        
-        
-        if let date = selectedPlaceEditCell?.placeViewBadgeDateLabel.text {
-            print(date)
-        }
-        
-        if let place = selectedPlaceEditCell?.placeViewBadgeTitleLabel.text {
-            print(place)
-        }
-        
     }
     
     func dismissKeyboard() {
@@ -111,8 +101,8 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
     }
     
     func creatingTrip() {
-        tripCreate["name"] = "pune trip" as AnyObject?
-        tripCreate["description"] = "This was amazing trek and for bike lovers i'll recommend" as AnyObject?
+        tripCreate["name"] = tripEditForm.titleTextField.text as AnyObject?
+        tripCreate["description"] = tripEditForm.descTextField.text as AnyObject?
         tripCreate["tag_list"] = ["Solo   Travel","Arts   and   culture","Camping"] as AnyObject?
         
         var tripPlaces = [String: AnyObject]()
@@ -138,9 +128,9 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
         }
         tripCreate["places"] = newPlaces as AnyObject?
 
-        TripService.sharedInstance.tripCreate(trip: tripCreate as NSDictionary) { (trip) in
-            print("+++++++++++++++\(trip)")
-        }
+//        TripService.sharedInstance.tripCreate(trip: tripCreate as NSDictionary) { (trip) in
+//            print("+++++++++++++++\(trip)")
+//        }
     }
     
     

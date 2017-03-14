@@ -143,10 +143,22 @@ class TripEdit: UIView {
 //        }
     }
     
+    
     func addIntoTrip() {
         
+        if titleTextField.text == "" {
+            titleTextField.shake()
+        } else {
+            
+            print(titleTextField.text!)
+        }
         
-        
+        if descTextField.text == "" {
+            descTextField.shake()
+        } else {
+            print(descTextField.text!)
+        }
+        return
     }
     
     func addThumbnailImage() {
@@ -221,3 +233,5 @@ class TripEdit: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+
