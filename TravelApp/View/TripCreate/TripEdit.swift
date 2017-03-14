@@ -158,6 +158,10 @@ class TripEdit: UIView {
         } else {
             print(descTextField.text!)
         }
+        
+        createTripCtrl.creatingTrip()
+        
+        
         return
     }
     

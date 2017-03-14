@@ -127,10 +127,15 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
             
         }
         tripCreate["places"] = newPlaces as AnyObject?
+        publishingTrip()
 
-//        TripService.sharedInstance.tripCreate(trip: tripCreate as NSDictionary) { (trip) in
-//            print("+++++++++++++++\(trip)")
-//        }
+    }
+    
+    func publishingTrip() {
+        
+        TripService.sharedInstance.tripCreate(trip: tripCreate as NSDictionary) { (trip) in
+            print("+++++++++++++++\(trip)")
+        }
     }
     
     
