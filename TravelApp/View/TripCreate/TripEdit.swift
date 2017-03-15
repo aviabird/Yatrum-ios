@@ -10,6 +10,7 @@ import UIKit
 
 class TripEdit: UIView {
     var createTripCtrl: CreateTripController!
+    var placeCells: PlaceEditCell!
 
     override init(frame: CGRect) {
         super.init(frame: frame)

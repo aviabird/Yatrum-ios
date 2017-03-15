@@ -102,17 +102,19 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
     
     func creatingTrip() {
         tripCreate["name"] = tripEditForm.titleTextField.text as AnyObject?
-        tripCreate["description"] = tripEditForm.descTextField.text as AnyObject?
+        tripCreate["review"] = tripEditForm.descTextField.text as AnyObject?
         tripCreate["tag_list"] = ["Solo   Travel","Arts   and   culture","Camping"] as AnyObject?
         
         var tripPlaces = [String: AnyObject]()
         var tripPictures = [String: AnyObject]()
         
         var newPlaces = [[String: AnyObject]]()
-
         for var place in placeCreate {
-            place["name"] = "place name " as AnyObject?
-            place["description"] = "This place is super nice" as AnyObject?
+            place["name"] = selectedPlaceEditCell?.placeViewBadgeTitleLabel.text as AnyObject?
+            place["review"] = selectedPlaceEditCell?.placeReviewText.text as AnyObject?
+            place["destroy"] = false as AnyObject?
+            place["visited_date"] = selectedPlaceEditCell?.placeViewBadgeDateLabel.text as AnyObject?
+            
 
             var newPictures = [[String: AnyObject]]()
             for var picture in pictureCreate {
@@ -135,6 +137,9 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
         
         TripService.sharedInstance.tripCreate(trip: tripCreate as NSDictionary) { (trip) in
             print("+++++++++++++++\(trip)")
+        }
+        self.dismiss(animated: true) {
+            print("dismissed")
         }
     }
     
@@ -184,19 +189,23 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return trip.places.count 
+//        return trip.places.count 
+        return placeCreate.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! PlaceEditCell
-        cell.place = trip.places[indexPath.item]
+        cell.place = placeCreate[indexPath.item]
         cell.createTripCtrl = self
         return cell
     }
     
+    let reviewText = ""
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let text = trip.places[indexPath.item].review
+
+        let text  = reviewText
         
         let approxWidth = view.frame.width - 60
         let size = CGSize(width: approxWidth, height: 1000)

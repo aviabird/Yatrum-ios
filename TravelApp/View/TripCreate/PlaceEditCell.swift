@@ -11,7 +11,7 @@ import RxSwift
 
 class PlaceEditCell: BaseCell {
     
-    var place: Place!
+    var place = [String: AnyObject]()
     var createTripCtrl: CreateTripController!
     let disposeBag = DisposeBag()
 
