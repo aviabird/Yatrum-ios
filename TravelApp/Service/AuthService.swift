@@ -12,9 +12,9 @@ import Moya
 class AuthService: NSObject {
 
     static let sharedInstance = AuthService()
-    static var sharedData = SharedData()
     
     func login(email: String, password: String, loginController: LoginController) {
+        
         provider.request(MultiTarget(UserApi.authenticate(email, password))) { result in
             switch result {
             case let .success(response):
@@ -24,12 +24,13 @@ class AuthService: NSObject {
                     let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as AnyObject
                     
                     if let error = ((jsonResult["error"] as? NSDictionary)?["user_authentication"] as? NSArray)?[0]{
+                        
                         loginController.createAlert(title: "Error", message: "\(error)")
                     }else {
                         if let authToken = jsonResult["auth_token"] as? String {
-                            SharedData.sharedInstance.token = authToken
-                            SharedData.sharedInstance.setToken()
-                            SharedData.sharedInstance.SetCurrentUser(user: User(dictionary: jsonResult["user"] as! [String: AnyObject]))
+                            sharedData.token = authToken
+                            sharedData.setToken()
+                            sharedData.SetCurrentUser(user: User(dictionary: jsonResult["user"] as! [String: AnyObject]))
                             
                             self.refreshProvider()
                             
@@ -80,8 +81,8 @@ class AuthService: NSObject {
         }
     }
     
-    func auth_user() -> User {
-        var user: User = User(dictionary: [:])
+    func auth_user(completion: @escaping (User) -> ()){
+        var user: User!
         
         provider.request(MultiTarget(UserApi.auth_user)) { result in
             switch result {
@@ -93,9 +94,13 @@ class AuthService: NSObject {
                     
                     if let error = ((jsonResult["error"] as? String)) {
                         print(error)
+                        sharedData.homeController?.handleLogout()
                     }else {
-                        user = User(dictionary: jsonResult as! [String: AnyObject])
-                        SharedData.sharedInstance.SetCurrentUser(user: user)
+                        DispatchQueue.main.async {
+                            user = User(dictionary: jsonResult as! [String: AnyObject])
+                            sharedData.SetCurrentUser(user: user)
+                            completion(user)
+                        }
                     }
                 } catch {
                     print("Api Error")
@@ -107,8 +112,6 @@ class AuthService: NSObject {
                 print("Auth User Error", error.description)
             }
         }
-        
-        return user
         
     }
     

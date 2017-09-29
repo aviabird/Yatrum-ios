@@ -84,7 +84,7 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
     let cellId = "cellId"
     
     func loadSubViews() {
-        trip.user = SharedData.sharedInstance.getCurrentUser()!
+        trip.user = SharedData.sharedInstance.currentUser
         trip.places = [Place(), Place()]
         
         addTripEditForm()

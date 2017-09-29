@@ -10,11 +10,11 @@ import UIKit
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var sharedData = SharedData.sharedInstance
     var trips: [Trip]?
     let cellId = "cellId"
     let trendingCellId = "trendingCellId"
     let userProfile = "userProfile"
+    let notification = "notification"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         setUpNavBarButtons()
         
-        if sharedData.getToken() == "" {
+        if SharedData.sharedInstance.getToken() == "" {
             perform(#selector(handleLogout), with: nil, afterDelay: 0)
         }
         
@@ -47,6 +47,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
         collectionView?.register(TrendingCell.self, forCellWithReuseIdentifier: trendingCellId)
         collectionView?.register(UserProfileCell.self, forCellWithReuseIdentifier: userProfile)
+        collectionView?.register(NotificationCell.self, forCellWithReuseIdentifier: notification)
         
         collectionView?.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 50, 0)
@@ -76,10 +77,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         navigationItem.leftBarButtonItems = [moreBarButtonItem, searchBarButtonItem]
         
-        // Left Navigation Bar Button
-        let addIcon = UIImage(named: "plus-filled")?.withRenderingMode(.alwaysTemplate)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: addIcon, style: .plain, target: self, action: #selector(publishTrip))
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.appCallToActionColor()
+        // right Navigation Bar Button
+//        let addIcon = UIImage(named: "plus-filled")?.withRenderingMode(.alwaysTemplate)
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(image: addIcon, style: .plain, target: self, action: #selector(publishTrip))
+//        navigationItem.rightBarButtonItem?.tintColor = UIColor.appCallToActionColor()
     }
     
     @objc func publishTrip() {
@@ -140,6 +141,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             identifier = cellId
         case 1:
             identifier = trendingCellId
+        case 2:
+            identifier = notification
         case 3:
             identifier = userProfile
         default:

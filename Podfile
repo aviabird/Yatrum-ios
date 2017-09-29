@@ -6,19 +6,21 @@ target 'TravelApp' do
   use_frameworks!
 
   # Pods for TravelApp
-  pod 'RxSwift',     ‘4.0.0-beta.0’
-  pod 'RxCocoa',     ‘4.0.0-beta.0’
-  pod 'Moya/RxSwift', :git => 'https://github.com/Moya/Moya.git', :branch => '10.0.0-dev'
+  pod 'RxSwift',     '4.0.0-beta.0'
+  pod 'RxCocoa',     '4.0.0-beta.0'
+  pod 'Moya/RxSwift', git: 'https://github.com/Moya/Moya.git', branch: '10.0.0-dev'
   pod 'ReSwift', '~> 4.0.0'
   #  pod 'ReSwiftRouter'
   pod 'SwiftDate', '~> 4.4.1'
   pod 'GooglePlaces', '~> 2.4.0'
+  pod 'Google/SignIn'
+  pod 'Google/Analytics'
 
   target 'TravelAppTests' do
     inherit! :search_paths
     # Pods for testing
-    pod 'RxBlocking', ‘4.0.0-beta.0’
-    pod 'RxTest', ‘4.0.0-beta.0’
+    pod 'RxBlocking', '4.0.0-beta.0'
+    pod 'RxTest', '4.0.0-beta.0'
   end
 
   target 'TravelAppUITests' do

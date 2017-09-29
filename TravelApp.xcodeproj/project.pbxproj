@@ -53,9 +53,15 @@
 		78CAB9561E33B39A0087F530 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78CAB9541E33B39A0087F530 /* LaunchScreen.storyboard */; };
 		78CAB9611E33B39B0087F530 /* TravelAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAB9601E33B39B0087F530 /* TravelAppTests.swift */; };
 		78CAB96C1E33B39B0087F530 /* TravelAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAB96B1E33B39B0087F530 /* TravelAppUITests.swift */; };
+		78CE6FE51E6174FA00BFB0F5 /* UserReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CE6FE41E6174FA00BFB0F5 /* UserReducer.swift */; };
+		78CE6FE71E61751F00BFB0F5 /* UserActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CE6FE61E61751F00BFB0F5 /* UserActions.swift */; };
+		78CE6FE91E61753200BFB0F5 /* UserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CE6FE81E61753200BFB0F5 /* UserState.swift */; };
+		78E782641E61D9AA00A81156 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 78E782631E61D9AA00A81156 /* GoogleService-Info.plist */; };
 		78EC1D8B1E56D1ED00FAFC56 /* TripEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EC1D8A1E56D1EC00FAFC56 /* TripEdit.swift */; };
 		78F561201E5047AE005724E7 /* TripDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F5611F1E5047AE005724E7 /* TripDetailViewController.swift */; };
 		85E49A2B2F82B9CFFBFDED0E /* Pods_TravelApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6BC1A7BA229A0C84477C713 /* Pods_TravelApp.framework */; };
+		C7411E701E5F09FD00B2711F /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7411E6F1E5F09FD00B2711F /* Media.swift */; };
+		C7411E721E5F10A400B2711F /* Following.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7411E711E5F10A400B2711F /* Following.swift */; };
 		C75943561E4DD16C000232D4 /* SearchDropdownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75943551E4DD16C000232D4 /* SearchDropdownCell.swift */; };
 		C76704F51E5DB692004461F6 /* Followers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76704EF1E5DB692004461F6 /* Followers.swift */; };
 		C76704F61E5DB692004461F6 /* UserFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76704F01E5DB692004461F6 /* UserFeed.swift */; };
@@ -64,6 +70,7 @@
 		C76704F91E5DB692004461F6 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76704F31E5DB692004461F6 /* UserProfileHeader.swift */; };
 		C76704FA1E5DB692004461F6 /* UserTripCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76704F41E5DB692004461F6 /* UserTripCell.swift */; };
 		C783C6841E41DD4400870E9B /* SearchTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C783C6831E41DD4400870E9B /* SearchTripViewController.swift */; };
+		C7DD79AB1E690F8C003BE92F /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DD79AA1E690F8C003BE92F /* NotificationCell.swift */; };
 		C7E133B81E44818100D0F8D8 /* SearchTripCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E133B71E44818100D0F8D8 /* SearchTripCell.swift */; };
 		C7F9C62C1E433FA600E9B664 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F9C62B1E433FA600E9B664 /* SearchBar.swift */; };
 		C872CCCA74F945B8C43595C1 /* Pods_TravelAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30A16FD43D6C973DF44F884 /* Pods_TravelAppTests.framework */; };
@@ -129,6 +136,7 @@
 		78684ECC1E4083220074B8C2 /* Providers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Providers.swift; path = Helpers/Providers.swift; sourceTree = "<group>"; };
 		786932961E5841DB00C8589A /* PlaceEditCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaceEditCell.swift; path = View/TripCreate/PlaceEditCell.swift; sourceTree = "<group>"; };
 		786FEED41E45E03900B6CD8D /* PlaceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaceCell.swift; path = View/TripDetail/PlaceCell.swift; sourceTree = "<group>"; };
+		78B675281E64303C0065C090 /* TravelApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TravelApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		78CAB9481E33B39A0087F530 /* TravelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78CAB94B1E33B39A0087F530 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78CAB9501E33B39A0087F530 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -141,11 +149,17 @@
 		78CAB9671E33B39B0087F530 /* TravelAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TravelAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		78CAB96B1E33B39B0087F530 /* TravelAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelAppUITests.swift; sourceTree = "<group>"; };
 		78CAB96D1E33B39B0087F530 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		78CE6FE41E6174FA00BFB0F5 /* UserReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserReducer.swift; path = Reducers/UserReducer.swift; sourceTree = "<group>"; };
+		78CE6FE61E61751F00BFB0F5 /* UserActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserActions.swift; path = Actions/UserActions.swift; sourceTree = "<group>"; };
+		78CE6FE81E61753200BFB0F5 /* UserState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserState.swift; path = State/UserState.swift; sourceTree = "<group>"; };
+		78E782631E61D9AA00A81156 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		78EC1D8A1E56D1EC00FAFC56 /* TripEdit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripEdit.swift; path = View/TripCreate/TripEdit.swift; sourceTree = "<group>"; };
 		78F5611F1E5047AE005724E7 /* TripDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripDetailViewController.swift; path = Controller/TripDetailViewController.swift; sourceTree = "<group>"; };
 		90C2D25E7B38CBE630322CB8 /* Pods-TravelAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TravelAppTests/Pods-TravelAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		BE1D77A28EE3CC48998822AC /* Pods-TravelAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TravelAppTests/Pods-TravelAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C30A16FD43D6C973DF44F884 /* Pods_TravelAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7411E6F1E5F09FD00B2711F /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Media.swift; path = View/UserProfile/Media.swift; sourceTree = "<group>"; };
+		C7411E711E5F10A400B2711F /* Following.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Following.swift; path = View/UserProfile/Following.swift; sourceTree = "<group>"; };
 		C75943551E4DD16C000232D4 /* SearchDropdownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchDropdownCell.swift; path = View/SearchDropdownCell.swift; sourceTree = "<group>"; };
 		C76704EF1E5DB692004461F6 /* Followers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Followers.swift; path = View/UserProfile/Followers.swift; sourceTree = "<group>"; };
 		C76704F01E5DB692004461F6 /* UserFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserFeed.swift; path = View/UserProfile/UserFeed.swift; sourceTree = "<group>"; };
@@ -154,6 +168,7 @@
 		C76704F31E5DB692004461F6 /* UserProfileHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfileHeader.swift; path = View/UserProfile/UserProfileHeader.swift; sourceTree = "<group>"; };
 		C76704F41E5DB692004461F6 /* UserTripCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserTripCell.swift; path = View/UserProfile/UserTripCell.swift; sourceTree = "<group>"; };
 		C783C6831E41DD4400870E9B /* SearchTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchTripViewController.swift; path = Controller/SearchTripViewController.swift; sourceTree = "<group>"; };
+		C7DD79AA1E690F8C003BE92F /* NotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationCell.swift; path = View/NotificationCell.swift; sourceTree = "<group>"; };
 		C7E133B71E44818100D0F8D8 /* SearchTripCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchTripCell.swift; path = View/SearchTripCell.swift; sourceTree = "<group>"; };
 		C7F9C62B1E433FA600E9B664 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchBar.swift; path = View/SearchBar.swift; sourceTree = "<group>"; };
 		E3FB5D723B4B0B2413325BD7 /* Pods_TravelAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -220,6 +235,7 @@
 				C7F9C62B1E433FA600E9B664 /* SearchBar.swift */,
 				C7E133B71E44818100D0F8D8 /* SearchTripCell.swift */,
 				C75943551E4DD16C000232D4 /* SearchDropdownCell.swift */,
+				C7DD79AA1E690F8C003BE92F /* NotificationCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -228,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				780ABCC41E424D3400043261 /* TripActions.swift */,
+				78CE6FE61E61751F00BFB0F5 /* UserActions.swift */,
 			);
 			name = Actions;
 			sourceTree = "<group>";
@@ -238,6 +255,7 @@
 				780ABCC91E424E0200043261 /* TripReducer.swift */,
 				780ABCCB1E42E24A00043261 /* AppReducer.swift */,
 				780ABCCD1E42E57000043261 /* AuthenticationReducer.swift */,
+				78CE6FE41E6174FA00BFB0F5 /* UserReducer.swift */,
 			);
 			name = Reducers;
 			sourceTree = "<group>";
@@ -276,6 +294,7 @@
 				7830442E1E40C98300AA05FD /* TripState.swift */,
 				783044301E40CB6400AA05FD /* AuthenticationState.swift */,
 				783044321E40D43200AA05FD /* AppState.swift */,
+				78CE6FE81E61753200BFB0F5 /* UserState.swift */,
 			);
 			name = State;
 			sourceTree = "<group>";
@@ -329,6 +348,8 @@
 				78CAB9521E33B39A0087F530 /* Assets.xcassets */,
 				78CAB9541E33B39A0087F530 /* LaunchScreen.storyboard */,
 				78CAB9571E33B39A0087F530 /* Info.plist */,
+				78E782631E61D9AA00A81156 /* GoogleService-Info.plist */,
+				78B675281E64303C0065C090 /* TravelApp-Bridging-Header.h */,
 			);
 			path = TravelApp;
 			sourceTree = "<group>";
@@ -400,11 +421,13 @@
 			isa = PBXGroup;
 			children = (
 				C76704EF1E5DB692004461F6 /* Followers.swift */,
+				C7411E711E5F10A400B2711F /* Following.swift */,
 				C76704F01E5DB692004461F6 /* UserFeed.swift */,
 				C76704F11E5DB692004461F6 /* UserMenuBar.swift */,
 				C76704F21E5DB692004461F6 /* UserProfileCell.swift */,
 				C76704F31E5DB692004461F6 /* UserProfileHeader.swift */,
 				C76704F41E5DB692004461F6 /* UserTripCell.swift */,
+				C7411E6F1E5F09FD00B2711F /* Media.swift */,
 			);
 			name = UserProfile;
 			sourceTree = "<group>";
@@ -544,6 +567,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				78CAB9561E33B39A0087F530 /* LaunchScreen.storyboard in Resources */,
+				78E782641E61D9AA00A81156 /* GoogleService-Info.plist in Resources */,
 				78CAB9531E33B39A0087F530 /* Assets.xcassets in Resources */,
 				78CAB9511E33B39A0087F530 /* Main.storyboard in Resources */,
 			);
@@ -722,7 +746,9 @@
 				78684EC71E4082EB0074B8C2 /* UserService.swift in Sources */,
 				781DBE1B1E3F8066003591DA /* SettingCell.swift in Sources */,
 				78684ECD1E4083220074B8C2 /* Providers.swift in Sources */,
+				C7411E701E5F09FD00B2711F /* Media.swift in Sources */,
 				786932971E5841DB00C8589A /* PlaceEditCell.swift in Sources */,
+				78CE6FE51E6174FA00BFB0F5 /* UserReducer.swift in Sources */,
 				C76704F71E5DB692004461F6 /* UserMenuBar.swift in Sources */,
 				C76704F51E5DB692004461F6 /* Followers.swift in Sources */,
 				783044311E40CB6400AA05FD /* AuthenticationState.swift in Sources */,
@@ -732,6 +758,7 @@
 				781DBE0D1E3F7F4D003591DA /* Setting.swift in Sources */,
 				780ABCCE1E42E57000043261 /* AuthenticationReducer.swift in Sources */,
 				C7E133B81E44818100D0F8D8 /* SearchTripCell.swift in Sources */,
+				78CE6FE91E61753200BFB0F5 /* UserState.swift in Sources */,
 				781DBE031E3F7EB9003591DA /* Extensions.swift in Sources */,
 				781DBE111E3F7F64003591DA /* Place.swift in Sources */,
 				781DBE2C1E3F879C003591DA /* TripApi.swift in Sources */,
@@ -746,11 +773,14 @@
 				786FEED51E45E03900B6CD8D /* PlaceCell.swift in Sources */,
 				780ABCCC1E42E24A00043261 /* AppReducer.swift in Sources */,
 				781DBE191E3F8057003591DA /* TripCell.swift in Sources */,
+				78CE6FE71E61751F00BFB0F5 /* UserActions.swift in Sources */,
 				780ABCD31E4310CE00043261 /* TripEffect.swift in Sources */,
 				781DBE211E3F8084003591DA /* FeedCell.swift in Sources */,
 				781DBE1D1E3F806F003591DA /* BaseCell.swift in Sources */,
 				780ABCC51E424D3400043261 /* TripActions.swift in Sources */,
+				C7411E721E5F10A400B2711F /* Following.swift in Sources */,
 				781DBE091E3F7F19003591DA /* SharedData.swift in Sources */,
+				C7DD79AB1E690F8C003BE92F /* NotificationCell.swift in Sources */,
 				78F561201E5047AE005724E7 /* TripDetailViewController.swift in Sources */,
 				C783C6841E41DD4400870E9B /* SearchTripViewController.swift in Sources */,
 				783044331E40D43200AA05FD /* AppState.swift in Sources */,
@@ -913,11 +943,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = QQ7G2P38XY;
 				INFOPLIST_FILE = TravelApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = aviabird.TravelApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aviabird.yatrum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -930,11 +961,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = QQ7G2P38XY;
 				INFOPLIST_FILE = TravelApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = aviabird.TravelApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aviabird.yatrum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;

@@ -19,6 +19,7 @@ import UIKit
     var is_liked_by_current_user: Bool = false
     var user_id: NSNumber?
     var tag_list: NSArray?
+    var view_count: NSNumber?
     
     var user: User?
     var places: [Place] = []
