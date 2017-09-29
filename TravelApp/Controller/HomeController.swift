@@ -54,7 +54,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.isPagingEnabled = true
     }
     
-    func handleLogout() {
+    @objc func handleLogout() {
         sharedData.clearAll()
         let loginController = LoginController()
         loginController.homeController = self
@@ -82,12 +82,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         navigationItem.rightBarButtonItem?.tintColor = UIColor.appCallToActionColor()
     }
     
-    func publishTrip() {
+    @objc func publishTrip() {
         let createTripController = CreateTripController()
         present(createTripController, animated: true, completion: nil)
     }
     
-    func handleSearch() {
+    @objc func handleSearch() {
         let searchTripController = SearchTripViewController()
         navigationController?.pushViewController(searchTripController, animated: true)
     }
@@ -98,7 +98,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     let settingsLauncher = SettingsLauncher()
-    func handleMore() {
+    @objc func handleMore() {
         settingsLauncher.homeController = self
         settingsLauncher.showSettings()
     }

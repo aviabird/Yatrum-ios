@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Trip: NSObject{
+@objc class Trip: NSObject{
     var id: NSNumber?
     var thumbnail_image_url: String?
     var name: String?
@@ -18,6 +18,7 @@ class Trip: NSObject{
     var created_at: String?
     var is_liked_by_current_user: Bool = false
     var user_id: NSNumber?
+    var tag_list: NSArray?
     
     var user: User?
     var places: [Place] = []

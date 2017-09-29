@@ -8,13 +8,11 @@
 
 import ReSwift
 
-struct AppReducer: Reducer {
-    
-    func handleAction(action: Action, state: AppState?) -> AppState {
-        return AppState(
-            authenticationState: authenticationReducer(state: state?.authenticationState, action: action),
-            tripState: tripReducer(state: state?.tripState, action: action)
-        )
-    }
-    
+func appReducer(action: Action, state: AppState?) -> AppState {
+    return AppState(
+        authenticationState: authenticationReducer(state: state?.authenticationState, action: action),
+        tripState: tripReducer(state: state?.tripState, action: action)
+    )
 }
+
+

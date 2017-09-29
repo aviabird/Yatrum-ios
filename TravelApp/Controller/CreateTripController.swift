@@ -26,7 +26,7 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
         loadSubViews()
     }
     
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
@@ -65,7 +65,7 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
         return button
     }()
     
-    func handleDoneAddingDate() {
+    @objc func handleDoneAddingDate() {
         handleDateSelection(sender: self.datePicker)
         
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
@@ -153,7 +153,7 @@ class CreateTripController: UIViewController, UICollectionViewDataSource,  UICol
         
         let approxWidth = view.frame.width - 60
         let size = CGSize(width: approxWidth, height: 1000)
-        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 12)]
+        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)]
         
         let estimatedFrame = NSString(string: text).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
         

@@ -34,7 +34,7 @@ class SearchDropdownCell: BaseCell {
         searchedLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
-    func selectSearch() {
+    @objc func selectSearch() {
         searchCtrl.searchTrips(query: searchedLabel.text!)
     }
     

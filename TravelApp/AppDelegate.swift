@@ -10,7 +10,7 @@ import UIKit
 import ReSwift
 import GooglePlaces
 
-var store = Store<AppState>(reducer: AppReducer(), state: nil)
+var store = Store<AppState>(reducer: appReducer, state: nil)
 var statusBarBackgroundView = UIView()
 
 @UIApplicationMain
@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         UINavigationBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
         
         UIApplication.shared.statusBarStyle = .lightContent
         

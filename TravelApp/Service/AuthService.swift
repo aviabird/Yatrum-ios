@@ -113,8 +113,8 @@ class AuthService: NSObject {
     }
     
     private func refreshProvider() {
-        authPlugin = AccessTokenPlugin(token: SharedData.sharedInstance.getToken())
-        provider = RxMoyaProvider<MultiTarget>(plugins: [NetworkLoggerPlugin(verbose: true), authPlugin])
+        authPlugin = AccessTokenPlugin(tokenClosure: SharedData.sharedInstance.getToken())
+        provider = MoyaProvider<MultiTarget>(plugins: [NetworkLoggerPlugin(verbose: true), authPlugin])
     }
     
 }

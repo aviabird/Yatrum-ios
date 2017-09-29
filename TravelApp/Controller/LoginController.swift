@@ -40,7 +40,7 @@ class LoginController: UIViewController {
         return button
     }()
     
-    func handleLoginRegister() {
+    @objc func handleLoginRegister() {
         if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
             handleLogin()
         } else {
@@ -160,7 +160,7 @@ class LoginController: UIViewController {
         return sc
     }()
     
-    func handleLoginRegisterChange() {
+    @objc func handleLoginRegisterChange() {
         let title = loginRegisterSegmentedControl.titleForSegment(at: loginRegisterSegmentedControl.selectedSegmentIndex)
         loginRegisterButton.setTitle(title, for: .normal)
         
@@ -202,7 +202,7 @@ class LoginController: UIViewController {
         setupLoginRegisterSegmentedControl()
     }
     
-    func keyboardWillShow(notification: NSNotification) {
+    @objc func keyboardWillShow(notification: NSNotification) {
         
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0{
@@ -212,13 +212,13 @@ class LoginController: UIViewController {
         
     }
     
-    func keyboardWillHide(notification: NSNotification) {
+    @objc func keyboardWillHide(notification: NSNotification) {
         if self.view.frame.origin.y != 0{
             self.view.frame.origin.y = 0
         }
     }
     
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
         confirmPasswordTextField.resignFirstResponder()

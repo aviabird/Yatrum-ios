@@ -17,6 +17,11 @@ public enum UserApi {
 }
 
 extension UserApi: TargetType {
+    public var headers: [String : String]? {
+        return [:]
+    }
+    
+    
     public var baseURL: URL { return URL(string: SharedData.sharedInstance.API_URL)! }
     public var path: String {
         switch self {
@@ -52,7 +57,7 @@ extension UserApi: TargetType {
         return URLEncoding.default
     }
     public var task: Task {
-        return .request
+        return .requestPlain
     }
     public var validate: Bool {
         switch self {

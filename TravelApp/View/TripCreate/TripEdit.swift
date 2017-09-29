@@ -48,7 +48,7 @@ class TripEdit: UIView {
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.textColor = UIColor.white
         tf.attributedPlaceholder =  NSAttributedString(string: "Title Here",
-                           attributes: [NSForegroundColorAttributeName: UIColor.white])
+                           attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         tf.tintColor = UIColor.appCallToActionColor()
         tf.textAlignment = .center
         return tf
@@ -73,7 +73,7 @@ class TripEdit: UIView {
         return ub
     }()
     
-    func handleSelectTripImage() {
+    @objc func handleSelectTripImage() {
         self.createTripCtrl.handleSelectTripImage()
     }
 
@@ -90,7 +90,7 @@ class TripEdit: UIView {
         return ub
     }()
     
-    func handleCloseView() {
+    @objc func handleCloseView() {
         statusBarBackgroundView.alpha = 1
         createTripCtrl?.dismiss(animated: true, completion: nil)
     }

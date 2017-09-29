@@ -88,7 +88,7 @@ class TripDetailViewController: UIViewController, UICollectionViewDataSource,  U
         
         let approxWidth = view.frame.width - 60
         let size = CGSize(width: approxWidth, height: 1000)
-        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 12)]
+        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)]
         
         let estimatedFrame = NSString(string: text!).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
         

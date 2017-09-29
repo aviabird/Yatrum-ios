@@ -46,7 +46,7 @@ class PlaceEditCell: BaseCell {
         return label
     }()
     
-    func handleDatePickerSelection() {
+    @objc func handleDatePickerSelection() {
         createTripCtrl.selectedPlaceEditCell = self
         createTripCtrl.dismissKeyboard()
         
@@ -78,7 +78,7 @@ class PlaceEditCell: BaseCell {
         return ub
     }()
     
-    func handleAddPlace() {
+    @objc func handleAddPlace() {
         createTripCtrl.selectedPlaceEditCell = self
         createTripCtrl.autocompleteClicked()
     }
